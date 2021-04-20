@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
 
 const PORT = process.env.PORT || 3001;
@@ -14,6 +15,21 @@ if (process.env.PRODUCTION_URL) {
         res.sendFile(path.join(__dirname, "client/build/index.html"));
     });
 };
+
+mongoose
+    .connect(process.env.MONGODB_URI || "mongodb://localhost/alumni-collab", {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true,
+    })
+    .then(() => {
+        console.log("Successfully connected to MongoDB");
+    })
+    .catch((err) => {
+        console.log("Error connecting to MongoDB", err);
+    });
+
 
 app.get('/', function (req, res) {
     res.send('Hello World!')
