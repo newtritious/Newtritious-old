@@ -1,10 +1,23 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import styled from 'styled-components';
+
+const StyledLink = styled(Link)`
+    width: 11%;
+    min-width: 140px;
+    font-size: 40px;
+    text-align: center;
+    padding: 10px;
+
+    &:hover {
+        background: #ddd;
+    }
+`
 
 class NavButton extends React.Component{
     render(){
         return(
-            <Link to={this.props.link}>{this.props.name}</Link>
+            <StyledLink to={this.props.link}>{this.props.name}</StyledLink>
         )
     }
 }
@@ -12,7 +25,7 @@ class NavButton extends React.Component{
 class NavBar extends React.Component{
     render(){
         return(
-            <div>
+            <div class="flex flex-row h-20">
                 <NavButton name ="Home" link="/" />
                 <NavButton name = "PageA" link ="/page-a"/>
                 <NavButton name = "PageB" link ="/page-b"/>
