@@ -35,10 +35,8 @@ mongoose
         console.log("Error connecting to MongoDB", err);
     });
 
-// Basic GET route for testing
-app.get('/', function (req, res) {
-    res.send('Hello World!')
-});
+// Routes defined here
+require("./routes/routes")(app);
 
 // Set Express server to listen on PORT
 app.listen(PORT, () => {
