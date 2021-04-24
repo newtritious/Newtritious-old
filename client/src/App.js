@@ -1,9 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import StyleSamples from './components/StyleSamples';
 import NavBar from './components/NavBar.js'
-import Test from './components/test.js'
 import HomePage from './components/pages/HomePage.js'
 import PageA from './components/pages/PageA.js'
 import PageB from './components/pages/PageB.js'
