@@ -25,7 +25,7 @@ class NavButton extends React.Component{
 class NavBar extends React.Component{
     render(){
         return(
-            <div class="flex flex-row h-20">
+            <div className="flex flex-row h-20 border-b-2 border-gray-400">
                 <NavButton name ="Home" link="/" />
                 <NavButton name = "PageA" link ="/page-a"/>
                 <NavButton name = "PageB" link ="/page-b"/>
