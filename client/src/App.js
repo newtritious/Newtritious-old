@@ -10,8 +10,18 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import API from './utils/API';
 
 class App extends React.Component {
+  state = {
+    testResult: 'fail'
+  };
+
+  componentDidMount() {
+    // API.testApi().then(result => console.log(result));
+    API.testApi().then(result => this.setState({testResult: result.data.test}));      
+  }
+
   render(){
     return (
       <Router>
@@ -30,6 +40,7 @@ class App extends React.Component {
             <HomePage />
           </Route>
         </Switch>
+        <span>Test api: {this.state.testResult}!</span>
       </Router>
     );
   }
