@@ -1,7 +1,10 @@
 // Require external packages
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
+import dotenv from 'dotenv'
+import express from 'express'
+import mongoose from 'mongoose'
+import userRoutes from './backend/routes/userRoutes.js'
+
+dotenv.config()
 
 // Declare instance of Express
 const app = express();
@@ -36,7 +39,7 @@ mongoose
     });
 
 // Routes defined here
-require("./routes/routes")(app);
+app.use('/api/users', userRoutes)
 
 // Set Express server to listen on PORT
 app.listen(PORT, () => {
