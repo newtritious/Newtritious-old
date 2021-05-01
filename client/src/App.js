@@ -14,7 +14,8 @@ import API from './utils/API';
 
 class App extends React.Component {
   state = {
-    testResult: 'fail'
+    testResult: 'fail',
+    user: "guest"
   };
 
   componentDidMount() {
