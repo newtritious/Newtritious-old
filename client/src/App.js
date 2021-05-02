@@ -5,6 +5,7 @@ import HomePage from './components/pages/HomePage.js'
 import PageA from './components/pages/PageA.js'
 import PageB from './components/pages/PageB.js'
 import PageC from './components/pages/PageC.js'
+import SignUpPage from './components/pages/SignUpPage.js'
 import {
   BrowserRouter as Router,
   Switch,
@@ -36,6 +37,9 @@ class App extends React.Component {
           </Route>
           <Route path="/page-c">
             <PageC />
+          </Route>
+          <Route path="/sign-up">
+            <SignUpPage />
           </Route>
           <Route path="/">
             <HomePage />

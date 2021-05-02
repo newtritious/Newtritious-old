@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const StyledLink = styled(Link)`
     width: 11%;
-    min-width: 140px;
+    min-width: 170px;
     font-size: 40px;
     text-align: center;
     padding: 10px;
@@ -30,6 +30,10 @@ class NavBar extends React.Component{
                 <NavButton name = "PageA" link ="/page-a"/>
                 <NavButton name = "PageB" link ="/page-b"/>
                 <NavButton name = "PageC" link ="/page-c"/>
+
+                <div className="flex flex-row-reverse w-full">
+                    <NavButton className="text-xl" name= "Sign Up" link="/sign-up"/>
+                </div>
             </div>
         )
     }

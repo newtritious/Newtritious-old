@@ -77,7 +77,7 @@ class SignUpForm extends React.Component{
                 <label>Confirm Password</label>
                     <StyledTextInput type="password" name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleInputChange}></StyledTextInput>
                 <div className="flex flex-row-reverse">
-                    <StyledSubmit value="Submit" />
+                    <StyledSubmit value="Sign Up" />
                 </div>
             </StyledForm>
         )
