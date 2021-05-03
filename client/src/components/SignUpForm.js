@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {StyledTextInput, StyledSubmit} from './StyledInputs'
 
 const StyledForm = styled.form`
     width: 50%;
@@ -9,36 +10,7 @@ const StyledForm = styled.form`
     background: #ddd;
     border-radius: 20px;
 `
-const StyledTextInput = styled.input`
-    width:100%;
-    border-radius: 5px;
-    border-color: #000;
-    border-width: 1px;
-    padding: 3px;
-    margin: auto;
-    margin-bottom: 30px;
-    display: block;
-    font-size: 18px;
-    
-    &:focus {
-        border-color: #00d;
-        outline: none;
-    }`
 
-const StyledSubmit = styled.input.attrs({
-    type: "submit"
-})`
-    border-radius: 20px;
-    padding: 15px 30px 15px 30px;
-    color: #fff;
-    background: #3c2;
-    font-size: 24px;
-    transition: background 300ms;
-    
-    &:hover {
-        background: #092;
-        cursor: pointer;
-    }`
 
 class SignUpForm extends React.Component{
     state= {
