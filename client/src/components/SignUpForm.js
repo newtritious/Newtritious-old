@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {StyledTextInput, StyledSubmit} from './StyledInputs'
+import {StyledTextInput, StyledSubmit} from './styles/StyledInputs'
 
 const StyledForm = styled.form`
     width: 50%;
