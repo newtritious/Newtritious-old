@@ -1,7 +1,7 @@
 import React from 'react';
 import SignUpForm from './../SignUpForm'
 
-class HomePage extends React.Component{
+class SignUpPage extends React.Component{
     render(){
         return(
             <div>
@@ -11,4 +11,4 @@ class HomePage extends React.Component{
     }
 }
 
-export default HomePage;
+export default SignUpPage;
