@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# we are using yarn, so need this to stop showing up
+package-lock.json
