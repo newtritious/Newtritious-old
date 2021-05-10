@@ -8,6 +8,7 @@ import PageC from './components/pages/PageC.js';
 import SignUpPage from './components/pages/SignUpPage.js';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import API from './utils/API';
+import './index.css';
 
 class App extends React.Component {
   state = {
@@ -48,21 +49,35 @@ class App extends React.Component {
         </Switch>
         <span>Test api: {this.state.testResult}!</span>
         {/* API Testing */}
-        <div>
-          <h2>Spoonacular Data:</h2>
-          <pre>
-            {this.state.spoonacularApi.map((data, index) => {
-              return (
-                <ul key={index} style={{ marginTop: '10px' }}>
-                  <li>id: {JSON.stringify(data.id, null, 2)}</li>
-                  <li>title: {data.title}</li>
-                  <li>imgUrl: {data.image}</li>
-                  <li>imgType: {data.imageType}</li>
-                </ul>
-              );
-            })}
-          </pre>
-        </div>
+        {/* <div>
+          <h2>Spoonacular Data:</h2> */}
+        <pre>
+          {this.state.spoonacularApi.map((data, index) => {
+            return (
+
+              // <ul key={index} style={{ marginTop: '10px' }}>
+              //   <li>id: {JSON.stringify(data.id, null, 2)}</li>
+              //   <li>title: {data.title}</li>
+              //   <img>imgUrl: {data.image}</img>
+              //   <li>ingredients: {data.ingredients}</li>
+              //   <li>imgType: {data.imageType}</li>
+              // </ul>
+              <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+                <div className="md:flex">
+                  <div className="md:flex-shrink-0">
+                    <img className="h-48 w-full object-cover md:w-48" src={data.image} alt="recipe" />
+                  </div>
+                  <div className="p-8">
+                    <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{data.title}</div>
+                    <a href={data.url} className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Finding customers for your new business</a>
+                    <p className="mt-2 text-gray-500">{data.usedIngredients}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </pre>
+        {/* // </div> */}
         {/* API Testing */}
       </Router>
     );
