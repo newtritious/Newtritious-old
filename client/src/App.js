@@ -5,6 +5,7 @@ import HomePage from './components/pages/HomePage.js';
 import PageA from './components/pages/PageA.js';
 import PageB from './components/pages/PageB.js';
 import PageC from './components/pages/PageC.js';
+import Search from './components/pages/Search';
 import SignUpPage from './components/pages/SignUpPage.js';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import API from './utils/API';
@@ -47,12 +48,14 @@ class App extends React.Component {
             <HomePage />
           </Route>
         </Switch>
+        <Search />
         <span>Test api: {this.state.testResult}!</span>
         {/* API Testing */}
         {/* <div>
           <h2>Spoonacular Data:</h2> */}
         <pre>
-          {this.state.spoonacularApi.map((data, index) => {
+          {/* still mapping over a static call and returning the data in a visual way */}
+          {this.state.spoonacularApi.map((data) => {
             return (
 
               // <ul key={index} style={{ marginTop: '10px' }}>
@@ -62,15 +65,15 @@ class App extends React.Component {
               //   <li>ingredients: {data.ingredients}</li>
               //   <li>imgType: {data.imageType}</li>
               // </ul>
-              <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+              <div key={data.id} className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-auto md:max-w-2xl">
                 <div className="md:flex">
                   <div className="md:flex-shrink-0">
                     <img className="h-48 w-full object-cover md:w-48" src={data.image} alt="recipe" />
                   </div>
                   <div className="p-8">
                     <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{data.title}</div>
-                    <a href={data.url} className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">Finding customers for your new business</a>
-                    <p className="mt-2 text-gray-500">{data.usedIngredients}</p>
+                    <a href={data.sourceUrl} className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{data.sourceUrl}</a>
+                    <p className="mt-1 text-gray-500 overflow-visible">{data.summary}</p>
                   </div>
                 </div>
               </div>

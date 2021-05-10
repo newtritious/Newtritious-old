@@ -1,5 +1,5 @@
 const axios = require('axios');
-const apiUri = `https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=${process.env.API_KEY}`;
+const apiUri = `https://api.spoonacular.com/recipes/complexSearch?query=beef&addRecipeInformation=true&apiKey=${process.env.API_KEY}`;
 
 /****** 
   Spoonacular API has a limit of 150 requests per day on the free tier 
