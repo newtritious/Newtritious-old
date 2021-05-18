@@ -21,7 +21,8 @@ class Search extends Component {
                 if (res.data.status === "error") {
                     throw new Error(res.data.message);
                 }
-                this.setState({ results: res.data.message, error: "" });
+                this.setState({ results: console.log(res.data) })
+                // res.data.message, error: "" });
             })
             .catch(err => this.setState({ error: err.message }));
 

@@ -1,11 +1,11 @@
 import React from "react";
 // import "./style.css";
 
-function SearchResults(image, title, sourceUrl, summary) {
+function SearchResults({ results, image, title, sourceUrl, summary }) {
     return (
         <>
             {/* having trouble grabbing the results array from search page to map over the results , doesnt like the name of the array? */}
-            {data.results.map((data) => {
+            {results.map((data) => {
                 return (
                     <div key={data.id} className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-auto md:max-w-2xl">
                         <div className="md:flex">
