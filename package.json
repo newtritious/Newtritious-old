@@ -26,11 +26,12 @@
   "homepage": "https://github.com/ichbindev/alumni-collab#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "dotenv": "^8.2.0",
+    "dotenv": "^9.0.1",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
     "mongoose": "^5.12.5",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "concurrently": "^6.0.2",

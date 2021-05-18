@@ -106,5 +106,10 @@ dist
 # TernJS port file
 .tern-port
 
+<<<<<<< HEAD
 # we are using yarn, so need this to stop showing up
 package-lock.json
+=======
+#file with  personal API KEY
+.env
+>>>>>>> 2109ecb3e4503161186d0e5d3f999db0b54ba97f
