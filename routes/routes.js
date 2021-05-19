@@ -11,6 +11,8 @@ module.exports = function(app) {
 /* ------------------------ uncomment code below this ----------------------- */
 
     // const user = new User(req.body);
+
+    console.log(req)
     
     try {
       // await user.save()

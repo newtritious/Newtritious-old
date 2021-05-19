@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {StyledTextInput, StyledSubmit} from './styles/StyledInputs'
+import {StyledTextInput, StyledSubmit} from './styles/StyledInputs';
+import axios from 'axios';
 
 const StyledForm = styled.form`
     width: 50%;
@@ -28,7 +29,10 @@ class SignUpForm extends React.Component{
     }
 
     handleSubmit(event){
-        console.log(this.state)
+        axios.post('/signup', this.state).then(function(response){
+            console.log("a response!")
+            console.log(response)
+        })
         event.preventDefault();
     }
 
