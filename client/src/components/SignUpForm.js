@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {StyledTextInput, StyledSubmit} from './styles/StyledInputs'
+import { StyledTextInput, StyledSubmit } from './styles/StyledInputs'
 
 const StyledForm = styled.form`
     width: 50%;
@@ -12,42 +12,44 @@ const StyledForm = styled.form`
 `
 
 
-class SignUpForm extends React.Component{
-    state= {
+class SignUpForm extends React.Component {
+    state = {
         userName: "",
         email: "",
         password: "",
         confirmPassword: ""
     }
 
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event){
+    handleSubmit(event) {
         console.log(this.state)
-        event.preventDefault();
+        event.preventDefault()
+        // need the form to clear out after submission
+
     }
 
-    handleInputChange(event){
+    handleInputChange(event) {
         this.setState({
             [event.target.name]: event.target.value
         })
     }
-    render(){
-        return(
+    render() {
+        return (
             <StyledForm onSubmit={this.handleSubmit}>
                 <label>Username</label>
-                    <StyledTextInput type="text" name="userName" value={this.state.userName} onChange={this.handleInputChange}></StyledTextInput>
+                <StyledTextInput type="text" name="userName" value={this.state.userName} onChange={this.handleInputChange}></StyledTextInput>
                 <label>Email</label>
-                    <StyledTextInput type="email" name="email" value={this.state.email} onChange={this.handleInputChange}></StyledTextInput>
+                <StyledTextInput type="email" name="email" value={this.state.email} onChange={this.handleInputChange}></StyledTextInput>
                 <label>Password</label>
-                    <StyledTextInput type="password" name="password" value={this.state.password} onChange={this.handleInputChange}></StyledTextInput>
+                <StyledTextInput type="password" name="password" value={this.state.password} onChange={this.handleInputChange}></StyledTextInput>
                 <label>Confirm Password</label>
-                    <StyledTextInput type="password" name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleInputChange}></StyledTextInput>
+                <StyledTextInput type="password" name="confirmPassword" value={this.state.confirmPassword} onChange={this.handleInputChange}></StyledTextInput>
                 <div className="flex flex-row-reverse">
                     <StyledSubmit value="Sign Up" />
                 </div>
