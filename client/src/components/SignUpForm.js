@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {StyledTextInput, StyledSubmit} from './styles/StyledInputs';
+import {StyledTextInput, StyledSubmit, StyledInputMessage} from './styles/StyledInputs';
 import axios from 'axios';
 
 const StyledForm = styled.form`
@@ -29,6 +29,7 @@ class SignUpForm extends React.Component{
     }
 
     handleSubmit(event){
+
         axios.post('/signup', this.state).then(function(response){
             console.log("a response!")
             console.log(response)
@@ -45,7 +46,10 @@ class SignUpForm extends React.Component{
         return(
             <StyledForm onSubmit={this.handleSubmit}>
                 <label>Username</label>
+                    <div className="relative">
                     <StyledTextInput type="text" name="userName" value={this.state.userName} onChange={this.handleInputChange}></StyledTextInput>
+                    {checkUsername(this.state.userName) && <StyledInputMessage>Username should be 3 or more characters</StyledInputMessage>}
+                    </div>
                 <label>Email</label>
                     <StyledTextInput type="email" name="email" value={this.state.email} onChange={this.handleInputChange}></StyledTextInput>
                 <label>Password</label>
@@ -58,6 +62,11 @@ class SignUpForm extends React.Component{
             </StyledForm>
         )
     }
+}
+
+function checkUsername(userName){
+    let cutName = userName.replace(/ /g,"")
+    return (cutName.length < 3 && cutName.length > 0)
 }
 
 export default SignUpForm
