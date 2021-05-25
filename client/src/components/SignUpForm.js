@@ -13,15 +13,15 @@ const StyledForm = styled.form`
 `
 
 
-class SignUpForm extends React.Component{
-    state= {
+class SignUpForm extends React.Component {
+    state = {
         userName: "",
         email: "",
         password: "",
         confirmPassword: ""
     }
 
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.handleInputChange = this.handleInputChange.bind(this)
@@ -48,8 +48,8 @@ class SignUpForm extends React.Component{
             [event.target.name]: value
         })
     }
-    render(){
-        return(
+    render() {
+        return (
             <StyledForm onSubmit={this.handleSubmit}>
                 <label>Username</label>
                     <div className="relative">
