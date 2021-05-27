@@ -30,7 +30,7 @@ class SignUpForm extends React.Component {
 
     handleSubmit(event){
 
-        if(!(checkUsername(this.state.userName) || checkPassword(this.state.password) || (this.state.password !== this.state.confirmPassword))){
+        if(validateUsername(this.state.userName) && validatePassword(this.state.password) && (this.state.password === this.state.confirmPassword)){
             axios.post('/signup', this.state).then(function(response){
                 console.log("a response!")
                 console.log(response)
@@ -54,14 +54,14 @@ class SignUpForm extends React.Component {
                 <label>Username</label>
                     <div className="relative">
                     <StyledTextInput type="text" name="userName" value={this.state.userName} onChange={this.handleInputChange} required maxLength="24"></StyledTextInput>
-                    {checkUsername(this.state.userName) && <StyledInputMessage>Username should be 3 or more characters with only letters, numbers, or underscores ( _ )</StyledInputMessage>}
+                    {!validateUsername(this.state.userName) && <StyledInputMessage>Username should be 3 or more characters with only letters, numbers, or underscores ( _ )</StyledInputMessage>}
                     </div>
                 <label>Email</label>
                     <StyledTextInput type="email" name="email" value={this.state.email} onChange={this.handleInputChange} required></StyledTextInput>
                 <label>Password</label>
                     <div className="relative">
                     <StyledTextInput type="password" name="password" value={this.state.password} onChange={this.handleInputChange} required maxLength="32"></StyledTextInput>
-                    {checkPassword(this.state.password) && <StyledInputMessage>Pasword should be 8 or more characters</StyledInputMessage>}
+                    {!validatePassword(this.state.password) && <StyledInputMessage>Pasword should be 8 or more characters</StyledInputMessage>}
                     </div>
                 <label>Confirm Password</label>
                     <div className="relative">
@@ -76,15 +76,15 @@ class SignUpForm extends React.Component {
     }
 }
 
-function checkUsername(userName){
+function validateUsername(userName){
     if(/[^\w_]/.test(userName))
-        return true
+        return false
     else
-        return (userName.length < 3 && userName.length > 0)
+        return !(userName.length < 3 && userName.length > 0)
 }
 
-function checkPassword(password){
-    return(password.length <8 && password.length > 0)
+function validatePassword(password){
+    return !(password.length < 8 && password.length > 0)
 }
 
 
