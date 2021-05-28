@@ -27,7 +27,6 @@ class SignUpForm extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
     handleSubmit(event){
 
         if(validateUsername(this.state.userName) && validatePassword(this.state.password) && (this.state.password === this.state.confirmPassword)){
@@ -35,7 +34,17 @@ class SignUpForm extends React.Component {
                 console.log("a response!")
                 console.log(response)
             })
-        }
+            .catch(error => {
+                console.log(error)
+            })
+
+            this.setState({
+                userName:"",
+                email:"",
+                password:"",
+                confirmPassword:""
+            })
+        }else
         console.log("submission rejected!")
 
         event.preventDefault();
