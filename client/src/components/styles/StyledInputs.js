@@ -9,12 +9,20 @@ const StyledTextInput = styled.input`
     margin: auto;
     margin-bottom: 30px;
     display: block;
-    font-size: 18px;
+    font-size: 1.1rem;
     
     &:focus {
         border-color: #00d;
         outline: none;
     }`
+
+const StyledInputMessage = styled.p`
+    font-size: .8rem;
+    color: #d00;
+    position: absolute;
+    left: 0;
+    top: 34px;
+`
 
 const StyledSubmit = styled.input.attrs({
     type: "submit"
@@ -47,5 +55,6 @@ const StyledSubmit = styled.input.attrs({
 
 export {
     StyledTextInput,
-    StyledSubmit
+    StyledSubmit,
+    StyledInputMessage
 }
