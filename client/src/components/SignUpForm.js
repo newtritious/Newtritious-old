@@ -15,7 +15,7 @@ const StyledForm = styled.form`
 
 class SignUpForm extends React.Component {
     state = {
-        userName: "",
+        username: "",
         email: "",
         password: "",
         confirmPassword: ""
@@ -28,9 +28,14 @@ class SignUpForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleSubmit(event){
+      const userSubmission = {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+      }
 
-        if(validateUsername(this.state.userName) && validatePassword(this.state.password) && (this.state.password === this.state.confirmPassword)){
-            axios.post('/signup', this.state).then(function(response){
+        if(validateUsername(this.state.username) && validatePassword(this.state.password) && (this.state.password === this.state.confirmPassword)){
+            axios.post('/signup', userSubmission).then(function(response){
                 console.log("a response!")
                 console.log(response)
             })
@@ -62,8 +67,8 @@ class SignUpForm extends React.Component {
             <StyledForm onSubmit={this.handleSubmit}>
                 <label>Username</label>
                     <div className="relative">
-                    <StyledTextInput type="text" name="userName" value={this.state.userName} onChange={this.handleInputChange} required maxLength="24"></StyledTextInput>
-                    {!validateUsername(this.state.userName) && <StyledInputMessage>Username should be 3 or more characters with only letters, numbers, or underscores ( _ )</StyledInputMessage>}
+                    <StyledTextInput type="text" name="userName" value={this.state.username} onChange={this.handleInputChange} required maxLength="24"></StyledTextInput>
+                    {!validateUsername(this.state.username) && <StyledInputMessage>Username should be 3 or more characters with only letters, numbers, or underscores ( _ )</StyledInputMessage>}
                     </div>
                 <label>Email</label>
                     <StyledTextInput type="email" name="email" value={this.state.email} onChange={this.handleInputChange} required></StyledTextInput>
@@ -85,11 +90,11 @@ class SignUpForm extends React.Component {
     }
 }
 
-function validateUsername(userName){
-    if(/[^\w_]/.test(userName))
+function validateUsername(username){
+    if(/[^\w_]/.test(username))
         return false
     else
-        return !(userName.length < 3 && userName.length > 0)
+        return !(username.length < 3 && username.length > 0)
 }
 
 function validatePassword(password){
