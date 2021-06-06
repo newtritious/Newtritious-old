@@ -1,6 +1,6 @@
 import React from 'react';
 
-class PageA extends React.Component{
+class SearchPage extends React.Component{
     render(){
         return(
             <div>
@@ -10,4 +10,4 @@ class PageA extends React.Component{
     }
 }
 
-export default PageA;
+export default SearchPage;

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import NavBar from './components/NavBar.js';
 import HomePage from './components/pages/HomePage.js';
-import PageA from './components/pages/PageA.js';
+import SearchPage from './components/pages/SearchPage.js';
 import PageB from './components/pages/PageB.js';
 import PageC from './components/pages/PageC.js';
 import SignUpPage from './components/pages/SignUpPage.js';
@@ -31,8 +31,8 @@ class App extends React.Component {
       <Router>
         <NavBar />
         <Switch>
-          <Route path='/page-a'>
-            <PageA />
+          <Route path='/search'>
+            <SearchPage />
           </Route>
           <Route path='/page-b'>
             <PageB />
