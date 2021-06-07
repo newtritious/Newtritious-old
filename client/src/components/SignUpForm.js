@@ -1,16 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import {StyledTextInput, StyledSubmit, StyledInputMessage} from './styles/StyledInputs';
+import {StyledTextInput, StyledSubmit, StyledInputMessage, StyledForm} from './styles/StyledInputs';
 import axios from 'axios';
 
-const StyledForm = styled.form`
-    width: 50%;
-    margin: auto;
-    margin-top: 50px;
-    padding: 40px;
-    background: #ddd;
-    border-radius: 20px;
-`
+
 
 
 class SignUpForm extends React.Component {
