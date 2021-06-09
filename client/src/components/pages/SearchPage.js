@@ -1,10 +1,11 @@
 import React from 'react';
+import SearchForm from "./../SearchForm.js"
 
 class SearchPage extends React.Component{
     render(){
         return(
             <div>
-                Welcome to page A!
+                <SearchForm></SearchForm>
             </div>
         )
     }

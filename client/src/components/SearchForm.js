@@ -18,11 +18,20 @@ class SearchForm extends React.Component{
             [event.target.name]: value
         })
     }
+    handleSubmit(event){
+        console.log(this.state)
+
+        event.preventDefault();
+    }
     render(){
         return(
             <div>
                 <StyledForm onSubmit={this.handleSubmit}>
-                    
+                    <label>Search:</label>
+                    <StyledTextInput type="text" name="searchInput" value={this.state.searchInput} onChange={this.handleInputChange} required maxLengh="48"></StyledTextInput>
+                    <div className="flex flex-row-reverse">
+                        <StyledSubmit value="Go" />
+                    </div>
                 </StyledForm>
             </div>
         )
