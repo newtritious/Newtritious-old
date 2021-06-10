@@ -16,7 +16,7 @@ module.exports = function (app) {
 
     // const user = new User(req.body);
 
-    console.log(req)
+    // console.log(req)
     
     try {
       await user.save()
@@ -28,6 +28,12 @@ module.exports = function (app) {
       res.status(400).send(e)
     }
   })
+
+  //this is a dummy route.  Feel free to change or replace this as needed.
+  app.post("/search-req", async function (req,res){
+
+    console.log(req.body)
+  });
 
 };
 

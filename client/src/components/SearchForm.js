@@ -21,6 +21,15 @@ class SearchForm extends React.Component{
     handleSubmit(event){
         console.log(this.state)
 
+        //feel free to change this request as needed.
+        axios.post('/search-req', this.state).then(function(response){
+            console.log("a response!")
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
         event.preventDefault();
     }
     render(){

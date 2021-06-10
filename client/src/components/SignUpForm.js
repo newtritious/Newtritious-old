@@ -27,7 +27,7 @@ class SignUpForm extends React.Component {
       }
 
         if(validateUsername(this.state.username) && validatePassword(this.state.password) && (this.state.password === this.state.confirmPassword)){
-            axios.post('/signup', userSubmission).then(function(response){
+            axios.get('/signup', userSubmission).then(function(response){
                 console.log("a response!")
                 console.log(response)
             })
