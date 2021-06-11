@@ -59,7 +59,7 @@ class SignUpForm extends React.Component {
             <StyledForm onSubmit={this.handleSubmit}>
                 <label>Username</label>
                     <div className="relative">
-                    <StyledTextInput type="text" name="userName" value={this.state.username} onChange={this.handleInputChange} required maxLength="24"></StyledTextInput>
+                    <StyledTextInput type="text" name="username" value={this.state.username} onChange={this.handleInputChange} required maxLength="24"></StyledTextInput>
                     {!validateUsername(this.state.username) && <StyledInputMessage>Username should be 3 or more characters with only letters, numbers, or underscores ( _ )</StyledInputMessage>}
                     </div>
                 <label>Email</label>
