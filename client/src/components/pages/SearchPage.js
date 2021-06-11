@@ -5,7 +5,7 @@ class SearchPage extends React.Component{
     render(){
         return(
             <div>
-                <SearchForm></SearchForm>
+                <SearchForm />
             </div>
         )
     }
