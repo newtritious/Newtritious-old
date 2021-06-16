@@ -6,7 +6,12 @@ const API = {
   },
 
   spoonacularApi: function () {
-    return axios.get('/api/spoonacular');
+    return axios.get('/spoonacular');
+  },
+  spoonacularApiSearch: function (searchQuery) {
+    return axios.get('/spoonacular/search', {
+      params: { searchInput: searchQuery },
+    });
   },
 
   login: async function (email, password) {
