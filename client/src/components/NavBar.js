@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import {StyledTextInput, StyledSubmit} from './styles/StyledInputs'
+import axios from 'axios'
 
 const StyledLink = styled(Link)`
     width: 11%;
@@ -66,7 +67,7 @@ class NavButton extends React.Component{
 class LogInForm extends React.Component{
 
     state = {
-        userName:"",
+        email:"",
         password:""
     }
     constructor(props){
@@ -76,9 +77,19 @@ class LogInForm extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(event){
-        console.log(this.state)
+    async handleSubmit(event){
         event.preventDefault();
+        const { email, password } = this.state
+        try {
+            const user = await axios.post('/login', {
+                email,
+                password,
+            })
+            
+            console.log(user)
+        } catch(e) {
+            throw new Error(`Error: ${e}`)
+        }
     }
 
     handleInputChange(event){
@@ -90,8 +101,8 @@ class LogInForm extends React.Component{
     render(){
         return(
             <form onSubmit={this.handleSubmit}>
-                <label>Username</label>
-                    <StyledTextInput className = "text-input" type="text" name="userName" value={this.state.userName} onChange={this.handleInputChange}></StyledTextInput>
+                <label>Email</label>
+                    <StyledTextInput className = "text-input" type="text" name="email" value={this.state.email} onChange={this.handleInputChange}></StyledTextInput>
                 <label>Password</label>
                     <StyledTextInput className = "text-input" type="password" name="password" value={this.state.password} onChange={this.handleInputChange}></StyledTextInput>
                 <div className="flex flex-row-reverse">
