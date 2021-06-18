@@ -107,7 +107,7 @@ class NavBar extends React.Component{
         return(
             <div className="flex flex-row h-20 border-b-2 border-gray-400">
                 <NavButton name ="Home" link="/" />
-                <NavButton name = "PageA" link ="/page-a"/>
+                <NavButton name = "Search" link ="/search"/>
                 <NavButton name = "PageB" link ="/page-b"/>
                 <NavButton name = "PageC" link ="/page-c"/>
 

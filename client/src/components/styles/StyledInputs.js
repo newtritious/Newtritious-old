@@ -1,5 +1,14 @@
 import styled from 'styled-components';
 
+const StyledForm = styled.form`
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+    padding: 40px;
+    background: #ddd;
+    border-radius: 20px;
+`
+
 const StyledTextInput = styled.input`
     width:100%;
     border-radius: 5px;
@@ -56,5 +65,6 @@ const StyledSubmit = styled.input.attrs({
 export {
     StyledTextInput,
     StyledSubmit,
-    StyledInputMessage
+    StyledInputMessage,
+    StyledForm
 }
