@@ -34,9 +34,9 @@ module.exports = function (app) {
 
       user.comparePasswords(password, (err, isMatch) => {
         if (err) throw err;
-        if (!isMatch) return res.status(401).send()
+        if (!isMatch) return res.status(401).send();
 
-        res.status(200).send({user});
+        res.status(200).send({ user });
       });
     } catch (e) {
       throw new Error(`Error: ${e}`);

@@ -22,11 +22,11 @@ const API = {
         });
 
       if (!user) return;
-      
+
       console.log(user);
       return user;
     } catch (e) {
-      throw new Error(`Error: ${e}`)
+      throw new Error(`Error: ${e}`);
     }
   }
 };
