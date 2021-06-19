@@ -25,14 +25,20 @@ module.exports = function (app) {
 
     try {
       const user = await User.findOne({
-        email,
-        password
+        email
       });
 
       if (!user) {
         return res.status(404).send('User does not exist');
       }
-      res.status(200).send(user);
+
+      user.comparePasswords(password, (err, isMatch) => {
+        if (err) throw err;
+        if (!isMatch) return res.status(401).send('Credential login failed!')
+        
+        return res.status(200).send(user);
+      });
+
     } catch (e) {
       throw new Error(`Error: ${e}`);
     }

@@ -29,16 +29,24 @@ const UserSchema = new Schema({
 UserSchema.pre('save', function (next) {
   const user = this;
 
-  if (user.isModified('password')) {
-    bcrypt.hash(user.password, 8, function (err, hash) {
-      if (err) return next(err);
-      user.password = hash;
-      next();
-    });
-  } else {
+  if (!user.isModified('password')) return next();
+
+  bcrypt.hash(user.password, 8, function (err, hash) {
+    if (err) return next(err);
+    
+    user.password = hash;
     next();
-  }
+  });
 });
+
+UserSchema.methods.comparePasswords = function (password, cb) {
+  const user = this;
+
+  bcrypt.compare(password, user.password, function (err, isMatch) {
+    if (err) return cb(err);
+    cb(null, isMatch);
+  });
+};
 
 const User = mongoose.model('User', UserSchema);
 

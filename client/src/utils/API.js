@@ -17,8 +17,9 @@ const API = {
       });
 
       console.log(user);
+
     } catch (e) {
-      throw new Error(`Error: ${e}`);
+      console.log('Credentials failed')
     }
   }
 };
