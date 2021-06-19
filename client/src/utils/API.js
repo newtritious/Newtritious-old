@@ -11,15 +11,22 @@ const API = {
 
   login: async function (email, password) {
     try {
-      const user = await axios.post('/login', {
-        email,
-        password
-      });
+      const user = await axios
+        .post('/login', {
+          email,
+          password
+        })
+        .catch((error) => {
+          if (error.response.status === 401) alert('Credentials Failed');
+          if (error.response.status === 404) alert('User Not Found');
+        });
 
+      if (!user) return;
+      
       console.log(user);
-
+      return user;
     } catch (e) {
-      console.log('Credentials failed')
+      throw new Error(`Error: ${e}`)
     }
   }
 };

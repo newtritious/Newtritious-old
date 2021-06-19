@@ -34,11 +34,10 @@ module.exports = function (app) {
 
       user.comparePasswords(password, (err, isMatch) => {
         if (err) throw err;
-        if (!isMatch) return res.status(401).send('Credential login failed!')
-        
-        return res.status(200).send(user);
-      });
+        if (!isMatch) return res.status(401).send()
 
+        res.status(200).send({user});
+      });
     } catch (e) {
       throw new Error(`Error: ${e}`);
     }
