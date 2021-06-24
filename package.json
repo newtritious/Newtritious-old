@@ -26,10 +26,12 @@
   "homepage": "https://github.com/ichbindev/alumni-collab#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^9.0.1",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.5",
     "passport-jwt": "^4.0.0",
     "react-router-dom": "^5.2.0",
