@@ -22,14 +22,14 @@ class SearchPage extends React.Component {
     });
   }
 
-  // function to handle search form submit
   handleSearchForm(e) {
     e.preventDefault();
 
+    // set loading to true before the request is complete
+    this.setState({ isLoading: true });
+
     API.spoonacularApiSearch(this.state.searchInput)
       .then((results) => {
-        // set loading to true before the request is complete
-        this.setState({ isLoading: true });
         // set loading to false and set the searchResults to the data we get back, loading back to false
         if (results) {
           this.setState({
