@@ -85,7 +85,7 @@ Contributions are what make the open source community such an amazing place to b
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Rebase your commits (`git rebase -i origin/main`)
-5. Push to the Branch (`git push --force-with-lease origin feature/AmazingFeature`)
+5. Push to the Branch (`git push origin feature/AmazingFeature`)
 6. Open a Pull Request
 
 ## Tests
