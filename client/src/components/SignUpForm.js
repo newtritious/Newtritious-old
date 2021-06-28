@@ -1,16 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import {StyledTextInput, StyledSubmit, StyledInputMessage} from './styles/StyledInputs';
+import {StyledTextInput, StyledSubmit, StyledInputMessage, StyledForm} from './styles/StyledInputs';
 import axios from 'axios';
 
-const StyledForm = styled.form`
-    width: 50%;
-    margin: auto;
-    margin-top: 50px;
-    padding: 40px;
-    background: #ddd;
-    border-radius: 20px;
-`
+
 
 
 class SignUpForm extends React.Component {
@@ -42,6 +34,13 @@ class SignUpForm extends React.Component {
             .catch(error => {
                 console.log(error)
             })
+
+            this.setState({
+                userName:"",
+                email:"",
+                password:"",
+                confirmPassword:""
+            })
         }else
         console.log("submission rejected!")
 
@@ -60,7 +59,7 @@ class SignUpForm extends React.Component {
             <StyledForm onSubmit={this.handleSubmit}>
                 <label>Username</label>
                     <div className="relative">
-                    <StyledTextInput type="text" name="userName" value={this.state.username} onChange={this.handleInputChange} required maxLength="24"></StyledTextInput>
+                    <StyledTextInput type="text" name="username" value={this.state.username} onChange={this.handleInputChange} required maxLength="24"></StyledTextInput>
                     {!validateUsername(this.state.username) && <StyledInputMessage>Username should be 3 or more characters with only letters, numbers, or underscores ( _ )</StyledInputMessage>}
                     </div>
                 <label>Email</label>

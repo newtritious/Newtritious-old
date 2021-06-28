@@ -1,7 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {StyledTextInput, StyledSubmit} from './styles/StyledInputs'
+import { StyledTextInput, StyledSubmit } from './styles/StyledInputs';
+import API from '../utils/API';
 
 const StyledLink = styled(Link)`
     width: 11%;
@@ -10,10 +11,10 @@ const StyledLink = styled(Link)`
     text-align: center;
     padding: 10px;
 
-    &:hover {
-        background: #ddd;
-    }
-`
+  &:hover {
+    background: #ddd;
+  }
+`;
 
 const StyledTab = styled.div`
     width: 11%;
@@ -23,17 +24,17 @@ const StyledTab = styled.div`
     padding: 10px;
     user-select: none;
 
-    &.log-in:focus-within{
-        background: #ddd;
-    }
+  &.log-in:focus-within {
+    background: #ddd;
+  }
 
-    &.log-in:hover {
-        background: #ddd;
-        cursor: pointer;
-    }
+  &.log-in:hover {
+    background: #ddd;
+    cursor: pointer;
+  }
 
-    position: relative
-`
+  position: relative;
+`;
 
 const StyledDropDownForm = styled.div`
     position: absolute;
@@ -63,67 +64,79 @@ class NavButton extends React.Component{
     }
 }
 
-class LogInForm extends React.Component{
+class LogInForm extends React.Component {
+  state = {
+    email: '',
+    password: ''
+  };
+  constructor(props) {
+    super(props);
 
-    state = {
-        userName:"",
-        password:""
-    }
-    constructor(props){
-        super(props)
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-        this.handleInputChange = this.handleInputChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+  handleSubmit(event) {
+    event.preventDefault();
+    const { email, password } = this.state;
+    API.login(email, password);
+  }
 
-    handleSubmit(event){
-        console.log(this.state)
-        event.preventDefault();
-    }
+  handleInputChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  }
 
-    handleInputChange(event){
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-
-    render(){
-        return(
-            <form onSubmit={this.handleSubmit}>
-                <label>Username</label>
-                    <StyledTextInput className = "text-input" type="text" name="userName" value={this.state.userName} onChange={this.handleInputChange}></StyledTextInput>
-                <label>Password</label>
-                    <StyledTextInput className = "text-input" type="password" name="password" value={this.state.password} onChange={this.handleInputChange}></StyledTextInput>
-                <div className="flex flex-row-reverse">
-                    <StyledSubmit className="small blue" value="Log In" />
-                </div>
-            </form>
-        )
-    }
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>Email</label>
+        <StyledTextInput
+          className="text-input"
+          type="text"
+          name="email"
+          value={this.state.email}
+          onChange={this.handleInputChange}
+        ></StyledTextInput>
+        <label>Password</label>
+        <StyledTextInput
+          className="text-input"
+          type="password"
+          name="password"
+          value={this.state.password}
+          onChange={this.handleInputChange}
+        ></StyledTextInput>
+        <div className="flex flex-row-reverse">
+          <StyledSubmit className="small blue" value="Log In" />
+        </div>
+      </form>
+    );
+  }
 }
 
-class NavBar extends React.Component{
-    render(){
-        return(
-            <div className="flex flex-row h-20 border-b-2 border-gray-400">
-                <NavButton name ="Home" link="/" />
-                <NavButton name = "PageA" link ="/page-a"/>
-                <NavButton name = "PageB" link ="/page-b"/>
-                <NavButton name = "PageC" link ="/page-c"/>
+class NavBar extends React.Component {
+  render() {
+    return (
+      <div className="flex flex-row h-20 border-b-2 border-gray-400">
+        <NavButton name="Home" link="/" />
+        <NavButton name="Search" link="/search" />
+        <NavButton name="PageB" link="/page-b" />
+        <NavButton name="PageC" link="/page-c" />
 
-                <div className="flex flex-row-reverse w-full">
-                    <StyledTab>Guest</StyledTab>
-                    <StyledTab className = "log-in">
-                        Log In
-                        <StyledDropDownForm>
-                            <LogInForm />
-                        </StyledDropDownForm>
-                    </StyledTab>
-                    <NavButton className="text-xl" name= "Sign Up" link="/sign-up"/>
-                </div>
-            </div>
-        )
-    }
+        <div className="flex flex-row-reverse w-full">
+          <StyledTab>Guest</StyledTab>
+          <StyledTab className="log-in">
+            Log In
+            <StyledDropDownForm>
+              <LogInForm />
+            </StyledDropDownForm>
+          </StyledTab>
+          <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default NavBar;
