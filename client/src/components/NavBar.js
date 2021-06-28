@@ -6,7 +6,7 @@ import {StyledTextInput, StyledSubmit} from './styles/StyledInputs'
 const StyledLink = styled(Link)`
     width: 11%;
     min-width: 170px;
-    font-size: 40px;
+    font-size: 2.5rem;
     text-align: center;
     padding: 10px;
 
@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
 const StyledTab = styled.div`
     width: 11%;
     min-width: 170px;
-    font-size: 40px;
+    font-size: 2.5rem;
     text-align: center;
     padding: 10px;
     user-select: none;
@@ -45,7 +45,7 @@ const StyledDropDownForm = styled.div`
     padding: 15px;
     border-radius: 0px 0px 5px 5px;
     text-align: left;
-    font-size: 18px;
+    font-size: 1.125rem;
 
     .log-in:hover &{
         display: block;

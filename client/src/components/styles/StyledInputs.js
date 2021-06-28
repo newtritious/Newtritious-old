@@ -31,12 +31,12 @@ const StyledSubmit = styled.input.attrs({
     padding: 15px 30px 15px 30px;
     color: #fff;
     background: #3c2;
-    font-size: 24px;
+    font-size: 1.5rem;
     transition: background 300ms;
 
     &.small {
         padding: 8px 20px 8px 20px;
-        font-size: 20px;
+        font-size: 1.25rem;
         border-radius: 10px;
     }
 
