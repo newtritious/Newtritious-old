@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledTextInput, StyledSubmit } from './styles/StyledInputs';
 import API from '../utils/API';
+import theme from '../theme.js';
 
 const StyledLink = styled(Link)`
     width: 11%;
@@ -12,7 +13,7 @@ const StyledLink = styled(Link)`
     padding: 10px;
 
   &:hover {
-    background: #ddd;
+    background: ${theme.primary.faded};
   }
 `;
 
