@@ -14,6 +14,7 @@ const StyledLink = styled(NavLink)`
     position: relative;
     color: ${theme.primary.default};
     transition: color .3s ease-in-out;
+    margin-left: 5px;
 
   &:hover {
     color: #fff;
@@ -146,7 +147,7 @@ class LogInForm extends React.Component {
 class NavBar extends React.Component {
   render() {
     return (
-      <div className="flex flex-row h-20 border-b-2 border-gray-400">
+      <div className="flex flex-row h-20 border-b-2 mt-3 pl-1 border-primary">
         <NavButton name="Home" link="/" />
         <NavButton name="Search" link="/search" />
         <NavButton name="PageB" link="/page-b" />
