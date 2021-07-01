@@ -56,7 +56,7 @@ class SearchPage extends React.Component {
           onSubmitForm={this.handleSearchForm}
           onInputChange={this.handleInputChange}
         />
-        {this.state.searchResults &&
+        {this.state.searchResults?.length &&
           this.state.searchResults.map((data) => {
             return (
               <div
