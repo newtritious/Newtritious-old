@@ -13,6 +13,8 @@
 
 - [Installation](#installation)
 
+- [Get Spoonacular API Key](#spoonacular)
+
 - [Running](#running-the-project)
 
 - [Troubleshooting](#troubleshooting)
@@ -58,6 +60,17 @@ To get a local copy up and running follow these simple steps.
    ```
 
 - **_Note: If you are using npm, delete all `node_modules` folders in the root of the project folder and client folder - then reinstall packages with yarn_**
+
+## Get Spoonacular API Key
+
+Signup for your own Spoonacular API key @ `https://spoonacular.com/food-api`.
+
+1. Click the `Start Now` button in the navigation
+2. From the `Dashboard` - Navigate to `Profile`
+3. You will see your API key hidden `API Key: *****************************`
+4. Click the `Show / Hide API Key` button
+5. Create a local `.env` file
+6. In the `.env.EXAMPLE` file, you will see an example on how your Spoonacular API key should look in your `.env` file. `SPOONACULAR_API_KEY=your_api_key`
 
 ## Running the project
 
