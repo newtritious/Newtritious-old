@@ -53,6 +53,7 @@ class SearchPage extends React.Component {
     return (
       <div>
         <SearchForm
+          searchInput={this.state.searchInput}
           onSubmitForm={this.handleSearchForm}
           onInputChange={this.handleInputChange}
         />
