@@ -13,7 +13,9 @@ module.exports = function (app) {
    */
   app.get('/spoonacular', async function (_, res) {
     try {
-      const response = await axios.get(apiUri);
+      const response = await axios.get(
+        `https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=${process.env.SPOONACULAR_API_KEY}`
+      );
       // send results with a status of 200
       res.status(200).json(response.data.results);
     } catch (error) {
