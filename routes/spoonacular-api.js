@@ -1,5 +1,4 @@
 const axios = require('axios');
-const apiUri = `https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=${process.env.SPOONACULAP_API_KEY}`;
 
 /****** 
   Spoonacular API has a limit of 150 requests per day on the free tier 
@@ -14,7 +13,9 @@ module.exports = function (app) {
    */
   app.get('/spoonacular', async function (_, res) {
     try {
-      const response = await axios.get(apiUri);
+      const response = await axios.get(
+        `https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=${process.env.SPOONACULAR_API_KEY}`
+      );
       // send results with a status of 200
       res.status(200).json(response.data.results);
     } catch (error) {
@@ -36,7 +37,7 @@ module.exports = function (app) {
     try {
       // save the response in a variable with the search query and API key
       const response = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${searchInput}&addRecipeInformation=true&apiKey=${process.env.SPOONACULAP_API_KEY}`
+        `https://api.spoonacular.com/recipes/complexSearch?query=${searchInput}&addRecipeInformation=true&apiKey=${process.env.SPOONACULAR_API_KEY}`
       );
       // send an OK status and the data as json
       res.status(200).json(response.data.results);
