@@ -56,7 +56,7 @@ class SignUpForm extends React.Component {
     }
     render() {
         return (
-            <StyledForm onSubmit={this.handleSubmit}>
+            <StyledForm onSubmit={this.handleSubmit} className = "signup">
                 <label>Username</label>
                     <div className="relative">
                     <StyledTextInput type="text" name="username" value={this.state.username} onChange={this.handleInputChange} required maxLength="24"></StyledTextInput>

@@ -1,12 +1,15 @@
 import styled from 'styled-components';
+import theme from "../../theme";
 
 const StyledForm = styled.form`
     width: 50%;
     margin: auto;
     margin-top: 50px;
     padding: 40px;
-    background: #ddd;
+    background: #fff;
     border-radius: 20px;
+    border-width: 3px;
+    border-color: ${theme.primary.default}
 `
 
 const StyledTextInput = styled.input`

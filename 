@@ -1,0 +1,249 @@
+[33mcommit c42ce4bb8112c1ab9346589e4a4c344cfecb0ecb[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Chris <cmlinac@gmail.com>
+Date:   Thu Jul 1 15:15:36 2021 -0500
+
+    check search results for content instead of just existence (#40)
+
+[33mcommit b70ecd08db70c2662152a944f13242bf1ef32da2[m
+Author: Ashlyn Tyler <46911274+AshlynTyler@users.noreply.github.com>
+Date:   Thu Jul 1 00:42:33 2021 -0600
+
+    Navbar styling (#39)
+    
+    * changed font from pixels to rem
+    
+    * added a theme that can be imported to other files.
+    
+    * making serious progress on navlink animations
+    
+    * just a few tweeks to spacing.
+
+[33mcommit 7007576393770c7a0e25759436c3092996c3d032[m
+Merge: 6104197 27c34ff
+Author: Joseph Lynn <josephlynn94@gmail.com>
+Date:   Sun Jun 27 14:24:04 2021 -0400
+
+    Merge pull request #37 from ichbindev/spoonacular-search
+    
+    adds .env.EXAMPLE file, displays results from spoonacular api on user search
+
+[33mcommit 27c34ffc5374d544627fb607e7ec35c2153d0e9e[m[33m ([m[1;31morigin/spoonacular-search[m[33m)[m
+Author: Joseph Lynn <josephlynn94@gmail.com>
+Date:   Fri Jun 25 05:54:17 2021 -0400
+
+    moved loading state before the API call happens
+
+[33mcommit 71048b7eb328dd9045dadb258a51d56af52163a9[m
+Author: Joseph Lynn <josephlynn94@gmail.com>
+Date:   Fri Jun 25 05:50:16 2021 -0400
+
+    changed SearchForm to functional component
+
+[33mcommit c773cfe2b2b5ad762bab581ab033b82b4a8deb8f[m
+Author: Joseph Lynn <josephlynn94@gmail.com>
+Date:   Fri Jun 25 05:43:39 2021 -0400
+
+    changed API_KEY to SPOONACULAP_API_KEY, removed --force-with-lease in README
+
+[33mcommit 5dbb4080853d2e24570cfe7e3f27d7509938731f[m
+Merge: a3a9bb2 9b9aa63
+Author: Joseph Lynn <josephlynn94@gmail.com>
+Date:   Thu Jun 24 13:17:07 2021 -0400
+
+    Merge branch 'spoonacular-search' of https://github.com/ichbindev/alumni-collab into spoonacular-search
+
+[33mcommit a3a9bb2c185fb0470842b513b707ad2b111cdf9e[m
+Author: Joseph Lynn <josephlynn94@gmail.com>
+Date:   Thu Jun 24 11:16:58 2021 -0400
+
+    made changes to contributing section in readme
+
+[33mcommit 4726796d195026f132ad02ef255faef9e8a17381[m
+Author: Joseph Lynn <josephlynn94@gmail.com>
+Date:   Wed Jun 16 07:42:30 2021 -0400
+
+    adds .env.EXAMPLE file, lifted SearchForm component state, displaying results from spoonacular api when a user uses the search form, removed static spoonacular api call from the frontend
+
+[33mcommit 61041974fe658abe879a3fff7f59e2b0b06ddd25[m
+Author: Robert Parsons <55468908+rmpcoding@users.noreply.github.com>
+Date:   Thu Jun 24 09:16:03 2021 -0700
+
+    Bcrypt hook user schema (#36)
+    
+    * Adds new branch
+    
+    * Adds working login route and talks to the frontend (no auth yet)
+    
+    * Adds login function to utils/API instead of in NavBar and formats API & NavBar.js to prettier format
+    
+    * Adds hashing prehook function in User model for saving hashed passwords in db
+    
+    * Adds login route password matching functionality
+    
+    * Adds pw hashing prior to db save, hashed pw comparing in login route, and logic to API login
+    
+    * Formats selected files
+    
+    * removes outdated userRoutes.js, which was removed from main codebase
+
+[33mcommit 9b9aa63c81a2a8e9619e7a45a15a88b0ec094ab3[m
+Author: Joseph Lynn <josephlynn94@gmail.com>
+Date:   Thu Jun 24 11:16:58 2021 -0400
+
+    made changes to contributing section in readme
+
+[33mcommit 67e8b0e10c9bcdb0e8b088df449d4243fde8fb86[m
+Author: Joseph Lynn <josephlynn94@gmail.com>
+Date:   Wed Jun 16 07:42:30 2021 -0400
+
+    adds .env.EXAMPLE file, lifted SearchForm component state, displaying results from spoonacular api when a user uses the search form, removed static spoonacular api call from the frontend
+
+[33mcommit 59ee2be7a21c6ab176619ab5a92e0fe78a5b0186[m
+Author: Robert Parsons <55468908+rmpcoding@users.noreply.github.com>
+Date:   Sun Jun 20 12:58:15 2021 -0700
+
+    Adds working login route and talks to the frontend (no auth yet) (#33)
+    
+    * Adds working login route and talks to the frontend (no auth yet)
+    
+    * Adds login function to utils/API instead of in NavBar and formats API & NavBar.js to prettier format
+
+[33mcommit 76e703f19ce2d9c0e30bee586548b84c5f036aff[m
+Author: Chris <cmlinac@gmail.com>
+Date:   Thu Jun 17 19:18:30 2021 -0500
+
+    Prettier fix (#32)
+    
+    * add prettier
+    
+    * fix prettier oopsie
+
+[33mcommit 36b58d1dec9c21c5ce34b6444bc9b6c3985fb147[m
+Author: Chris <cmlinac@gmail.com>
+Date:   Thu Jun 17 19:08:49 2021 -0500
+
+    add prettier (#30)
+
+[33mcommit ce8d27a89d1cbf8db6ed3b46b27eda7a93b48eed[m
+Author: Robert Parsons <55468908+rmpcoding@users.noreply.github.com>
+Date:   Thu Jun 10 17:26:35 2021 -0700
+
+    Fixes username input on frontend (#26)
+
+[33mcommit 68d01a85852a82e328356ed4d95b198e8ad3b02e[m
+Author: Ashlyn Tyler <46911274+AshlynTyler@users.noreply.github.com>
+Date:   Thu Jun 10 18:09:41 2021 -0600
+
+    Search frontend (#27)
+    
+    * initial commit
+    
+    * commiting so I can merge
+    
+    * created test component and changed app constructor to class.
+    
+    * created the basic html and functionality for the nav-bar
+    
+    * added barebones css to the navbar
+    
+    * added barebones css to the navbar
+    
+    * deleted unsused imports
+    
+    * added a bottom border to nav bar
+    
+    * Created sign up form components and basic styling
+    
+    * added sign up page and nav button
+    
+    * added log in component to nav bar and added basic funtionality and css.
+    
+    * added a styles folder
+    
+    * added a post request that sends sign up form data to the backend
+    
+    * added a function to check the length of usernames and a message that apears if they are too short
+    
+    * added some more constraints and warnings to signing up
+    
+    * fixing some things on the wrong branch.  Oops
+    
+    * pulled from main
+    
+    * working on the basic skeleton for the food search component.
+    
+    * have component running on dev build just need to hook it to a request
+    
+    * added a search route and request and got the search component to send data to the backend
+    
+    * made requested changes
+
+[33mcommit 221e15e953bc3e731ff59136ee2b800b95643f29[m
+Author: Robert Parsons <55468908+rmpcoding@users.noreply.github.com>
+Date:   Thu Jun 3 20:49:19 2021 -0700
+
+    Adds CORS dependency and middleware to server, enables all cors requests (#23)
+
+[33mcommit 9cf7af833f47462ecde7dd260d3952808e0d08dc[m
+Author: Chris <cmlinac@gmail.com>
+Date:   Thu Jun 3 19:25:37 2021 -0500
+
+    match FE user to backend model (#25)
+    
+    * match FE user to backend model
+    
+    * kill package lock
+
+[33mcommit 1c4ebae342fabef2e87ea7c78b4c4ca5b001296a[m
+Author: Ashlyn Tyler <46911274+AshlynTyler@users.noreply.github.com>
+Date:   Thu May 27 18:36:48 2021 -0600
+
+    Sign up (#22)
+    
+    * initial commit
+    
+    * commiting so I can merge
+    
+    * created test component and changed app constructor to class.
+    
+    * created the basic html and functionality for the nav-bar
+    
+    * added barebones css to the navbar
+    
+    * added barebones css to the navbar
+    
+    * deleted unsused imports
+    
+    * added a bottom border to nav bar
+    
+    * Created sign up form components and basic styling
+    
+    * added sign up page and nav button
+    
+    * added log in component to nav bar and added basic funtionality and css.
+    
+    * added a styles folder
+    
+    * added a post request that sends sign up form data to the backend
+    
+    * added a function to check the length of usernames and a message that apears if they are too short
+    
+    * added some more constraints and warnings to signing up
+    
+    * made requested changes
+
+[33mcommit 43f65781eca3172080ed58d94b772a0c8a42457d[m
+Author: Amy Moseman <amoseman18@gmail.com>
+Date:   Wed May 19 14:48:28 2021 -0600
+
+    Passport (#21)
+    
+    * merging
+    
+    * removed elint extends in frontend package,json
+    
+    * moved models folder out of FE src folder, created services folder and added passport, installed passport-jwt package
+    
+    * added eslint back into FE pagke.json
+
+[33mcommit 2109ecb3e4503161186d0e

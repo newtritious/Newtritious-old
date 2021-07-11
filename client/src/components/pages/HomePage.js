@@ -1,11 +1,11 @@
 import React from 'react';
-import SignUpForm from './../SignUpForm'
+import Hero from './../Hero'
 
 class HomePage extends React.Component{
     render(){
         return(
             <div>
-                <SignUpForm/>
+                <Hero/>
             </div>
         )
     }
