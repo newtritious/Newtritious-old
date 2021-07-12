@@ -75,7 +75,7 @@ class SignUpForm extends React.Component {
                     {(this.state.password !== this.state.confirmPassword) && <StyledInputMessage>Does not match</StyledInputMessage>}
                     </div>
                 <div className="flex flex-row-reverse">
-                    <StyledSubmit value="Sign Up" />
+                    <StyledSubmit value="Sign Up" className="centered"/>
                 </div>
             </StyledForm>
         )

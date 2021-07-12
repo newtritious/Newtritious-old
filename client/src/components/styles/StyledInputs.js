@@ -7,21 +7,23 @@ const StyledForm = styled.form`
     margin-top: 50px;
     padding: 40px;
     background: #fff;
-    border-radius: 20px;
-    border-width: 3px;
-    border-color: ${theme.primary.default}
+    border-radius: 10px;
+    border-width: 4px;
+    border-color: ${theme.primary.default};
+    box-shadow: 3px 5px 10px 5px #0003, 1px 2px 10px 3px #0001 inset;
 `
 
 const StyledTextInput = styled.input`
     width:100%;
     border-radius: 5px;
     border-color: #000;
-    border-width: 1px;
+    border-width: 2px;
     padding: 3px;
     margin: auto;
     margin-bottom: 30px;
     display: block;
     font-size: 1.1rem;
+    box-shadow: 3px 5px 10px #0001;
     
     &:focus {
         border-color: #00d;
@@ -39,12 +41,20 @@ const StyledInputMessage = styled.p`
 const StyledSubmit = styled.input.attrs({
     type: "submit"
 })`
-    border-radius: 20px;
+    border-radius: 5px;
     padding: 15px 30px 15px 30px;
     color: #fff;
-    background: #3c2;
+    background: ${theme.primary.default};
     font-size: 1.5rem;
-    transition: background 300ms;
+    transition: background 400ms, color 400ms;
+    border-width: 3px;
+    border-color: ${theme.primary.default};
+    box-shadow: 3px 5px 10px #0003;
+
+    &.centered{
+        margin-left: auto;
+        margin-right: auto;
+    }
 
     &.small {
         padding: 8px 20px 8px 20px;
@@ -57,7 +67,8 @@ const StyledSubmit = styled.input.attrs({
     }
     
     &:hover {
-        background: #092;
+        background: #fff;
+        color: ${theme.primary.default};
         cursor: pointer;
     }
     &.blue:hover {
