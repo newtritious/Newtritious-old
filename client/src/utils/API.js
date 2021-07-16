@@ -33,6 +33,25 @@ const API = {
     } catch (e) {
       throw new Error(`Error: ${e}`);
     }
+  },
+  logout: async function () {
+    try {
+      console.log(document.cookie)
+      const user = await axios
+        .post('/logout', {
+          cookies: document.cookie
+        })
+        .catch((error) => {
+          if (error.response.status === 500) alert('Cannot logout');
+        });
+
+      if (!user) return;
+
+      console.log(user);
+      return user;
+    } catch (e) {
+      throw new Error(`Error: ${e}`);
+    }
   }
 };
 

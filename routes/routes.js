@@ -16,7 +16,7 @@ module.exports = function (app) {
 
       res
         .status(201)
-        .cookie('access_token', `Bearer ${token}`, {
+        .cookie('jwt', `Bearer ${token}`, {
           httpOnly: true
         })
         .send({
@@ -58,8 +58,7 @@ module.exports = function (app) {
   });
 
   app.post('/logout', auth, async function (req, res) {
-    console.log(req.body);
-    res.send('HECK YES!!!!');
+    console.log('middleware has passed already.');
   });
 
   //this is a dummy route.  Feel free to change or replace this as needed.
