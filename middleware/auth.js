@@ -26,37 +26,18 @@ const auth = async (req, res, next) => {
 
   opts.jwtFromRequest = cookieExtractor(req);
   opts.secretOrKey = process.env.SECRET_STRING;
-
-  console.log(opts.jwtFromRequest, opts.secretOrKey)
   
   const payload = jwt.verify(opts.jwtFromRequest, opts.secretOrKey);
   console.log(payload)
-
-  // const cb = (jwt_payload, done) => {
-  //   console.log('opts');
-  //   let user = User.findById(jwt_payload.id)
-  //   console.log(user)
-
-  //   User.findById(jwt_payload.id)
-  //     .then((user) => {
-  //       if (user) {
-  //         console.log(user);
-  //         return done(null, user);
-  //       }
-  //       console.log('hhhhhhh');
-  //       return done(null, false);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }
 
   try {
     passport.use(
       new JwtStrategy(opts, function (jwt_payload, done) {
         console.log('opts');
-        let user = User.findById(jwt_payload._id)
+        let user = User.findById({_id: jwt_payload.sub})
         console.log(user)
     
-        User.findById(jwt_payload._id)
+        User.findById(jwt_payload.sub)
           .then((user) => {
             if (user) {
               console.log(user);
