@@ -9,6 +9,7 @@ import SignUpPage from './components/pages/SignUpPage.js';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import API from './utils/API';
 import './index.css';
+import Recipe from './components/Recipe';
 
 class App extends React.Component {
   state = {
@@ -29,6 +30,9 @@ class App extends React.Component {
         <Switch>
           <Route path="/search">
             <SearchPage />
+          </Route>
+          <Route path="/recipe/:id">
+            <Recipe />
           </Route>
           <Route path="/page-b">
             <PageB />

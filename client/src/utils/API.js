@@ -10,8 +10,11 @@ const API = {
   },
   spoonacularApiSearch: function (searchQuery) {
     return axios.get('/spoonacular/search', {
-      params: { searchInput: searchQuery },
+      params: { searchInput: searchQuery }
     });
+  },
+  spoonacularApiRecipe: function (id) {
+    return axios.get(`/spoonacular/${id}`);
   },
 
   login: async function (email, password) {
