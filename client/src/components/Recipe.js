@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import theme from '../theme';
+import { useParams } from 'react-router-dom';
 import API from '../utils/API';
 
 function Recipe() {
   const params = useParams();
   const [recipe, setRecipe] = useState({});
-  const [error, setError] = useState();
 
   useEffect(() => {
     API.spoonacularApiRecipe(params.id)
@@ -19,22 +17,33 @@ function Recipe() {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
-
+  }, [params.id]);
   return (
-    <div>
-      <h1>{recipe.title}</h1>
-      <img src={recipe.image} alt={recipe.title} />
-      <ul>
-        {recipe.dishTypes.map((dish) => (
-          <li>{dish}</li>
-        ))}
+    <div className="md:container mx-auto">
+      <h1 className="text-center text-6xl mb-5 mt-5">{recipe.title}</h1>
+      <img className="flex mx-auto" src={recipe.image} alt={recipe.title} />
+      <ul className="flex gap-3	items-center mt-2">
+        Dish Types:
+        {recipe &&
+          recipe.dishTypes?.map((dish, index) => (
+            <li key={index} className="text-white font-bold py-3 rounded-full">
+              {dish}
+            </li>
+          ))}
       </ul>
-      <h2>Ingredients</h2>
+      <h2 className="text-4xl p-1 border-b-2 mt-5">Ingredients</h2>
       <ul>
-        {recipe.extendedIngredients.map((ingredient) => (
-          <li>{ingredient.original}</li>
-        ))}
+        {Recipe &&
+          recipe.extendedIngredients?.map((ingredient) => (
+            <li key={ingredient.id}>{ingredient.original}</li>
+          ))}
+      </ul>
+      <h2 className="text-4xl p-1 border-b-2 mt-5">Steps</h2>
+      <ul>
+        {recipe &&
+          recipe?.analyzedInstructions?.[0].steps.map((step) => (
+            <li key={step.number}>{step.step}</li>
+          ))}
       </ul>
     </div>
   );
