@@ -47,7 +47,7 @@ UserSchema.methods.generateAuthToken = async function () {
   };
   const token = await jwt.sign(payload, process.env.SECRET_STRING);
 
-  user.tokens = [...user.tokens, {token}];
+  user.tokens = [...user.tokens, { token }];
 
   await user.save();
 
@@ -59,7 +59,8 @@ UserSchema.methods.comparePasswords = function (password, cb) {
 
   bcrypt.compare(password, user.password, function (err, isMatch) {
     if (err) return cb(err);
-    cb(null, isMatch);
+    if (!isMatch) return cb(null, isMatch);
+    return cb(null, user);
   });
 };
 

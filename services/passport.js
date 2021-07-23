@@ -1,25 +1,63 @@
+const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
+const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
-// require('dotenv').config();
 
-const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = process.env.SECRET_STRING;
+const cookieExtractor = (req) => {
+  let token = null;
 
-const passportJwt = (passport) => {
-  passport.use(
-    new JwtStrategy(opts, (jwt_payload, done) => {
-      User.findById(jwt_payload.id)
-        .then((user) => {
-          if (user) {
-            return done(null, user);
-          }
-          return done(null, false);
-        })
-        .catch((err) => console.log(err));
-    })
-  );
+  if (req && req.cookies) {
+    console.log('inside if statement');
+    token = req.cookies['jwt'];
+  }
+  console.log(typeof token);
+
+  return token;
 };
 
-module.exports = passportJwt;
+const opts = {};
+
+opts.jwtFromRequest = cookieExtractor;
+opts.secretOrKey = process.env.SECRET_STRING;
+
+// const payload = jwt.verify(opts.jwtFromRequest, opts.secretOrKey);
+// console.log(payload);
+
+// authorization via jwt
+passport.use(
+  new JwtStrategy(opts, (payload, done) => {
+    User.findById({ _id: payload._id }, (err, user) => {
+      if (err) return done(err, false);
+      if (user) return done(null, user);
+      return done(null, false);
+    })
+      .then((user) => {
+        console.log(user);
+        if (user) {
+          return done(null, user);
+        }
+        return done(null, false, { message: 'inside try block.' });
+      })
+      .catch((err) => console.log('inside passport.use catch block', err));
+  })
+);
+
+// authenticate username/password
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'email'
+    },
+    async (email, password, done) => {
+      try {
+        await User.findOne({ email }, (err, user) => {
+          if (err) return done(err);
+          if (!user) return done(null, false);
+          user.comparePasswords(password, done);
+        });
+      } catch (e) {
+        throw new Error(`LocalStrategy Error: ${e}`);
+      }
+    }
+  )
+);

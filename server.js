@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 
 // Declare instance of Express
 const app = express();
@@ -21,6 +22,7 @@ if (process.env.PRODUCTION_URL) {
     res.sendFile(path.join(__dirname, 'client/build/index.html'));
   });
 }
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
