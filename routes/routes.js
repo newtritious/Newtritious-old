@@ -19,74 +19,55 @@ module.exports = function (app) {
       res
         .status(201)
         .cookie('jwt', `${token}`, {
-          httpOnly: true
+          httpOnly: true,
+          sameSite: true
         })
         .send({
-          user,
-          token
+          user
         });
     } catch (e) {
       res.status(400).send(e);
     }
   });
 
-  app.post('/login', passport.authenticate('local', { session: false }), function (req, res) {
-      const signToken = userId => {
-        return jwt.sign({
-          sub: userId
-        }, process.env.SECRET_STRING)
-      }
+  app.post(
+    '/login',
+    passport.authenticate('local', { session: false }),
+    function (req, res) {
+      const signToken = (userId) => {
+        return jwt.sign(
+          {
+            sub: userId
+          },
+          process.env.SECRET_STRING,
+          { expiresIn: '14 days' }
+        );
+      };
 
       if (req.isAuthenticated()) {
         const { _id, username, email } = req.user;
         const token = signToken(_id);
-        res.cookie('jwt', token, {
-          httpOnly: true,
-          sameSite: true,
-        }).status(200).send({
-          username,
-          email,
-        });
+        res
+          .cookie('jwt', token, {
+            httpOnly: true,
+            sameSite: true
+          })
+          .status(200)
+          .send({
+            username,
+            email,
+            _id
+          });
       }
-      
-
-      // const email = req.body.email;
-      // const password = req.body.password;
-
-      // console.log('inside login route');
-      // try {
-      //   const user = await User.findOne({
-      //     email
-      //   });
-
-      //   if (!user) {
-      //     return res.status(404).send('User does not exist');
-      //   }
-
-      //   const token = await user.generateAuthToken();
-
-      //   user.comparePasswords(password, (err, isMatch) => {
-      //     if (err) throw err;
-      //     if (!isMatch) return res.status(401).send();
-
-      //     res.status(200).send({
-      //       user,
-      //       token
-      //     });
-      //   });
-      // } catch (e) {
-      //   throw new Error(`Error: ${e}`);
-      // }
     }
   );
 
   app.get(
     '/logout',
     passport.authenticate('jwt', { session: false }),
-    async function (req, res) {
-      console.log('middleware has passed already.');
+    function (req, res) {
       res.clearCookie('jwt');
-      return res.json({ logout: 'logout complete' });
+      return res.json({ logout: 'logout complete', success: true });
     }
   );
 };

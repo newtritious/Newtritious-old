@@ -36,9 +36,8 @@ const API = {
   },
   logout: async function () {
     try {
-      console.log(document.cookie)
       const user = await axios
-        .post('/logout', {
+        .get('/logout', {
           cookies: document.cookie
         })
         .catch((error) => {
