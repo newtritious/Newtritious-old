@@ -3,6 +3,12 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 require('../services/passport');
 
+const signToken = (userId) => {
+  return jwt.sign({ sub: userId }, process.env.SECRET_STRING, {
+    expiresIn: '14 days'
+  });
+};
+
 module.exports = function (app) {
   app.get('/test', function (req, res) {
     return res.json({ test: 'success' });
@@ -34,16 +40,6 @@ module.exports = function (app) {
     '/login',
     passport.authenticate('local', { session: false }),
     function (req, res) {
-      const signToken = (userId) => {
-        return jwt.sign(
-          {
-            sub: userId
-          },
-          process.env.SECRET_STRING,
-          { expiresIn: '14 days' }
-        );
-      };
-
       if (req.isAuthenticated()) {
         const { _id, username, email } = req.user;
         const token = signToken(_id);
