@@ -7,7 +7,7 @@ function Recipe() {
   const [recipe, setRecipe] = useState({});
 
   useEffect(() => {
-    API.spoonacularApiRecipe(params.id)
+    API.getRecipe(params.id)
       .then((results) => {
         if (results) {
           console.log(results.data);

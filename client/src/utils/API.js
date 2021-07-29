@@ -4,16 +4,12 @@ const API = {
   testApi: function () {
     return axios.get('/test');
   },
-
-  spoonacularApi: function () {
-    return axios.get('/spoonacular');
-  },
-  spoonacularApiSearch: function (searchQuery) {
+  searchRecipes: function (searchQuery) {
     return axios.get('/spoonacular/search', {
       params: { searchInput: searchQuery }
     });
   },
-  spoonacularApiRecipe: function (id) {
+  getRecipe: function (id) {
     return axios.get(`/spoonacular/${id}`);
   },
 

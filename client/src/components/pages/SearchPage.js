@@ -30,7 +30,7 @@ class SearchPage extends React.Component {
     // set loading to true before the request is complete
     this.setState({ isLoading: true });
 
-    API.spoonacularApiSearch(this.state.searchInput)
+    API.searchRecipes(this.state.searchInput)
       .then((results) => {
         // set loading to false and set the searchResults to the data we get back, loading back to false
         if (results) {
