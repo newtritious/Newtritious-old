@@ -162,6 +162,10 @@ class NavBar extends React.Component {
             </StyledDropDownForm>
           </StyledTab>
           <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
+          <button onClick={() => {
+            API.logout()
+            console.log(document.cookie)
+           }}>Logout</button>
         </div>
       </div>
     );
