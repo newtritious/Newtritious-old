@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
     ingredients: {
-        type: String,
+        type: Array, 
         trim: true
     },
     instructions: {
@@ -13,7 +13,6 @@ const recipeSchema = new Schema({
     pictures: {
         //what do we put here
     }
-
 })
 
 const Recipe = mongoose.model("Recipe", recipeSchema);
