@@ -1,6 +1,8 @@
 import React from 'react';
-import SearchForm from './../SearchForm.js';
+import { Link } from 'react-router-dom';
+import theme from '../../theme';
 import API from '../../utils/API';
+import SearchForm from './../SearchForm.js';
 
 class SearchPage extends React.Component {
   state = {
@@ -28,7 +30,7 @@ class SearchPage extends React.Component {
     // set loading to true before the request is complete
     this.setState({ isLoading: true });
 
-    API.spoonacularApiSearch(this.state.searchInput)
+    API.searchRecipes(this.state.searchInput)
       .then((results) => {
         // set loading to false and set the searchResults to the data we get back, loading back to false
         if (results) {
@@ -95,12 +97,15 @@ class SearchPage extends React.Component {
                     <div className="block mt-1 text-base leading-tight font-normal text-black">
                       HealthScore: {data.healthScore}
                     </div>
-                    <a
-                      href={data.sourceUrl}
-                      className="block mt-1 text-xs leading-tight font-normal text-indigo-500 hover:underline"
+                    <button
+                      style={{
+                        backgroundColor: theme.primary.default,
+                        color: '#ffff'
+                      }}
+                      className="mt-2 text-white font-bold py-2 px-4 rounded"
                     >
-                      Source: {data.sourceUrl}
-                    </a>
+                      <Link to={`/recipe/${data.id}`}>View Recipe</Link>
+                    </button>
                   </div>
                 </div>
               </div>

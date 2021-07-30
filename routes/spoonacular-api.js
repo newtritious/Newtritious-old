@@ -42,9 +42,30 @@ module.exports = function (app) {
       // send an OK status and the data as json
       res.status(200).json(response.data.results);
     } catch (error) {
-      // log any errors
+      // log and send error
       console.error(error);
-      // set the status
+      res.status(400).json(error);
+    }
+  });
+
+  /**
+   * get recipe information by id
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} Object containing full information about a recipe
+   */
+  app.get('/spoonacular/:id', async function (req, res) {
+    // get id from the req.params
+    const id = req.params.id;
+    try {
+      const response = await axios.get(
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`
+      );
+      // send an OK status and the data as json
+      res.status(200).json(response.data);
+    } catch (error) {
+      // log and send error
+      console.error(error);
       res.status(400).json(error);
     }
   });
