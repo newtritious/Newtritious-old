@@ -1,6 +1,6 @@
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const { User, Recipe } = require('../models/index');
+const { User } = require('../models');
 require('../services/passport');
 
 const signToken = (userId) => {
