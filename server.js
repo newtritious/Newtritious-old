@@ -28,6 +28,7 @@ app.use(passport.session());
 
 // Routes defined here
 require('./routes/routes')(app);
+require('./routes/recipes')(app);
 require('./routes/spoonacular-api')(app);
 
 // Set Express server to listen on PORT

@@ -11,8 +11,25 @@ const recipeSchema = new Schema({
         {
           equipment: [
             {
-              type: String
-            }
+                id: {
+                    type: Number
+                }
+            },
+            {
+                name: {
+                    type: String
+                }
+            },
+            {
+                localizedName: {
+                    type: String
+                }
+            },
+            {
+                image: {
+                    type: String
+                }
+            },
           ]
         },
         {
@@ -32,6 +49,16 @@ const recipeSchema = new Schema({
               }
             }
           ]
+        },
+        {
+          number: {
+            type: Number
+          }
+        },
+        {
+          step: {
+            type: String
+          }
         }
       ]
     }
@@ -67,7 +94,6 @@ const recipeSchema = new Schema({
     type: Number
   },
   image: {
-    //what do we put here
     // should I use a url parser npm package?
     type: String
   },

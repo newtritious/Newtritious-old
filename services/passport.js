@@ -22,15 +22,11 @@ opts.secretOrKey = process.env.SECRET_STRING;
 passport.use(
   new JwtStrategy(opts, async (payload, done) => {
     try {
-      const user = await User.findById({ _id: payload.sub }, (err, user) => {
+      await User.findById({ _id: payload.sub }, (err, user) => {
         if (err) return done(err, false);
         if (user) return done(null, user);
         return done(null, false);
       });
-      
-      if (user) return done(null, user);
-      
-      return done(null, false, { message: 'User does not exist' });
     } catch (e) {
       throw new Error(`Passport Config Error: ${e}`);
     }
