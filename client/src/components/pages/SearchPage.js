@@ -45,7 +45,7 @@ class SearchPage extends React.Component {
       .catch(() => {
         this.setState({
           searchInput: '',
-          searchResults: 'No search results found, try a different query',
+          searchResults: [],
           isLoading: false
         });
       });
