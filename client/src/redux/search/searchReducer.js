@@ -31,11 +31,11 @@ export const getCategory = (state) => state.search.filters.category;
 export const getDishType = (state) => state.search.filters.dishType;
 
 // reducer
-const recipesReducer = (state = initialState, action) => {
+const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
       return state;
   }
 };
 
-export default recipesReducer;
+export default searchReducer;
