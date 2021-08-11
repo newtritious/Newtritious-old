@@ -154,7 +154,7 @@ class NavBar extends React.Component {
         <NavButton name="PageC" link="/page-c" />
 
         <div className="flex flex-row-reverse w-full">
-          <StyledTab>Guest</StyledTab>
+          <StyledTab>{this.props.user}</StyledTab>
           <StyledTab className="log-in">
             Log In
             <StyledDropDownForm>

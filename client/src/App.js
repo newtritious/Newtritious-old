@@ -14,7 +14,8 @@ import Recipe from './components/Recipe';
 class App extends React.Component {
   state = {
     testResult: 'fail',
-    user: 'guest'
+    user: 'guest',
+    loggedIn: false
   };
   componentDidMount() {
     // API.testApi().then(result => console.log(result));
@@ -26,7 +27,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <NavBar />
+        <NavBar user={this.state.user} loggedIn={this.state.loggedIn}/>
         <Switch>
           <Route path="/search">
             <SearchPage />
@@ -44,7 +45,7 @@ class App extends React.Component {
             <SignUpPage />
           </Route>
           <Route path="/">
-            <HomePage />
+            <HomePage user={this.state.user} loggedIn={this.state.loggedIn}/>
           </Route>
         </Switch>
         <span>Test api: {this.state.testResult}!</span>
