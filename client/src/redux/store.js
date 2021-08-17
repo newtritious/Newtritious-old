@@ -2,7 +2,6 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-// import searchReducer from './reducers/searchReducer';
 import userReducer from './reducers/userReducer';
 import searchReducer from './reducers/searchReducer';
 

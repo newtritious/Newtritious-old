@@ -1,8 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { searchRecipes } from '../../redux/reducers/searchReducer';
 import theme from '../../theme';
 import API from '../../utils/API';
 import SearchForm from './../SearchForm.js';
+
+function mapDispatchToProps(dispatch) {
+  return {
+    searchRecipes: (recipes) => dispatch(searchRecipes(recipes))
+  };
+}
 
 class SearchPage extends React.Component {
   state = {
@@ -39,6 +47,7 @@ class SearchPage extends React.Component {
             searchResults: results.data,
             isLoading: false
           });
+          this.props.searchRecipes(this.state.searchResults);
         }
         console.log(this.state);
       })
@@ -116,4 +125,6 @@ class SearchPage extends React.Component {
   }
 }
 
-export default SearchPage;
+const Form = connect(null, mapDispatchToProps)(SearchPage);
+
+export default Form;
