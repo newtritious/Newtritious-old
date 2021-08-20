@@ -19,7 +19,7 @@ class Hero extends React.Component{
     render(){
         return(
             <StyledHero>
-                <SignUpForm/>
+                <SignUpForm {...this.props}/>
             </StyledHero>
         )
     }

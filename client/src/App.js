@@ -17,11 +17,24 @@ class App extends React.Component {
     user: 'guest',
     loggedIn: false
   };
+
+  constructor(props) {
+    super(props)
+
+    this.loginUpdate = this.loginUpdate.bind(this)
+  }
+
   componentDidMount() {
     // API.testApi().then(result => console.log(result));
     API.testApi().then((result) =>
       this.setState({ testResult: result.data.test })
     );
+  }
+
+  loginUpdate(loggedInF,userF = this.state.user){
+    this.setState({loggedIn: loggedInF})
+    this.setState({user: userF})
+    console.log(userF)
   }
 
   render() {
@@ -42,10 +55,10 @@ class App extends React.Component {
             <PageC />
           </Route>
           <Route path="/sign-up">
-            <SignUpPage />
+            <SignUpPage user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
           </Route>
           <Route path="/">
-            <HomePage user={this.state.user} loggedIn={this.state.loggedIn}/>
+            <HomePage user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
           </Route>
         </Switch>
         <span>Test api: {this.state.testResult}!</span>

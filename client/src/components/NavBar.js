@@ -46,20 +46,38 @@ const LinkTabAnim = styled.div`
     `
 
 const StyledTab = styled.div`
-    width: 11%;
-    min-width: 170px;
-    font-size: 2.5rem;
-    text-align: center;
-    padding: 10px;
-    user-select: none;
+  width: 11%;
+  min-width: 170px;
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  color: ${theme.primary.default};
+  transition: color .3s ease-in-out;
+  margin-left: 5px;
 
-  &.log-in:focus-within {
-    background: #ddd;
+  &:hover {
+  color: #fff;
+
+  .child{
+      top:0;
+  }
   }
 
-  &.log-in:hover {
-    background: #ddd;
-    cursor: pointer;
+  &.log-in:focus-within {
+    color: #fff;
+
+    .child{
+        top:0;
+    }
+  }
+
+  &.log-in:hover{
+    cursor:pointer;
+  }
+
+  &.log-in{
+    user-select:none;
   }
 
   position: relative;
@@ -71,11 +89,14 @@ const StyledDropDownForm = styled.div`
     width: 190%;
     top: 100%;
     background: #dcd;
+    color: #000;
+    z-index: 1;
     display: none;
     padding: 15px;
     border-radius: 0px 0px 5px 5px;
     text-align: left;
     font-size: 1.125rem;
+    cursor: auto;
 
     .log-in:hover &{
         display: block;
@@ -156,6 +177,7 @@ class NavBar extends React.Component {
         <div className="flex flex-row-reverse w-full">
           <StyledTab>{this.props.user}</StyledTab>
           <StyledTab className="log-in">
+            <LinkTabAnim className="child"/>
             Log In
             <StyledDropDownForm>
               <LogInForm />
