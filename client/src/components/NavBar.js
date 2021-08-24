@@ -55,6 +55,8 @@ const StyledTab = styled.div`
   color: ${theme.primary.default};
   transition: color .3s ease-in-out;
   margin-left: 5px;
+  user-select: none;
+  cursor: pointer;
 
   &:hover {
   color: #fff;
@@ -72,16 +74,18 @@ const StyledTab = styled.div`
     }
   }
 
-  &.log-in:hover{
-    cursor:pointer;
-  }
-
-  &.log-in{
-    user-select:none;
-  }
-
   position: relative;
 `;
+
+const StyledText = styled.div`
+  width: 11%;
+  min-width: 170px;
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 10px;
+  margin-left: 5px;
+  user-select: none;
+`
 
 const StyledDropDownForm = styled.div`
     position: absolute;
@@ -168,26 +172,37 @@ class LogInForm extends React.Component {
 class NavBar extends React.Component {
   render() {
     return (
-      <div className="flex flex-row h-20 border-b-2 mt-3 pl-1 border-primary">
+      <div className="flex flex-row h-20 border-b-2 mt-3 pl-1 border-primary pr-10">
         <NavButton name="Home" link="/" />
         <NavButton name="Search" link="/search" />
         <NavButton name="PageB" link="/page-b" />
         <NavButton name="PageC" link="/page-c" />
 
         <div className="flex flex-row-reverse w-full">
-          <StyledTab>{this.props.user}</StyledTab>
-          <StyledTab className="log-in">
-            <LinkTabAnim className="child"/>
-            Log In
-            <StyledDropDownForm>
-              <LogInForm />
-            </StyledDropDownForm>
-          </StyledTab>
-          <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
-          <button onClick={() => {
-            API.logout()
-            console.log(document.cookie)
-           }}>Logout</button>
+          {this.props.loggedIn &&
+            <StyledText>{this.props.user}</StyledText>
+          }
+          {!this.props.loggedIn &&
+            <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
+          }
+          {!this.props.loggedIn &&
+            <StyledTab className="log-in">
+              <LinkTabAnim className="child"/>
+              Log In
+              <StyledDropDownForm>
+                <LogInForm />
+              </StyledDropDownForm>
+            </StyledTab>
+          }
+
+          {this.props.loggedIn &&
+            <StyledTab onClick={() => {
+              API.logout()
+              console.log(document.cookie)
+            }}>
+              <LinkTabAnim className="child"/>
+            Log Out</StyledTab>
+          }
         </div>
       </div>
     );
