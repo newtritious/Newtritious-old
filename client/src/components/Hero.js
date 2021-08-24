@@ -19,7 +19,13 @@ class Hero extends React.Component{
     render(){
         return(
             <StyledHero>
-                <SignUpForm {...this.props}/>
+                {!this.props.loggedIn &&
+                    <SignUpForm {...this.props}/>
+                }
+                {this.props.loggedIn &&
+                    //this element is just here to take up space
+                    <div className="h-96"></div>
+                }
             </StyledHero>
         )
     }

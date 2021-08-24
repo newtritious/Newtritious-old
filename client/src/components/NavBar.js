@@ -199,6 +199,7 @@ class NavBar extends React.Component {
             <StyledTab onClick={() => {
               API.logout()
               console.log(document.cookie)
+              this.props.loginUpdate(false,"guest")
             }}>
               <LinkTabAnim className="child"/>
             Log Out</StyledTab>

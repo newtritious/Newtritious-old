@@ -6,7 +6,7 @@ import SearchPage from './components/pages/SearchPage.js';
 import PageB from './components/pages/PageB.js';
 import PageC from './components/pages/PageC.js';
 import SignUpPage from './components/pages/SignUpPage.js';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import API from './utils/API';
 import './index.css';
 import Recipe from './components/Recipe';
@@ -40,7 +40,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <NavBar user={this.state.user} loggedIn={this.state.loggedIn}/>
+        <NavBar user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
         <Switch>
           <Route path="/search">
             <SearchPage />
@@ -56,6 +56,9 @@ class App extends React.Component {
           </Route>
           <Route path="/sign-up">
             <SignUpPage user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
+            {this.state.loggedIn &&
+              <Redirect to="/"/>
+            }
           </Route>
           <Route path="/">
             <HomePage user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
