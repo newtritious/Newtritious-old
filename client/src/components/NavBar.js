@@ -179,31 +179,32 @@ class NavBar extends React.Component {
         <NavButton name="PageC" link="/page-c" />
 
         <div className="flex flex-row-reverse w-full">
-          {this.props.loggedIn &&
-            <StyledText>{this.props.user}</StyledText>
-          }
-          {!this.props.loggedIn &&
-            <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
-          }
-          {!this.props.loggedIn &&
-            <StyledTab className="log-in">
-              <LinkTabAnim className="child"/>
-              Log In
-              <StyledDropDownForm>
-                <LogInForm />
-              </StyledDropDownForm>
-            </StyledTab>
+          {this.props.loggedIn ?
+            <React.Fragment>
+              <StyledText>{this.props.user}</StyledText>
+              <StyledTab onClick={() => {
+                API.logout()
+                console.log(document.cookie)
+                this.props.loginUpdate(false,"guest")
+              }}>
+                <LinkTabAnim className="child"/>
+                Log Out
+              </StyledTab>
+            </React.Fragment>
+          :
+            <React.Fragment>
+              <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
+              <StyledTab className="log-in">
+                <LinkTabAnim className="child"/>
+                Log In
+                <StyledDropDownForm>
+                  <LogInForm />
+                </StyledDropDownForm>
+              </StyledTab>
+            </React.Fragment>
           }
 
-          {this.props.loggedIn &&
-            <StyledTab onClick={() => {
-              API.logout()
-              console.log(document.cookie)
-              this.props.loginUpdate(false,"guest")
-            }}>
-              <LinkTabAnim className="child"/>
-            Log Out</StyledTab>
-          }
+
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyledTextInput, StyledSubmit, StyledInputMessage, StyledForm} from './styles/StyledInputs';
-import axios from 'axios';
+import API from "../utils/API"
 
 
 
@@ -29,7 +29,7 @@ class SignUpForm extends React.Component {
 
         if(validateUsername(this.state.username) && validatePassword(this.state.password) && (this.state.password === this.state.confirmPassword)){
             
-            axios.post('/signup', userSubmission).then((response) => this.handleLoginResponse(response))
+            API.signup(userSubmission).then((response) => this.handleLoginResponse(response))
                 
             
             .catch(error => {

@@ -31,10 +31,10 @@ class App extends React.Component {
     );
   }
 
-  loginUpdate(loggedInF,userF = this.state.user){
-    this.setState({loggedIn: loggedInF})
-    this.setState({user: userF})
-    console.log(userF)
+  loginUpdate(loggedInParam, userParam = this.state.user) {
+    this.setState({loggedIn: loggedInParam})
+    this.setState({user: userParam})
+    console.log(userParam)
   }
 
   render() {

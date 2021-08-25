@@ -50,6 +50,9 @@ const API = {
     } catch (e) {
       throw new Error(`Error: ${e}`);
     }
+  },
+  signup: function (submission) {
+    return axios.post('/signup', submission)
   }
 };
 
