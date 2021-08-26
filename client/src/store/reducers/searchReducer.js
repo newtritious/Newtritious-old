@@ -12,7 +12,6 @@ const initialState = {
 };
 
 // action types - help to avoid action name typos
-export const SEARCH_RECIPES = 'search/searchRecipes';
 export const RECIPES_LOADING = 'recipes/recipesLoading';
 export const RECIPES_LOADED = 'recipes/recipesLoaded';
 export const RECIPES_FAILED = 'recipes/recipesFailed';
@@ -30,20 +29,14 @@ export const getCategory = (state) => state.search.filters.category;
 export const getDishType = (state) => state.search.filters.dishType;
 
 // action creators - function that takes in data and returns a formatted action. Think of them as your API for modifying your data
-export const searchRecipes = (recipes) => ({
-  type: SEARCH_RECIPES,
+export const recipesLoaded = (recipes) => ({
+  type: RECIPES_LOADED,
   payload: recipes
 });
 
 // reducer
 const searchReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SEARCH_RECIPES: {
-      return {
-        ...state,
-        recipes: action.payload
-      };
-    }
     case RECIPES_LOADING: {
       return {
         ...state,
@@ -54,7 +47,7 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         status: 'idle',
-        recipes: [...state.recipes, action.payload]
+        recipes: action.payload
       };
     }
     case RECIPES_FAILED: {

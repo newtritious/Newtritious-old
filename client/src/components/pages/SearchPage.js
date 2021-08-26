@@ -1,21 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { searchRecipes } from '../../redux/reducers/searchReducer';
+import { recipesLoaded } from '../../store/reducers/searchReducer';
 import theme from '../../theme';
 import API from '../../utils/API';
 import SearchForm from './../SearchForm.js';
 
-function mapDispatchToProps(dispatch) {
-  return {
-    searchRecipes: (recipes) => dispatch(searchRecipes(recipes))
-  };
-}
-
 class SearchPage extends React.Component {
   state = {
     searchInput: '',
-    searchResults: [],
     isLoading: false
   };
   constructor(props) {
@@ -40,21 +33,21 @@ class SearchPage extends React.Component {
 
     API.searchRecipes(this.state.searchInput)
       .then((results) => {
-        // set loading to false and set the searchResults to the data we get back, loading back to false
+        // set loading to false and set the recipes to the data we get back, loading back to false
         if (results) {
           this.setState({
             searchInput: '',
-            searchResults: results.data,
+            recipes: results.data,
             isLoading: false
           });
-          this.props.searchRecipes(this.state.searchResults);
+          this.props.recipesLoaded(this.state.recipes);
         }
         console.log(this.state);
       })
       .catch(() => {
         this.setState({
           searchInput: '',
-          searchResults: [],
+          recipes: [],
           isLoading: false
         });
       });
@@ -68,8 +61,8 @@ class SearchPage extends React.Component {
           onSubmitForm={this.handleSearchForm}
           onInputChange={this.handleInputChange}
         />
-        {this.state.searchResults?.length &&
-          this.state.searchResults.map((data) => {
+        {this.props.recipes?.length &&
+          this.props.recipes.map((data) => {
             return (
               <div
                 className="mt-3 mb-1.5 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
@@ -125,6 +118,12 @@ class SearchPage extends React.Component {
   }
 }
 
-const Form = connect(null, mapDispatchToProps)(SearchPage);
+const mapStateToProps = (state) => ({
+  recipes: state.search.recipes
+});
 
-export default Form;
+const mapDispatchToProps = (dispatch) => ({
+  recipesLoaded: (recipes) => dispatch(recipesLoaded(recipes))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
