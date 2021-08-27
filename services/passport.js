@@ -1,23 +1,58 @@
+const passport = require('passport');
 const JwtStrategy = require('passport-jwt').Strategy;
-const ExtractJwt = require('passport-jwt').ExtractJwt;
+const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
-require('dotenv').config();
+
+const cookieExtractor = (req) => {
+  let token = null;
+
+  if (req && req.cookies) {
+    token = req.cookies['jwt'];
+  }
+
+  return token;
+};
 
 const opts = {};
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+
+opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = process.env.SECRET_STRING;
 
-module.exports = (passport) => {
-  passport.use(
-    new JwtStrategy(opts, (jwt_payload, done) => {
-      User.findById(jwt_payload.id)
-        .then((user) => {
-          if (user) {
-            return done(null, user);
-          }
-          return done(null, false);
-        })
-        .catch((err) => console.log(err));
-    })
-  );
-};
+// authorization via jwt
+passport.use(
+  new JwtStrategy(opts, async (payload, done) => {
+    try {
+      const user = await User.findById({ _id: payload.sub }, (err, user) => {
+        if (err) return done(err, false);
+        if (user) return done(null, user);
+        return done(null, false);
+      });
+      
+      if (user) return done(null, user);
+      
+      return done(null, false, { message: 'User does not exist' });
+    } catch (e) {
+      throw new Error(`Passport Config Error: ${e}`);
+    }
+  })
+);
+
+// authenticate username/password
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'email'
+    },
+    async (email, password, done) => {
+      try {
+        await User.findOne({ email }, (err, user) => {
+          if (err) return done(err);
+          if (!user) return done(null, false);
+          user.comparePasswords(password, done);
+        });
+      } catch (e) {
+        throw new Error(`Passport Config Error: ${e}`);
+      }
+    }
+  )
+);

@@ -46,24 +46,46 @@ const LinkTabAnim = styled.div`
     `
 
 const StyledTab = styled.div`
-    width: 11%;
-    min-width: 170px;
-    font-size: 2.5rem;
-    text-align: center;
-    padding: 10px;
-    user-select: none;
+  width: 11%;
+  min-width: 170px;
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  color: ${theme.primary.default};
+  transition: color .3s ease-in-out;
+  margin-left: 5px;
+  user-select: none;
+  cursor: pointer;
 
-  &.log-in:focus-within {
-    background: #ddd;
+  &:hover {
+  color: #fff;
+
+  .child{
+      top:0;
+  }
   }
 
-  &.log-in:hover {
-    background: #ddd;
-    cursor: pointer;
+  &.log-in:focus-within {
+    color: #fff;
+
+    .child{
+        top:0;
+    }
   }
 
   position: relative;
 `;
+
+const StyledText = styled.div`
+  width: 11%;
+  min-width: 170px;
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 10px;
+  margin-left: 5px;
+  user-select: none;
+`
 
 const StyledDropDownForm = styled.div`
     position: absolute;
@@ -71,11 +93,14 @@ const StyledDropDownForm = styled.div`
     width: 190%;
     top: 100%;
     background: #dcd;
+    color: #000;
+    z-index: 1;
     display: none;
     padding: 15px;
     border-radius: 0px 0px 5px 5px;
     text-align: left;
     font-size: 1.125rem;
+    cursor: auto;
 
     .log-in:hover &{
         display: block;
@@ -147,21 +172,39 @@ class LogInForm extends React.Component {
 class NavBar extends React.Component {
   render() {
     return (
-      <div className="flex flex-row h-20 border-b-2 mt-3 pl-1 border-primary">
+      <div className="flex flex-row h-20 border-b-2 mt-3 pl-1 border-primary pr-10">
         <NavButton name="Home" link="/" />
         <NavButton name="Search" link="/search" />
         <NavButton name="PageB" link="/page-b" />
         <NavButton name="PageC" link="/page-c" />
 
         <div className="flex flex-row-reverse w-full">
-          <StyledTab>Guest</StyledTab>
-          <StyledTab className="log-in">
-            Log In
-            <StyledDropDownForm>
-              <LogInForm />
-            </StyledDropDownForm>
-          </StyledTab>
-          <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
+          {this.props.loggedIn ?
+            <React.Fragment>
+              <StyledText>{this.props.user}</StyledText>
+              <StyledTab onClick={() => {
+                API.logout()
+                console.log(document.cookie)
+                this.props.loginUpdate(false,"guest")
+              }}>
+                <LinkTabAnim className="child"/>
+                Log Out
+              </StyledTab>
+            </React.Fragment>
+          :
+            <React.Fragment>
+              <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
+              <StyledTab className="log-in">
+                <LinkTabAnim className="child"/>
+                Log In
+                <StyledDropDownForm>
+                  <LogInForm />
+                </StyledDropDownForm>
+              </StyledTab>
+            </React.Fragment>
+          }
+
+
         </div>
       </div>
     );
