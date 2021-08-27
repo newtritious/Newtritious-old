@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyledTextInput, StyledSubmit, StyledInputMessage, StyledForm} from './styles/StyledInputs';
-import axios from 'axios';
+import API from "../utils/API"
 
 
 
@@ -18,6 +18,7 @@ class SignUpForm extends React.Component {
 
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleLoginResponse = this.handleLoginResponse.bind(this);
     }
     handleSubmit(event){
       const userSubmission = {
@@ -27,10 +28,10 @@ class SignUpForm extends React.Component {
       }
 
         if(validateUsername(this.state.username) && validatePassword(this.state.password) && (this.state.password === this.state.confirmPassword)){
-            axios.post('/signup', userSubmission).then(function(response){
-                console.log("a response!")
-                console.log(response)
-            })
+            
+            API.signup(userSubmission).then((response) => this.handleLoginResponse(response))
+                
+            
             .catch(error => {
                 console.log(error)
             })
@@ -45,6 +46,12 @@ class SignUpForm extends React.Component {
         console.log("submission rejected!")
 
         event.preventDefault();
+    }
+
+    handleLoginResponse(response){
+        console.log("a response!")
+        console.log(response)
+        this.props.loginUpdate(true,response.data.user.username)
     }
 
     handleInputChange(event){

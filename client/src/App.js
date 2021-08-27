@@ -6,7 +6,7 @@ import SearchPage from './components/pages/SearchPage.js';
 import PageB from './components/pages/PageB.js';
 import PageC from './components/pages/PageC.js';
 import SignUpPage from './components/pages/SignUpPage.js';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import API from './utils/API';
 import './index.css';
 import Recipe from './components/Recipe';
@@ -14,8 +14,16 @@ import Recipe from './components/Recipe';
 class App extends React.Component {
   state = {
     testResult: 'fail',
-    user: 'guest'
+    user: 'guest',
+    loggedIn: false
   };
+
+  constructor(props) {
+    super(props)
+
+    this.loginUpdate = this.loginUpdate.bind(this)
+  }
+
   componentDidMount() {
     // API.testApi().then(result => console.log(result));
     API.testApi().then((result) =>
@@ -23,10 +31,16 @@ class App extends React.Component {
     );
   }
 
+  loginUpdate(loggedInParam, userParam = this.state.user) {
+    this.setState({loggedIn: loggedInParam})
+    this.setState({user: userParam})
+    console.log(userParam)
+  }
+
   render() {
     return (
       <Router>
-        <NavBar />
+        <NavBar user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
         <Switch>
           <Route path="/search">
             <SearchPage />
@@ -41,10 +55,13 @@ class App extends React.Component {
             <PageC />
           </Route>
           <Route path="/sign-up">
-            <SignUpPage />
+            <SignUpPage user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
+            {this.state.loggedIn &&
+              <Redirect to="/"/>
+            }
           </Route>
           <Route path="/">
-            <HomePage />
+            <HomePage user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
           </Route>
         </Switch>
         <span>Test api: {this.state.testResult}!</span>
