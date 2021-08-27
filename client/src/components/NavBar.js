@@ -12,12 +12,12 @@ const StyledLink = styled(NavLink)`
     text-align: center;
     padding: 10px;
     position: relative;
-    color: ${theme.primary.default};
+    color: ${theme.colors.primary.default};
     transition: color .3s ease-in-out;
     margin-left: 5px;
 
   &:hover {
-    color: #fff;
+    color: ${theme.colors.whiteSpace};
     
     .child{
         top:0;
@@ -25,9 +25,9 @@ const StyledLink = styled(NavLink)`
   }
 
   &.active {
-      color: #fff;
+      color: ${theme.colors.whiteSpace};
       .child{
-        background: ${theme.primary.default};
+        background: ${theme.colors.primary.default};
         top: 0;
       }
   }
@@ -35,7 +35,7 @@ const StyledLink = styled(NavLink)`
 
 const LinkTabAnim = styled.div`
     position: absolute;
-    background: ${theme.primary.faded};
+    background: ${theme.colors.primary.faded};
     border-radius: 5px 5px 0px 0px;
     z-index: -1;
     top: 100%;

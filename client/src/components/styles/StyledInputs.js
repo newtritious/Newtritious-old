@@ -6,10 +6,10 @@ const StyledForm = styled.form`
     margin: auto;
     margin-top: 50px;
     padding: 40px;
-    background: #fff;
+    background: ${theme.colors.whiteSpace};
     border-radius: 10px;
     border-width: 4px;
-    border-color: ${theme.primary.default};
+    border-color: ${theme.colors.primary.default};
     box-shadow: 3px 5px 10px 5px #0003, 1px 2px 10px 3px #0001 inset;
 `
 
@@ -43,12 +43,12 @@ const StyledSubmit = styled.input.attrs({
 })`
     border-radius: 5px;
     padding: 15px 30px 15px 30px;
-    color: #fff;
-    background: ${theme.primary.default};
+    color: ${theme.colors.whiteSpace};
+    background: ${theme.colors.primary.default};
     font-size: 1.5rem;
     transition: background 400ms, color 400ms;
     border-width: 3px;
-    border-color: ${theme.primary.default};
+    border-color: ${theme.colors.primary.default};
     box-shadow: 3px 5px 10px #0003;
 
     &.centered{
@@ -67,8 +67,8 @@ const StyledSubmit = styled.input.attrs({
     }
     
     &:hover {
-        background: #fff;
-        color: ${theme.primary.default};
+        background: ${theme.colors.whiteSpace};
+        color: ${theme.colors.primary.default};
         cursor: pointer;
     }
     &.blue:hover {

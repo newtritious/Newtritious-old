@@ -9,7 +9,10 @@ import SignUpPage from './components/pages/SignUpPage.js';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import API from './utils/API';
 import './index.css';
+import theme from './theme.js'
 import Recipe from './components/Recipe';
+
+document.body.style.backgroundColor = theme.colors.whiteSpace
 
 class App extends React.Component {
   state = {

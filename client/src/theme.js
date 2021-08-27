@@ -1,9 +1,12 @@
 
 
 const theme = {
-    primary:{
-        default:'#f21f43',
-        faded:'#fab9c9'
+    colors:{
+        primary:{
+            default:'#f21f43',
+            faded:'#fab9c9'
+        },
+        whiteSpace:'#fff'
     }
 }
 
