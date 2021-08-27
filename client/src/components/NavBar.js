@@ -52,7 +52,7 @@ const StyledTab = styled.div`
   text-align: center;
   padding: 10px;
   position: relative;
-  color: ${theme.primary.default};
+  color: ${theme.colors.primary.default};
   transition: color .3s ease-in-out;
   margin-left: 5px;
   user-select: none;
