@@ -101,7 +101,7 @@ class SearchPage extends React.Component {
                     </div>
                     <button
                       style={{
-                        backgroundColor: theme.primary.default,
+                        backgroundColor: theme.colors.primary.default,
                         color: '#ffff'
                       }}
                       className="mt-2 text-white font-bold py-2 px-4 rounded"
