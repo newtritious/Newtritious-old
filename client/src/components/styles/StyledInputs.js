@@ -62,6 +62,13 @@ const StyledSubmit = styled.input.attrs({
         border-radius: 10px;
     }
 
+    &.x-small {
+        padding: 6px 15px 6px 15px;
+        font-size: 1rem;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
     &.blue {
         background: #28c;
     }
@@ -75,7 +82,6 @@ const StyledSubmit = styled.input.attrs({
         background: #05b;
         cursor: pointer;
     }`
-
 export {
     StyledTextInput,
     StyledSubmit,

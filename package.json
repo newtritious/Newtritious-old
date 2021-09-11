@@ -37,7 +37,10 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "react-redux": "^7.2.5",
     "react-router-dom": "^5.2.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
     "yarn": "^1.22.10"
   },
   "devDependencies": {
