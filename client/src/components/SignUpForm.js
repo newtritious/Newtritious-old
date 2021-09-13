@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyledTextInput, StyledSubmit, StyledInputMessage, StyledForm} from './styles/StyledInputs';
+import {StyledTextInput, StyledButton, StyledInputMessage, StyledForm} from './styles/StyledInputs';
 import API from "../utils/API"
 
 
@@ -82,7 +82,7 @@ class SignUpForm extends React.Component {
                     {(this.state.password !== this.state.confirmPassword) && <StyledInputMessage>Does not match</StyledInputMessage>}
                     </div>
                 <div className="flex flex-row-reverse">
-                    <StyledSubmit value="Sign Up" className="centered"/>
+                    <StyledButton type="submit" text="Sign Up" className="centered"/>
                 </div>
             </StyledForm>
         )

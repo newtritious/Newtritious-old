@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from "../../theme";
+import React from 'react';
 
 const StyledForm = styled.form`
     width: 50%;
@@ -38,9 +39,17 @@ const StyledInputMessage = styled.p`
     top: 34px;
 `
 
-const StyledSubmit = styled.input.attrs({
-    type: "submit"
-})`
+class ResponsiveButton extends React.Component {
+    render(){
+        return(
+            <button className ={this.props.className}>
+                <div className="child">{this.props.text}</div>
+            </button>
+        )
+    }
+}
+
+const StyledButton = styled(ResponsiveButton)`
     border-radius: 5px;
     padding: 15px 30px 15px 30px;
     color: ${theme.colors.whiteSpace};
@@ -50,6 +59,11 @@ const StyledSubmit = styled.input.attrs({
     border-width: 3px;
     border-color: ${theme.colors.primary.default};
     box-shadow: 3px 5px 10px #0003;
+
+    .child{
+        font-size: 1em;
+        transition: font-size 400ms;
+    }
 
     &.centered{
         margin-left: auto;
@@ -77,6 +91,9 @@ const StyledSubmit = styled.input.attrs({
         background: ${theme.colors.whiteSpace};
         color: ${theme.colors.primary.default};
         cursor: pointer;
+        .child{
+            font-size: 1.05em;
+        }
     }
     &.blue:hover {
         background: #05b;
@@ -84,7 +101,7 @@ const StyledSubmit = styled.input.attrs({
     }`
 export {
     StyledTextInput,
-    StyledSubmit,
+    StyledButton,
     StyledInputMessage,
     StyledForm
 }

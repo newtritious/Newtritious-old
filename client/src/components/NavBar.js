@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { StyledTextInput, StyledSubmit } from './styles/StyledInputs';
+import { StyledTextInput, StyledButton } from './styles/StyledInputs';
 import API from '../utils/API';
 import theme from '../theme.js';
 
@@ -162,7 +162,7 @@ class LogInForm extends React.Component {
           onChange={this.handleInputChange}
         ></StyledTextInput>
         <div className="flex flex-row-reverse">
-          <StyledSubmit className="small blue" value="Log In" />
+          <StyledButton type="submit" className="small blue" text="Log In" />
         </div>
       </form>
     );
