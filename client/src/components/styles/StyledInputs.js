@@ -43,7 +43,9 @@ class ResponsiveButton extends React.Component {
     render(){
         return(
             <button className ={this.props.className}>
-                <div className="child">{this.props.text}</div>
+                
+                <div className="dynamicChild">{this.props.text}</div>
+                <div className="staticChild">{this.props.text}</div>
             </button>
         )
     }
@@ -59,10 +61,21 @@ const StyledButton = styled(ResponsiveButton)`
     border-width: 3px;
     border-color: ${theme.colors.primary.default};
     box-shadow: 3px 5px 10px #0003;
+    position: relative;
 
-    .child{
-        font-size: 1em;
+    .dynamicChild{
         transition: font-size 400ms;
+        position: absolute;
+        margin: auto;
+        left:0;
+        right:0;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+    }
+
+    .staticChild{
+        opacity: 0;
     }
 
     &.centered{
@@ -91,7 +104,7 @@ const StyledButton = styled(ResponsiveButton)`
         background: ${theme.colors.whiteSpace};
         color: ${theme.colors.primary.default};
         cursor: pointer;
-        .child{
+        .dynamicChild{
             font-size: 1.05em;
         }
     }
