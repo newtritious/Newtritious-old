@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { StyledTextInput, StyledSubmit } from './styles/StyledInputs';
+import LogInForm from './LoginForm';
+import { userLogin } from '../store/reducers/userReducer';
 import API from '../utils/API';
 import theme from '../theme.js';
 
@@ -120,57 +122,6 @@ class NavButton extends React.Component {
   }
 }
 
-class LogInForm extends React.Component {
-  state = {
-    email: '',
-    password: ''
-  };
-  constructor(props) {
-    super(props);
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const { email, password } = this.state;
-    API.login(email, password);
-  }
-
-  handleInputChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Email</label>
-        <StyledTextInput
-          className="text-input"
-          type="text"
-          name="email"
-          value={this.state.email}
-          onChange={this.handleInputChange}
-        ></StyledTextInput>
-        <label>Password</label>
-        <StyledTextInput
-          className="text-input"
-          type="password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handleInputChange}
-        ></StyledTextInput>
-        <div className="flex flex-row-reverse">
-          <StyledSubmit className="small blue" value="Log In" />
-        </div>
-      </form>
-    );
-  }
-}
-
 class NavBar extends React.Component {
   render() {
     return (
@@ -202,7 +153,7 @@ class NavBar extends React.Component {
                 <LinkTabAnim className="child" />
                 Log In
                 <StyledDropDownForm>
-                  <LogInForm />
+                  <LogInForm userLogin={this.props.userLogin} />
                 </StyledDropDownForm>
               </StyledTab>
             </React.Fragment>
@@ -213,4 +164,15 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+const mapStateToProps = (state) => {
+  return {
+    username: state.user.username,
+    email: state.user.email
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  userLogin: (username, email) => dispatch(userLogin(username, email))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
