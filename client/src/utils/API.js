@@ -52,7 +52,7 @@ const API = {
     }
   },
   signup: function (submission) {
-    return axios.post('/signup', submission)
+    return axios.post('/signup', submission);
   }
 };
 

@@ -11,25 +11,25 @@ const recipeSchema = new Schema({
         {
           equipment: [
             {
-                id: {
-                    type: Number
-                }
+              id: {
+                type: Number
+              }
             },
             {
-                name: {
-                    type: String
-                }
+              name: {
+                type: String
+              }
             },
             {
-                localizedName: {
-                    type: String
-                }
+              localizedName: {
+                type: String
+              }
             },
             {
-                image: {
-                    type: String
-                }
-            },
+              image: {
+                type: String
+              }
+            }
           ]
         },
         {

@@ -45,7 +45,9 @@ UserSchema.methods.generateAuthToken = async function () {
   const payload = {
     sub: user._id.toString()
   };
-  const token = await jwt.sign(payload, process.env.SECRET_STRING, { expiresIn: '14 days' });
+  const token = await jwt.sign(payload, process.env.SECRET_STRING, {
+    expiresIn: '14 days'
+  });
 
   user.tokens = [...user.tokens, { token }];
 
