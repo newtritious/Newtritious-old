@@ -6,13 +6,18 @@ import SearchPage from './components/pages/SearchPage.js';
 import PageB from './components/pages/PageB.js';
 import PageC from './components/pages/PageC.js';
 import SignUpPage from './components/pages/SignUpPage.js';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom';
 import API from './utils/API';
 import './index.css';
-import theme from './theme.js'
+import theme from './theme.js';
 import Recipe from './components/Recipe';
 
-document.body.style.backgroundColor = theme.colors.whiteSpace
+document.body.style.backgroundColor = theme.colors.whiteSpace;
 
 class App extends React.Component {
   state = {
@@ -22,9 +27,9 @@ class App extends React.Component {
   };
 
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.loginUpdate = this.loginUpdate.bind(this)
+    this.loginUpdate = this.loginUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -35,15 +40,19 @@ class App extends React.Component {
   }
 
   loginUpdate(loggedInParam, userParam = this.state.user) {
-    this.setState({loggedIn: loggedInParam})
-    this.setState({user: userParam})
-    console.log(userParam)
+    this.setState({ loggedIn: loggedInParam });
+    this.setState({ user: userParam });
+    console.log(userParam);
   }
 
   render() {
     return (
       <Router>
-        <NavBar user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
+        <NavBar
+          user={this.state.user}
+          loggedIn={this.state.loggedIn}
+          loginUpdate={this.loginUpdate}
+        />
         <Switch>
           <Route path="/search">
             <SearchPage />
@@ -58,13 +67,19 @@ class App extends React.Component {
             <PageC />
           </Route>
           <Route path="/sign-up">
-            <SignUpPage user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
-            {this.state.loggedIn &&
-              <Redirect to="/"/>
-            }
+            <SignUpPage
+              user={this.state.user}
+              loggedIn={this.state.loggedIn}
+              loginUpdate={this.loginUpdate}
+            />
+            {this.state.loggedIn && <Redirect to="/" />}
           </Route>
           <Route path="/">
-            <HomePage user={this.state.user} loggedIn={this.state.loggedIn} loginUpdate={this.loginUpdate}/>
+            <HomePage
+              user={this.state.user}
+              loggedIn={this.state.loggedIn}
+              loginUpdate={this.loginUpdate}
+            />
           </Route>
         </Switch>
         <span>Test api: {this.state.testResult}!</span>
