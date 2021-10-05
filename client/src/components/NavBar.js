@@ -1,9 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import LogInForm from './LoginForm';
-import { userLogin } from '../store/reducers/userReducer';
 import API from '../utils/API';
 import theme from '../theme.js';
 
@@ -153,7 +151,7 @@ class NavBar extends React.Component {
                 <LinkTabAnim className="child" />
                 Log In
                 <StyledDropDownForm>
-                  <LogInForm userLogin={this.props.userLogin} />
+                  <LogInForm />
                 </StyledDropDownForm>
               </StyledTab>
             </React.Fragment>
@@ -164,15 +162,4 @@ class NavBar extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    username: state.user.username,
-    email: state.user.email
-  };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  userLogin: (username, email) => dispatch(userLogin(username, email))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default NavBar;

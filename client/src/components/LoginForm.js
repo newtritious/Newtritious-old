@@ -1,5 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { userLogin } from '../store/reducers/userReducer';
 import { StyledTextInput, StyledSubmit } from './styles/StyledInputs';
 import API from '../utils/API';
 
@@ -32,8 +34,7 @@ class LogInForm extends React.Component {
         }
       })
       .catch((error) => {
-        if (error.response.status === 401)
-          alert('Credentials Failed, please try again');
+        console.log(error);
       });
 
     this.setState({
@@ -58,7 +59,7 @@ class LogInForm extends React.Component {
           name="email"
           value={this.state.email}
           onChange={this.handleInputChange}
-        ></StyledTextInput>
+        />
         <label>Password</label>
         <StyledTextInput
           className="text-input"
@@ -66,7 +67,7 @@ class LogInForm extends React.Component {
           name="password"
           value={this.state.password}
           onChange={this.handleInputChange}
-        ></StyledTextInput>
+        />
         <div className="flex flex-row-reverse">
           <StyledSubmit className="small blue" value="Log In" />
         </div>
@@ -75,4 +76,18 @@ class LogInForm extends React.Component {
   }
 }
 
-export default withRouter(LogInForm);
+const mapStateToProps = (state) => {
+  return {
+    username: state.user.username,
+    email: state.user.email
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  userLogin: (username, email) => dispatch(userLogin(username, email))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(LogInForm));
