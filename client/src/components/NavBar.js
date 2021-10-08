@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { StyledTextInput, StyledSubmit } from './styles/StyledInputs';
+import LogInForm from './LoginForm';
 import API from '../utils/API';
 import theme from '../theme.js';
 
@@ -116,57 +116,6 @@ class NavButton extends React.Component {
       <StyledLink exact to={this.props.link}>
         {this.props.name} <LinkTabAnim className="child" />
       </StyledLink>
-    );
-  }
-}
-
-class LogInForm extends React.Component {
-  state = {
-    email: '',
-    password: ''
-  };
-  constructor(props) {
-    super(props);
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const { email, password } = this.state;
-    API.login(email, password);
-  }
-
-  handleInputChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Email</label>
-        <StyledTextInput
-          className="text-input"
-          type="text"
-          name="email"
-          value={this.state.email}
-          onChange={this.handleInputChange}
-        ></StyledTextInput>
-        <label>Password</label>
-        <StyledTextInput
-          className="text-input"
-          type="password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handleInputChange}
-        ></StyledTextInput>
-        <div className="flex flex-row-reverse">
-          <StyledSubmit className="small blue" value="Log In" />
-        </div>
-      </form>
     );
   }
 }
