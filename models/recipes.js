@@ -9,56 +9,60 @@ const recipeSchema = new Schema({
       },
       steps: [
         {
-          equipment: [
-            {
-              id: {
-                type: Number
-              }
-            },
-            {
-              name: {
-                type: String
-              }
-            },
-            {
-              localizedName: {
-                type: String
-              }
-            },
-            {
-              image: {
-                type: String
-              }
-            }
-          ]
-        },
-        {
-          ingredients: [
-            {
-              id: {
-                type: Number
-              },
-              image: {
-                type: String
-              },
-              localizedName: {
-                type: String
-              },
-              name: {
-                type: String
-              }
-            }
-          ]
-        },
-        {
           number: {
-            type: Number
-          }
-        },
-        {
+            type: String
+          },
           step: {
             type: String
-          }
+          },
+
+
+
+            equipment: [
+              {
+                id: {
+                  type: Number
+                }
+              },
+              {
+                name: {
+                  type: String
+                }
+              },
+              {
+                localizedName: {
+                  type: String
+                }
+              },
+              {
+                image: {
+                  type: String
+                }
+              }
+            ],
+            ingredients: [
+              {
+                id: {
+                  type: Number
+                },
+                image: {
+                  type: String
+                },
+                localizedName: {
+                  type: String
+                },
+                name: {
+                  type: String
+                }
+              }
+            ],
+            number: {
+              type: Number
+            },
+            step: {
+              type: String
+            }
+
         }
       ]
     }
