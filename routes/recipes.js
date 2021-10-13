@@ -7,7 +7,13 @@ module.exports = function (app) {
     '/recipes',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
-      const recipe = await new Recipe(req.body);
+      const user = req.user;
+      const recipe = await new Recipe({
+        ...req.body,
+        owner: user._id
+      });
+      
+      console.log(user)
 
       try {
         await recipe.save();

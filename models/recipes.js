@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   analyzedInstructions: [
     {
       name: {
@@ -15,54 +19,50 @@ const recipeSchema = new Schema({
           step: {
             type: String
           },
-
-
-
-            equipment: [
-              {
-                id: {
-                  type: Number
-                }
-              },
-              {
-                name: {
-                  type: String
-                }
-              },
-              {
-                localizedName: {
-                  type: String
-                }
-              },
-              {
-                image: {
-                  type: String
-                }
+          equipment: [
+            {
+              id: {
+                type: Number
               }
-            ],
-            ingredients: [
-              {
-                id: {
-                  type: Number
-                },
-                image: {
-                  type: String
-                },
-                localizedName: {
-                  type: String
-                },
-                name: {
-                  type: String
-                }
-              }
-            ],
-            number: {
-              type: Number
             },
-            step: {
-              type: String
+            {
+              name: {
+                type: String
+              }
+            },
+            {
+              localizedName: {
+                type: String
+              }
+            },
+            {
+              image: {
+                type: String
+              }
             }
-
+          ],
+          ingredients: [
+            {
+              id: {
+                type: Number
+              },
+              image: {
+                type: String
+              },
+              localizedName: {
+                type: String
+              },
+              name: {
+                type: String
+              }
+            }
+          ],
+          number: {
+            type: Number
+          },
+          step: {
+            type: String
+          }
         }
       ]
     }

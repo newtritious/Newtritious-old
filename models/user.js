@@ -2,29 +2,47 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const recipeSchema = require('./recipes.js');
 
-const UserSchema = new Schema({
-  username: {
-    type: String,
-    required: [true, 'Required']
-  },
-  email: {
-    type: String,
-    required: [true, 'Required'],
-    unique: true
-  },
-  password: {
-    type: String,
-    required: [true, 'Required']
-  },
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true
+const UserSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: [true, 'Required']
+    },
+    email: {
+      type: String,
+      required: [true, 'Required'],
+      unique: true
+    },
+    password: {
+      type: String,
+      required: [true, 'Required']
+    },
+    savedRecipes: [],
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true
+        }
       }
+    ]
+  },
+  {
+    toJSON: {
+      virtuals: true
+    },
+    toObject: {
+      virtuals: true
     }
-  ]
+  }
+);
+
+UserSchema.virtual('recipes', {
+  ref: 'Recipe',
+  localField: '_id',
+  foreignField: 'owner'
 });
 
 UserSchema.pre('save', function (next) {
@@ -65,6 +83,10 @@ UserSchema.methods.comparePasswords = function (password, cb) {
     return cb(null, user);
   });
 };
+
+UserSchema.virtual('savedRecipesLength').get(function () {
+  return this.savedRecipes.length;
+});
 
 const User = mongoose.model('User', UserSchema);
 
