@@ -43,13 +43,15 @@ class ResponsiveButton extends React.Component {
     render(){
         return(
             <button className ={this.props.className}>
-                
                 <div className="dynamicChild">{this.props.text}</div>
                 <div className="staticChild">{this.props.text}</div>
             </button>
         )
     }
 }
+
+//The static child is an invisible block element with the button text that just takes up space.
+//The dynamic child is a visible absolute element with the button text that grows and shrinks.
 
 const StyledButton = styled(ResponsiveButton)`
     border-radius: 5px;
