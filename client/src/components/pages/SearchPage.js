@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -5,6 +6,7 @@ import { recipesLoaded } from '../../store/reducers/searchReducer';
 import theme from '../../theme';
 import API from '../../utils/API';
 import SearchForm from './../SearchForm.js';
+import { StyledButton } from './../styles/StyledInputs.js'
 
 class SearchPage extends React.Component {
   state = {
@@ -99,15 +101,15 @@ class SearchPage extends React.Component {
                     <div className="block mt-1 text-base leading-tight font-normal text-black">
                       HealthScore: {data.healthScore}
                     </div>
-                    <button
-                      style={{
-                        backgroundColor: theme.colors.primary.default,
-                        color: '#ffff'
-                      }}
-                      className="mt-2 text-white font-bold py-2 px-4 rounded"
-                    >
-                      <Link to={`/recipe/${data.id}`}>View Recipe</Link>
-                    </button>
+                    <Link
+                    to={`/recipe/${data.id}`}>
+                      <StyledButton
+                        className="x-small mt-2 inline-block mr-auto"
+                        
+                        text="View Recipe"
+                      >
+                      </StyledButton>
+                    </Link>
                   </div>
                 </div>
               </div>
