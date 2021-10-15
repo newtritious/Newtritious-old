@@ -89,17 +89,13 @@ class SignUpForm extends React.Component {
     }
 }
 
-function validateUsername(username){
-    if(/[^\w_]/.test(username))
-        return false
-    else
-        return !(username.length < 3 && username.length > 0)
+function validateUsername(username) {
+  if (/[^\w_]/.test(username)) return false;
+  else return !(username.length < 3 && username.length > 0);
 }
 
-function validatePassword(password){
-    return !(password.length < 8 && password.length > 0)
+function validatePassword(password) {
+  return !(password.length < 8 && password.length > 0);
 }
 
-
-
-export default SignUpForm
+export default SignUpForm;

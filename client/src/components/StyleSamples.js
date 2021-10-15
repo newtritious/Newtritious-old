@@ -31,7 +31,9 @@ const StyledDiv = styled.div`
 
 // an example wrapper component
 // note: className prop is necessary!
-const BasicContainer = ({className, children}) => <div className={className}>{children}</div>
+const BasicContainer = ({ className, children }) => (
+  <div className={className}>{children}</div>
+);
 
 // styling our own component works the same way as the div
 const StyledBasicContainer = styled(BasicContainer)`
@@ -47,10 +49,12 @@ const StyledBasicContainer = styled(BasicContainer)`
 `;
 
 // basic span wrapped in a component
-const Span = ({className, children}) => <span className={className}>{children}</span>;
+const Span = ({ className, children }) => (
+  <span className={className}>{children}</span>
+);
 
 // same span but with red text
-// you could also make red a prop and make the styled span apply css according to the prop 
+// you could also make red a prop and make the styled span apply css according to the prop
 // more in the getting started link above
 const RedSpan = styled(Span)`
   color: red;
@@ -73,9 +77,7 @@ const StyleSamples = (props) => {
         <h3>Styled BasicContainer</h3>
         <p>using our custom component</p>
       </StyledBasicContainer>
-      <Span>normal span</Span>{' '}
-      <RedSpan>red span</RedSpan>
-
+      <Span>normal span</Span> <RedSpan>red span</RedSpan>
       {/* a bunch of random classes to show off tailwind */}
       {/* a two pixel black border, large margin, and medium gray background */}
       <BigDiv className="border-2 border-black m-10 bg-gray-500" />
