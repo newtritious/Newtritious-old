@@ -135,7 +135,5 @@ const recipeSchema = new Schema({
   }
 });
 
-// recipeSchema.plugin(uniqueValidator)
-
 
 module.exports = recipeSchema;
