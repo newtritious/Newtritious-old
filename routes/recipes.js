@@ -7,35 +7,38 @@ module.exports = function (app) {
     '/recipe',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
-      // const recipe = await User.findOneAndUpdate(
-      //   { _id: user._id },
-      //   { $addToSet: { savedRecipes: body } },
-      //   { new: true }
-      // );
       const user = await User.findOne({
         _id: req.user._id
       });
 
-      const recipes = user.savedRecipes;
+      let savedRecipeIds = user.savedRecipes;
+      let obj = {};
+      let count = 1;
 
-      // Find a way to filter recipes based on recipes[index].id;
-      // Filter out recipes so as to remove any duplicates based on id;
-      
-      // const filteredRecipes = recipes.filter(function (recipe, index) {
-      //   return recipes.indexOf(recipe) === index;
-      // });
+      const checkForDuplicates = (array) => {
+        for (let i = 0; i < array.length; i++) {
+          if (obj[array[i].id]) return false;
 
-      console.log(filteredRecipes);
+          obj[array[i].id] = count;
+        }
+        return true;
+      };
 
-      user.savedRecipes = filteredRecipes;
-
-      console.log('hiiii');
       try {
+        if (!checkForDuplicates(savedRecipeIds)) {
+          return res.status(418).json({
+            Error:
+              'The server refuses to serve coffee because it is a teapot. In other words, you cannot save duplicate recipes.'
+          });
+        }
+
+        const recipe = user.savedRecipes.addToSet(req.body);
+
         await user.save();
 
-        res.status(201).send(recipe);
+        res.status(201).json(recipe);
       } catch (e) {
-        res.status(400).send(e);
+        res.status(400).json(e);
       }
     }
   );

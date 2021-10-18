@@ -91,7 +91,8 @@ const recipeSchema = new Schema({
     type: Number
   },
   id: {
-    type: Number
+    type: Number,
+    unique: true
   },
   image: {
     // should I use a url parser npm package?
