@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { StyledTextInput, StyledButton } from './styles/StyledInputs';
 import LogInForm from './LoginForm';
 import API from '../utils/API';
 import theme from '../theme.js';
@@ -114,27 +113,9 @@ const StyledDropDownForm = styled.div`
 class NavButton extends React.Component {
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>Email</label>
-        <StyledTextInput
-          className="text-input"
-          type="text"
-          name="email"
-          value={this.state.email}
-          onChange={this.handleInputChange}
-        ></StyledTextInput>
-        <label>Password</label>
-        <StyledTextInput
-          className="text-input"
-          type="password"
-          name="password"
-          value={this.state.password}
-          onChange={this.handleInputChange}
-        ></StyledTextInput>
-        <div className="flex flex-row-reverse">
-          <StyledButton type="submit" className="small blue" text="Log In" />
-        </div>
-      </form>
+      <StyledLink exact to={this.props.link}>
+        {this.props.name} <LinkTabAnim className="child" />
+      </StyledLink>
     );
   }
 }
