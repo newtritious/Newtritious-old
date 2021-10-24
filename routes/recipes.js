@@ -62,4 +62,25 @@ module.exports = function (app) {
       }
     }
   );
+
+  app.delete(
+    '/recipe/:id',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+      const id = Number(req.params.id);
+      const _id = req.user._id;
+
+      try {
+        const updatedUser = await User.findOneAndUpdate(
+          { _id },
+          { $pull: { savedRecipes: { id } } },
+          { new: true }
+        );
+
+        res.status(200).json(updatedUser);
+      } catch (e) {
+        res.status(500).send(`Error: ${e}`);
+      }
+    }
+  );
 };
