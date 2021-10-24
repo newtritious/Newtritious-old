@@ -7,22 +7,22 @@ module.exports = function (app) {
     '/recipe',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
-      const user = await User.findOne({
-        _id: req.user._id
-      });
-
-      const savedRecipes = user.savedRecipes;
-
-      for (let i = 0; i < savedRecipes.length; i++) {
-        if (savedRecipes[i].id === req.body.id) {
-          return res.status(400).json({
-            Error:
-              'This error occurred because this recipe has been saved already.'
-          });
-        }
-      }
-
       try {
+        const user = await User.findOne({
+          _id: req.user._id
+        });
+
+        const savedRecipes = user.savedRecipes;
+
+        for (let i = 0; i < savedRecipes.length; i++) {
+          if (savedRecipes[i].id === req.body.id) {
+            return res.status(400).json({
+              Error:
+                'This error occurred because this recipe has been saved already.'
+            });
+          }
+        }
+
         const recipe = user.savedRecipes.addToSet(req.body);
 
         await user.save();
