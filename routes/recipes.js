@@ -12,33 +12,24 @@ module.exports = function (app) {
       });
 
       let savedRecipeIds = user.savedRecipes;
-      let obj = {};
-      let count = 1;
 
-      const checkForDuplicates = (array) => {
-        for (let i = 0; i < array.length; i++) {
-          if (obj[array[i].id]) return false;
-
-          obj[array[i].id] = count;
-        }
-        return true;
-      };
-
-      try {
-        if (!checkForDuplicates(savedRecipeIds)) {
-          return res.status(418).json({
+      for (let i = 0; i < savedRecipeIds.length; i++) {
+        if (savedRecipeIds[i].id === req.body.id) {
+          return res.status(400).json({
             Error:
-              'The server refuses to serve coffee because it is a teapot. In other words, you cannot save duplicate recipes.'
+              'This error occurred because this recipe has been saved already.'
           });
         }
+      }
 
+      try {
         const recipe = user.savedRecipes.addToSet(req.body);
 
         await user.save();
 
         res.status(201).json(recipe);
       } catch (e) {
-        res.status(400).json(e);
+        res.status(500).json(e);
       }
     }
   );
