@@ -11,10 +11,10 @@ module.exports = function (app) {
         _id: req.user._id
       });
 
-      let savedRecipeIds = user.savedRecipes;
+      const savedRecipes = user.savedRecipes;
 
-      for (let i = 0; i < savedRecipeIds.length; i++) {
-        if (savedRecipeIds[i].id === req.body.id) {
+      for (let i = 0; i < savedRecipes.length; i++) {
+        if (savedRecipes[i].id === req.body.id) {
           return res.status(400).json({
             Error:
               'This error occurred because this recipe has been saved already.'
@@ -38,23 +38,27 @@ module.exports = function (app) {
     '/recipe/:id',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
-      const _id = req.params.id;
-      const owner = req.user._id;
-      console.log(_id);
+      const id = Number(req.params.id);
+      const _id = req.user._id;
+
       try {
-        const recipe = await Recipe.findOne({
-          _id,
-          owner
+        const user = await User.findOne({
+          _id
         });
-        console.log(recipe);
-        // make a call to the database
-        // to search for the recipe id that is stored in your db.
-        res.status(200).send(`This is your recipe id: ${req.params.id}
-          Here is your recipe:
-          ${JSON.stringify(recipe)}
-        `);
+
+        const savedRecipes = user.savedRecipes;
+
+        for (let i = 0; i < savedRecipes.length; i++) {
+          const recipe = savedRecipes[i];
+
+          if (recipe.id === id) {
+            return res.status(200).json(recipe);
+          }
+        }
+
+        res.status(404).send(`Recipe not found`);
       } catch (e) {
-        res.status(400).send(`Error: ${e}`);
+        res.status(500).send(`Error: ${e}`);
       }
     }
   );

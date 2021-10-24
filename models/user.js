@@ -3,8 +3,6 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const recipeSchema = require('./recipes');
-// const uniqueValidator = require('mongoose-unique-validator');
-
 
 const UserSchema = new Schema(
   {
@@ -41,7 +39,6 @@ const UserSchema = new Schema(
   }
 );
 
-
 UserSchema.pre('save', function (next) {
   const user = this;
 
@@ -54,15 +51,6 @@ UserSchema.pre('save', function (next) {
     next();
   });
 });
-
-// UserSchema.methods.filterDuplicates = function() {
-//   const recipes = this.savedRecipes;
-//   const filteredRecipes = recipes.filter(function(recipe, index) {
-//     return recipes.indexOf(recipe) === index;
-//   })
-//   console.log(filteredRecipes)
-//   this.savedRecipes = filteredRecipes;
-// }
 
 UserSchema.methods.generateAuthToken = async function () {
   const user = this;
