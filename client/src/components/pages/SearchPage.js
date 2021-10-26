@@ -101,7 +101,7 @@ class SearchPage extends React.Component {
                       HealthScore: {data.healthScore}
                     </div>
                       <Link to={`/recipe/${data.id}`}>
-                        <StyledButton className="x-small" text="View Recipe"/>
+                        <StyledButton className="x-small mt-2" text="View Recipe"/>
                       </Link>
                   </div>
                 </div>

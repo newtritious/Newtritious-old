@@ -69,7 +69,7 @@ class LogInForm extends React.Component {
           onChange={this.handleInputChange}
         />
         <div className="flex flex-row-reverse">
-          <StyledButton type="submit" className="small blue" text="Log In" />
+          <StyledButton type="submit" className="small" text="Log In" />
         </div>
       </form>
     );
