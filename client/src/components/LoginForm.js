@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { userLogin } from '../store/reducers/userReducer';
-import { StyledTextInput, StyledSubmit } from './styles/StyledInputs';
+import { StyledTextInput, StyledButton } from './styles/StyledInputs';
 import API from '../utils/API';
 
 class LogInForm extends React.Component {
@@ -69,7 +69,7 @@ class LogInForm extends React.Component {
           onChange={this.handleInputChange}
         />
         <div className="flex flex-row-reverse">
-          <StyledSubmit className="small blue" value="Log In" />
+          <StyledButton type="submit" className="small" text="Log In" />
         </div>
       </form>
     );

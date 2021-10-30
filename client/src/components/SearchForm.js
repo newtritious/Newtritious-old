@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   StyledTextInput,
-  StyledSubmit,
+  StyledButton,
   StyledForm
 } from './styles/StyledInputs';
 
@@ -19,7 +19,7 @@ function SearchForm(props) {
           maxLength="48"
         ></StyledTextInput>
         <div className="flex flex-row-reverse">
-          <StyledSubmit value="Go" />
+          <StyledButton type="submit" text="Go" />
         </div>
       </StyledForm>
     </div>
