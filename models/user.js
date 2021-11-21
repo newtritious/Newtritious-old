@@ -82,10 +82,6 @@ UserSchema.methods.comparePasswords = function (password, cb) {
   });
 };
 
-UserSchema.virtual('savedRecipesLength').get(function () {
-  return this.savedRecipes.length;
-});
-
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

@@ -17,8 +17,6 @@ module.exports = function (app) {
   app.post('/signup', async function (req, res) {
     const user = new User(req.body);
 
-    // console.log(user.savedRecipesLength)
-
     try {
       await user.save();
 

@@ -1,5 +1,5 @@
 const passport = require('passport');
-const { User, Recipe } = require('../models');
+const { User } = require('../models');
 require('../services/passport');
 
 module.exports = function (app) {
@@ -14,20 +14,19 @@ module.exports = function (app) {
 
         const savedRecipes = user.savedRecipes;
 
-        for (let i = 0; i < savedRecipes.length; i++) {
-          if (savedRecipes[i].id === req.body.id) {
-            return res.status(400).json({
-              Error:
-                'This error occurred because this recipe has been saved already.'
-            });
-          }
+        let recipe = savedRecipes.find((element) => element.id === req.body.id);
+
+        if (!recipe) {
+          recipe = user.savedRecipes.addToSet(req.body);
+          await user.save();
+
+          return res.status(201).json(recipe);
         }
 
-        const recipe = user.savedRecipes.addToSet(req.body);
-
-        await user.save();
-
-        res.status(201).json(recipe);
+        res.status(400).json({
+          Error:
+            'This error occurred because this recipe has been saved already.'
+        });
       } catch (e) {
         res.status(500).json(e);
       }
@@ -48,15 +47,11 @@ module.exports = function (app) {
 
         const savedRecipes = user.savedRecipes;
 
-        for (let i = 0; i < savedRecipes.length; i++) {
-          const recipe = savedRecipes[i];
+        let recipe = savedRecipes.find((element) => element.id === id);
 
-          if (recipe.id === id) {
-            return res.status(200).json(recipe);
-          }
-        }
+        if (!recipe) return res.status(404).send(`Recipe not found`);
 
-        res.status(404).send(`Recipe not found`);
+        res.status(200).json(recipe);
       } catch (e) {
         res.status(500).send(`Error: ${e}`);
       }
