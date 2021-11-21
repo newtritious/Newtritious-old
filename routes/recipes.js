@@ -47,15 +47,11 @@ module.exports = function (app) {
 
         const savedRecipes = user.savedRecipes;
 
-        for (let i = 0; i < savedRecipes.length; i++) {
-          const recipe = savedRecipes[i];
+        let recipe = savedRecipes.find((element) => element.id === id);
 
-          if (recipe.id === id) {
-            return res.status(200).json(recipe);
-          }
-        }
+        if (!recipe) return res.status(404).send(`Recipe not found`);
 
-        res.status(404).send(`Recipe not found`);
+        res.status(200).json(recipe);
       } catch (e) {
         res.status(500).send(`Error: ${e}`);
       }
