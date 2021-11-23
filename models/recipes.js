@@ -9,6 +9,12 @@ const recipeSchema = new Schema({
       },
       steps: [
         {
+          number: {
+            type: String
+          },
+          step: {
+            type: String
+          },
           equipment: [
             {
               id: {
@@ -30,9 +36,7 @@ const recipeSchema = new Schema({
                 type: String
               }
             }
-          ]
-        },
-        {
+          ],
           ingredients: [
             {
               id: {
@@ -48,14 +52,10 @@ const recipeSchema = new Schema({
                 type: String
               }
             }
-          ]
-        },
-        {
+          ],
           number: {
             type: Number
-          }
-        },
-        {
+          },
           step: {
             type: String
           }
@@ -91,7 +91,8 @@ const recipeSchema = new Schema({
     type: Number
   },
   id: {
-    type: Number
+    type: Number,
+    unique: true
   },
   image: {
     // should I use a url parser npm package?
@@ -134,5 +135,5 @@ const recipeSchema = new Schema({
   }
 });
 
-const Recipe = mongoose.model('Recipe', recipeSchema);
-module.exports = Recipe;
+
+module.exports = recipeSchema;

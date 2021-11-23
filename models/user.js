@@ -2,30 +2,42 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const recipeSchema = require('./recipes');
 
-const UserSchema = new Schema({
-  username: {
-    type: String,
-    required: [true, 'Required']
-  },
-  email: {
-    type: String,
-    required: [true, 'Required'],
-    unique: true
-  },
-  password: {
-    type: String,
-    required: [true, 'Required']
-  },
-  tokens: [
-    {
-      token: {
-        type: String,
-        required: true
+const UserSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: [true, 'Required']
+    },
+    email: {
+      type: String,
+      required: [true, 'Required'],
+      unique: true
+    },
+    password: {
+      type: String,
+      required: [true, 'Required']
+    },
+    savedRecipes: [recipeSchema],
+    tokens: [
+      {
+        token: {
+          type: String,
+          required: true
+        }
       }
+    ]
+  },
+  {
+    toJSON: {
+      virtuals: true
+    },
+    toObject: {
+      virtuals: true
     }
-  ]
-});
+  }
+);
 
 UserSchema.pre('save', function (next) {
   const user = this;
@@ -55,6 +67,10 @@ UserSchema.methods.generateAuthToken = async function () {
 
   return token;
 };
+
+UserSchema.virtual('savedRecipesLength').get(function () {
+  return this.savedRecipes.length;
+});
 
 UserSchema.methods.comparePasswords = function (password, cb) {
   const user = this;

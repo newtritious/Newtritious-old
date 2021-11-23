@@ -33,5 +33,5 @@ require('./routes/spoonacular-api')(app);
 
 // Set Express server to listen on PORT
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`🌍 Server running on http://localhost:${PORT}`);
 });
