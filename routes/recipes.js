@@ -66,13 +66,17 @@ module.exports = function (app) {
       const _id = req.user._id;
 
       try {
-        const updatedUser = await User.findOneAndUpdate(
-          { _id },
+        const user = await User.findOne({ _id });
+
+        let recipe = user.savedRecipes.find((element) => element.id === id);
+        if (!recipe) return res.status(404).send(`Recipe not found`);
+
+        const update = await user.updateOne(
           { $pull: { savedRecipes: { id } } },
           { new: true }
         );
 
-        res.status(200).json(updatedUser);
+        res.status(200).send(update);
       } catch (e) {
         res.status(500).send(`Error: ${e}`);
       }
