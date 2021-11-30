@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import LogInForm from './LoginForm';
@@ -162,4 +163,14 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.username,
+    loggedIn: state.user.username !== ''
+  };
+};
+
+
+export default connect(
+  mapStateToProps
+)(NavBar);
