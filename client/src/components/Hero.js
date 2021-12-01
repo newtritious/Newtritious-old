@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SignUpForm from './SignUpForm';
 import styled from 'styled-components';
 
@@ -29,4 +30,12 @@ class Hero extends React.Component {
   }
 }
 
-export default Hero;
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.user.username !== ''
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(Hero);
