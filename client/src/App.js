@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import NavBar from './components/NavBar.js';
 import HomePage from './components/pages/HomePage.js';
@@ -21,16 +22,8 @@ document.body.style.backgroundColor = theme.colors.whiteSpace;
 
 class App extends React.Component {
   state = {
-    testResult: 'fail',
-    user: 'guest',
-    loggedIn: false
+    testResult: 'fail'
   };
-
-  constructor(props) {
-    super(props);
-
-    this.loginUpdate = this.loginUpdate.bind(this);
-  }
 
   componentDidMount() {
     // API.testApi().then(result => console.log(result));
@@ -39,20 +32,10 @@ class App extends React.Component {
     );
   }
 
-  loginUpdate(loggedInParam, userParam = this.state.user) {
-    this.setState({ loggedIn: loggedInParam });
-    this.setState({ user: userParam });
-    console.log(userParam);
-  }
-
   render() {
     return (
       <Router>
-        <NavBar
-          user={this.state.user}
-          loggedIn={this.state.loggedIn}
-          loginUpdate={this.loginUpdate}
-        />
+        <NavBar/>
         <Switch>
           <Route path="/search">
             <SearchPage />
@@ -67,19 +50,11 @@ class App extends React.Component {
             <PageC />
           </Route>
           <Route path="/sign-up">
-            <SignUpPage
-              user={this.state.user}
-              loggedIn={this.state.loggedIn}
-              loginUpdate={this.loginUpdate}
-            />
-            {this.state.loggedIn && <Redirect to="/" />}
+            <SignUpPage/>
+            {this.props.loggedIn && <Redirect to="/" />}
           </Route>
           <Route path="/">
-            <HomePage
-              user={this.state.user}
-              loggedIn={this.state.loggedIn}
-              loginUpdate={this.loginUpdate}
-            />
+            <HomePage/>
           </Route>
         </Switch>
         <span>Test api: {this.state.testResult}!</span>
@@ -88,4 +63,12 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.user.username !== ''
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(App);
