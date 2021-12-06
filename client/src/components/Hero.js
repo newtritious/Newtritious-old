@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SignUpForm from './SignUpForm';
 import styled from 'styled-components';
 
@@ -19,7 +20,7 @@ class Hero extends React.Component {
     return (
       <StyledHero>
         {!this.props.loggedIn ? (
-          <SignUpForm {...this.props} />
+          <SignUpForm/>
         ) : (
           //this element is just here to take up space
           <div className="h-96"></div>
@@ -29,4 +30,12 @@ class Hero extends React.Component {
   }
 }
 
-export default Hero;
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.user.username !== ''
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(Hero);

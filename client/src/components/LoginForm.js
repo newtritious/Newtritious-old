@@ -29,7 +29,7 @@ class LogInForm extends React.Component {
             username: results.data.username,
             userEmail: results.data.email
           });
-          this.props.userLogin(this.state.username, this.state.userEmail);
+          this.props.userLogin(this.state.username);
           this.props.history.push('/search');
         }
       })
@@ -78,13 +78,12 @@ class LogInForm extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    username: state.user.username,
-    email: state.user.email
+    username: state.user.username
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  userLogin: (username, email) => dispatch(userLogin(username, email))
+  userLogin: (username) => dispatch(userLogin(username))
 });
 
 export default connect(

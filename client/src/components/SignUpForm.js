@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { userSignup } from '../store/reducers/userReducer';
 import {
   StyledTextInput,
   StyledButton,
@@ -55,7 +57,7 @@ class SignUpForm extends React.Component {
   handleLoginResponse(response) {
     console.log('a response!');
     console.log(response);
-    this.props.loginUpdate(true, response.data.user.username);
+    this.props.userSignup(response.data.user.username);
   }
 
   handleInputChange(event) {
@@ -140,4 +142,14 @@ function validatePassword(password) {
   return !(password.length < 8 && password.length > 0);
 }
 
-export default SignUpForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    userSignup: (username) => dispatch(userSignup(username))
+  }
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignUpForm);
+

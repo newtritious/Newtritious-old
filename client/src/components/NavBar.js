@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { userLogout } from '../store/reducers/userReducer';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import LogInForm from './LoginForm';
@@ -137,7 +139,7 @@ class NavBar extends React.Component {
                 onClick={() => {
                   API.logout();
                   console.log(document.cookie);
-                  this.props.loginUpdate(false, 'guest');
+                  this.props.userLogout();
                 }}
               >
                 <LinkTabAnim className="child" />
@@ -162,4 +164,21 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user.username,
+    loggedIn: state.user.username !== ''
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+    userLogout: () => dispatch(userLogout())
+  }
+};
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NavBar);
