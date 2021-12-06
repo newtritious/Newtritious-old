@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   StyledTextInput,
-  StyledSubmit,
+  StyledButton,
   StyledInputMessage,
   StyledForm
 } from './styles/StyledInputs';
@@ -124,7 +124,7 @@ class SignUpForm extends React.Component {
           )}
         </div>
         <div className="flex flex-row-reverse">
-          <StyledSubmit value="Sign Up" className="centered" />
+          <StyledButton type="submit" text="Sign Up" className="centered" />
         </div>
       </StyledForm>
     );
