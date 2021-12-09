@@ -13,14 +13,14 @@ export const getUsername = (state) => state.user.username;
 export const getUserEmail = (state) => state.user.email;
 
 // action creators - function that takes in data and returns a formatted action. Think of them as your API for modifying your data
-export const userSignup = (email, password) => ({
+export const userSignup = (username) => ({
   type: USER_SIGNUP,
-  payload: { email, password }
+  payload: { username }
 });
 
-export const userLogin = (username, email) => ({
+export const userLogin = (username) => ({
   type: USER_LOGIN,
-  payload: { username, email }
+  payload: { username }
 });
 
 export const userLogout = () => ({
@@ -32,13 +32,13 @@ export const userLogout = () => ({
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_SIGNUP: {
-      return { ...state };
+      return { ...state, ...action.payload };
     }
     case USER_LOGIN: {
       return { ...state, ...action.payload };
     }
     case USER_LOGOUT: {
-      return {};
+      return initialState;
     }
     default: {
       return state;
