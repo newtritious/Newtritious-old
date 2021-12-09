@@ -13,6 +13,18 @@ const API = {
     return axios.get(`/spoonacular/${id}`);
   },
 
+  saveRecipe: async function (data) {
+    console.log(data);
+    try {
+      const recipe = await axios.post('/recipe', {
+        data
+      });
+      console.log('success')
+    } catch (e) {
+      throw new Error(`Error: ${e}`);
+    }
+  },
+
   login: async function (email, password) {
     try {
       const user = await axios
