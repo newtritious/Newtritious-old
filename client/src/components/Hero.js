@@ -9,10 +9,25 @@ const StyledHero = styled.div`
   padding: 50px;
   padding-bottom: 120px;
 
-  .signup {
+  .signup{
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  @media only screen and (min-width: 600px){
+    .signup {
+    width: 70%;
+    margin-left: 15%;
+  }
+  }
+
+  @media only screen and (min-width: 1100px){
+    .signup {
     width: 30%;
     margin-left: 60%;
   }
+  }
+
 `;
 
 class Hero extends React.Component {
