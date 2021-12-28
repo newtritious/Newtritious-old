@@ -9,8 +9,12 @@ import theme from '../theme.js';
 
 const StyledLink = styled(NavLink)`
   width: 11%;
-  min-width: 170px;
-  font-size: 2.5rem;
+  min-width: 90px;
+  font-size: 1.2rem;
+  @media only screen and (min-width: 1024px){
+    min-width: 170px;
+    font-size: 2.5rem;
+  }
   text-align: center;
   padding: 10px;
   position: relative;
@@ -49,8 +53,12 @@ const LinkTabAnim = styled.div`
 
 const StyledTab = styled.div`
   width: 11%;
-  min-width: 170px;
-  font-size: 2.5rem;
+  min-width: 90px;
+  font-size: 1.2rem;
+  @media only screen and (min-width: 1024px){
+    min-width: 170px;
+    font-size: 2.5rem;
+  }
   text-align: center;
   padding: 10px;
   position: relative;
@@ -81,10 +89,15 @@ const StyledTab = styled.div`
 
 const StyledText = styled.div`
   width: 11%;
-  min-width: 170px;
-  font-size: 2.5rem;
+  min-width: 90px;
+  font-size: 1.2rem;
+  padding: 5px;
+  @media only screen and (min-width: 1024px){
+    min-width: 170px;
+    font-size: 2.5rem;
+    padding: 10px;
+  }
   text-align: center;
-  padding: 10px;
   margin-left: 5px;
   user-select: none;
 `;
@@ -125,7 +138,7 @@ class NavButton extends React.Component {
 class NavBar extends React.Component {
   render() {
     return (
-      <div className="flex flex-row h-20 border-b-2 mt-3 pl-1 border-primary pr-10">
+      <div className="flex flex-row h-10 lg:h-20 border-b-2 mt-3 pl-1 border-primary pr-10">
         <NavButton name="Home" link="/" />
         <NavButton name="Search" link="/search" />
         <NavButton name="PageB" link="/page-b" />
