@@ -117,7 +117,7 @@ const StyledDropDownForm = styled.div`
   font-size: 1.125rem;
   cursor: auto;
 
-  .log-in:hover & {
+  .log-in:hover &,.log-in:active & {
     display: block;
   }
 

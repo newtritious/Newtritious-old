@@ -21,9 +21,13 @@ const StyledTextInput = styled.input`
   border-width: 2px;
   padding: 3px;
   margin: auto;
+  margin-bottom: 10px;
+  font-size: .6rem;
+  @media only screen and (min-height: 650px){
   margin-bottom: 30px;
-  display: block;
   font-size: 1.1rem;
+  }
+  display: block;
   box-shadow: 3px 5px 10px #0001;
 
   &:focus {
