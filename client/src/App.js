@@ -22,7 +22,30 @@ document.body.style.backgroundColor = theme.colors.whiteSpace;
 
 class App extends React.Component {
   state = {
-    testResult: 'fail'
+    testResult: 'fail',
+    pages: [
+      {
+        name: 'Home',
+        path: '/',
+        component: <HomePage />
+      },
+      {
+        name: 'Search',
+        path: '/search',
+        component: <SearchPage />
+      },
+      {
+        name: 'Page B',
+        path: '/page-b',
+        component: <PageB />
+      },
+      {
+        name: 'Page C',
+        path: '/page-c',
+        component: <PageC />
+      }
+
+    ]
   };
 
   componentDidMount() {
@@ -37,11 +60,11 @@ class App extends React.Component {
       <Router>
         <NavBar/>
         <Switch>
-          <Route path="/search">
-            <SearchPage />
-          </Route>
           <Route path="/recipe/:id">
             <Recipe />
+          </Route>
+          {/* <Route path="/search">
+            <SearchPage />
           </Route>
           <Route path="/page-b">
             <PageB />
@@ -49,12 +72,20 @@ class App extends React.Component {
           <Route path="/page-c">
             <PageC />
           </Route>
+          <Route path="/">
+            <HomePage/>
+          </Route> */}
+          {this.state.pages.map((data) => {
+            return (
+              <Route key={data.name} path={data.path}>
+                {data.component}
+              </Route>
+
+            )
+          })}
           <Route path="/sign-up">
             <SignUpPage/>
             {this.props.loggedIn && <Redirect to="/" />}
-          </Route>
-          <Route path="/">
-            <HomePage/>
           </Route>
         </Switch>
         <span>Test api: {this.state.testResult}!</span>
