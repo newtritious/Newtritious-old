@@ -24,6 +24,7 @@ class App extends React.Component {
   state = {
     testResult: 'fail',
     pages: [
+      
       {
         name: 'Home',
         path: '/',
@@ -43,7 +44,7 @@ class App extends React.Component {
         name: 'Page C',
         path: '/page-c',
         component: <PageC />
-      }
+      },
 
     ]
   };
@@ -58,35 +59,24 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <NavBar/>
+        <NavBar pages={this.state.pages}/>
         <Switch>
           <Route path="/recipe/:id">
             <Recipe />
           </Route>
-          {/* <Route path="/search">
-            <SearchPage />
+
+          <Route path="/sign-up">
+            <SignUpPage/>
+            {this.props.loggedIn && <Redirect to="/" />}
           </Route>
-          <Route path="/page-b">
-            <PageB />
-          </Route>
-          <Route path="/page-c">
-            <PageC />
-          </Route>
-          <Route path="/">
-            <HomePage/>
-          </Route> */}
           {this.state.pages.map((data) => {
             return (
-              <Route key={data.name} path={data.path}>
+              <Route key={data.name} exact path={data.path}>
                 {data.component}
               </Route>
 
             )
           })}
-          <Route path="/sign-up">
-            <SignUpPage/>
-            {this.props.loggedIn && <Redirect to="/" />}
-          </Route>
         </Switch>
         <span>Test api: {this.state.testResult}!</span>
       </Router>

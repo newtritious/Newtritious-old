@@ -139,10 +139,11 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className="flex flex-row h-10 lg:h-20 border-b-2 mt-3 pl-1 border-primary pr-10">
-        <NavButton name="Home" link="/" />
-        <NavButton name="Search" link="/search" />
-        <NavButton name="PageB" link="/page-b" />
-        <NavButton name="PageC" link="/page-c" />
+        {this.props.pages.map((data) => {
+            return (
+              <NavButton key={data.name} name={data.name} link={data.path} />
+            )
+        })}
 
         <div className="flex flex-row-reverse w-full">
           {this.props.loggedIn ? (
