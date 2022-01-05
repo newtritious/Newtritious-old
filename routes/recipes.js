@@ -54,6 +54,7 @@ module.exports = function (app) {
     '/recipe',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
+      let recipe;
       const spoonacularRecipeId = req.body.id;
 
       try {
@@ -63,16 +64,30 @@ module.exports = function (app) {
 
         let hasRecipe = await Recipe.findOne({ id: spoonacularRecipeId });
 
-        if (hasRecipe) {
-          return res.status(400).json({
-            Error:
-              'This error occurred because this recipe has been saved already.'
-          });
+        if (!hasRecipe) {
+          recipe = await Recipe.create(req.body);
         }
 
-        let recipe = await Recipe.create(req.body)
+        let isRecipeSavedToUser = user.savedRecipes.find(
+          (element) => element === hasRecipe._id
+        );
 
-        res.json(recipe);
+        if (!isRecipeSavedToUser) {
+          recipe = user.savedRecipes.addToSet(hasRecipe);
+        }
+
+        // return res.status(400).json({
+        //   Error:
+        //     'This error occurred because this recipe has been saved already.'
+        // });
+        
+        console.log(recipe);
+
+        // let userSavedRecipe = user.savedRecipes.addToSet(recipe._id);
+
+        await user.save();
+
+        return res.status(201).json(recipe);
 
         // .where('_id')
         // .in(user.savedRecipes)
