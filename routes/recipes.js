@@ -76,65 +76,9 @@ module.exports = function (app) {
           recipe = user.savedRecipes.addToSet(hasRecipe);
         }
 
-        // return res.status(400).json({
-        //   Error:
-        //     'This error occurred because this recipe has been saved already.'
-        // });
-        
-        console.log(recipe);
-
-        // let userSavedRecipe = user.savedRecipes.addToSet(recipe._id);
-
         await user.save();
 
         return res.status(201).json(recipe);
-
-        // .where('_id')
-        // .in(user.savedRecipes)
-        // .equals('61b82c32761c2b372359b937');
-
-        // const recipe = Recipe.create(req.body);
-
-        // check if recipe exists in Recipe database
-        // if yes
-        // get Recipe ObjectID
-        // save to user's savedRecipes array
-        // else
-        // save to Recipe database
-        // grab Recipe ObjectID
-        // save to user's savedRecipes array
-
-        // const hasRecipe = await Recipe.find()
-        //   .where('_id')
-        //   .in(user.savedRecipes)
-        //   .equals('61b82c32761c2b372359b937');
-
-        // console.log('======= hasRecipe: ', hasRecipe);
-
-        // if (hasRecipe) {
-        //   return res.status(400).json({
-        //     Error:
-        //       'This error occurred because this recipe has been saved already.'
-        //   });
-        // }
-
-        // const savedRecipes = user.savedRecipes;
-
-        // let recipe = savedRecipes.find((element) => element.id === req.body.id);
-
-        // if (!recipe) {
-        //   const savedRecipe = await Recipe.create(req.body); //returns { <recipe body> }
-        //   recipe = user.savedRecipes.addToSet(savedRecipe); //returns [ <recipe._id> ]
-
-        //   await user.save();
-
-        //   return res.status(201).json(savedRecipe);
-        // }
-
-        // res.status(400).json({
-        //   Error:
-        //     'This error occurred because this recipe has been saved already.'
-        // });
       } catch (e) {
         res.status(500).json(e);
       }
