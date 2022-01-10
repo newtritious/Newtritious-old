@@ -24,30 +24,32 @@ module.exports = function (app) {
   );
 
   /* ---------------------------- GET SINGLE RECIPE --------------------------- */
-  // app.get(
-  //   '/recipe/:id',
-  //   passport.authenticate('jwt', { session: false }),
-  //   async (req, res) => {
-  //     const id = Number(req.params.id);
-  //     const _id = req.user._id;
+  app.get(
+    '/recipe/:id',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+      const spoonacularRecipeId = Number(req.params.id);
+      const userId = req.user._id;
 
-  //     try {
-  //       const user = await User.findOne({
-  //         _id
-  //       });
+      try {
+        const user = await User.findOne({
+          _id: userId
+        });
 
-  //       const savedRecipes = user.savedRecipes;
+        let hasRecipe = await Recipe.findOne({ id: spoonacularRecipeId });
 
-  //       let recipe = savedRecipes.find((element) => element.id === id);
+        const savedRecipes = user.savedRecipes;
 
-  //       if (!recipe) return res.status(404).send(`Recipe not found`);
+        let recipe = savedRecipes.find((element) => element === hasRecipe._id);
 
-  //       res.status(200).json(recipe);
-  //     } catch (e) {
-  //       res.status(500).send(`Error: ${e}`);
-  //     }
-  //   }
-  // );
+        if (!recipe) return res.status(404).send(`Recipe not found`);
+
+        res.status(200).json(recipe);
+      } catch (e) {
+        res.status(500).send(`Error: ${e}`);
+      }
+    }
+  );
 
   /* ------------------------------ SAVE A RECIPE ----------------------------- */
   app.post(
@@ -64,21 +66,21 @@ module.exports = function (app) {
 
         let hasRecipe = await Recipe.findOne({ id: spoonacularRecipeId });
 
-        if (!hasRecipe) {
-          recipe = await Recipe.create(req.body);
-        }
-
+        // Database _ids are saved as objects, not strings, so string conversion must occur.
         let isRecipeSavedToUser = user.savedRecipes.find(
-          (element) => element === hasRecipe._id
+          (element) => element.toString() === hasRecipe._id.toString()
         );
 
-        if (!isRecipeSavedToUser) {
-          recipe = user.savedRecipes.addToSet(hasRecipe);
+        if (isRecipeSavedToUser) {
+          return res.status(400).json({
+            data: 'Recipe is already saved to database.'
+          });
         }
 
-        await user.save();
+        recipe = user.savedRecipes.addToSet(hasRecipe);
 
-        return res.status(201).json(recipe);
+        await user.save();
+        res.status(201).json(recipe);
       } catch (e) {
         res.status(500).json(e);
       }
