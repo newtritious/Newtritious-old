@@ -6,7 +6,10 @@ const StyledForm = styled.form`
   width: 50%;
   margin: auto;
   margin-top: 50px;
-  padding: 40px;
+  padding: 30px;
+  @media only screen and (min-height: 700px){
+    padding: 40px;
+  }
   background: ${theme.colors.whiteSpace};
   border-radius: 10px;
   border-width: 4px;
@@ -21,11 +24,11 @@ const StyledTextInput = styled.input`
   border-width: 2px;
   padding: 3px;
   margin: auto;
-  margin-bottom: 10px;
-  font-size: .6rem;
-  @media only screen and (min-height: 650px){
   margin-bottom: 30px;
-  font-size: 1.1rem;
+  font-size: .7rem;
+  @media only screen and (min-width: 570px){
+    margin-bottom: 30px;
+    font-size: 1.1rem;
   }
   display: block;
   box-shadow: 3px 5px 10px #0001;
@@ -37,11 +40,16 @@ const StyledTextInput = styled.input`
 `;
 
 const StyledInputMessage = styled.p`
-  font-size: 0.8rem;
+  
   color: #d00;
   position: absolute;
   left: 0;
-  top: 34px;
+  font-size: 0.7rem;
+  top: 26px;
+  @media only screen and (min-width: 570px){
+    font-size: 0.8rem;
+    top: 34px;
+  }
 `;
 
 class ResponsiveButton extends React.Component {

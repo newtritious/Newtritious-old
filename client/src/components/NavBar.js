@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { userLogout } from '../store/reducers/userReducer';
 import { NavLink } from 'react-router-dom';
@@ -6,17 +7,22 @@ import styled from 'styled-components';
 import LogInForm from './LoginForm';
 import API from '../utils/API';
 import theme from '../theme.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 const StyledLink = styled(NavLink)`
   width: 11%;
   min-width: 90px;
   font-size: 1.2rem;
-  @media only screen and (min-width: 1024px){
+  padding: 10px;
+  padding-top: 5px;
+  @media only screen and (min-width: 1280px){
     min-width: 170px;
     font-size: 2.5rem;
+    padding-top: 10px;
   }
   text-align: center;
-  padding: 10px;
+
   position: relative;
   color: ${theme.colors.primary.default};
   transition: color 0.3s ease-in-out;
@@ -52,15 +58,21 @@ const LinkTabAnim = styled.div`
 `;
 
 const StyledTab = styled.div`
-  width: 11%;
-  min-width: 90px;
+  min-width: 60px;
+  @media only screen and (min-width: 570px){
+    width: 11%;
+    min-width: 90px;
+  }
   font-size: 1.2rem;
-  @media only screen and (min-width: 1024px){
+  padding: 10px;
+  padding-top: 5px;
+  @media only screen and (min-width: 1280px){
     min-width: 170px;
     font-size: 2.5rem;
+    padding-top: 10px;
   }
   text-align: center;
-  padding: 10px;
+ 
   position: relative;
   color: ${theme.colors.primary.default};
   transition: color 0.3s ease-in-out;
@@ -68,7 +80,7 @@ const StyledTab = styled.div`
   user-select: none;
   cursor: pointer;
 
-  &:hover {
+  &:hover, &:active{
     color: #fff;
 
     .child {
@@ -92,7 +104,7 @@ const StyledText = styled.div`
   min-width: 90px;
   font-size: 1.2rem;
   padding: 5px;
-  @media only screen and (min-width: 1024px){
+  @media only screen and (min-width: 1280px){
     min-width: 170px;
     font-size: 2.5rem;
     padding: 10px;
@@ -104,8 +116,12 @@ const StyledText = styled.div`
 
 const StyledDropDownForm = styled.div`
   position: absolute;
-  left: 0px;
-  width: 190%;
+  right: 0px;
+  width: 300%;
+    @media only screen and (min-width: 1280px){
+    left: 0px;
+    width: 190%;
+  }
   top: 100%;
   background: #dcd;
   color: #000;
@@ -128,54 +144,97 @@ const StyledDropDownForm = styled.div`
 class NavButton extends React.Component {
   render() {
     return (
-      <StyledLink exact to={this.props.link}>
+      <StyledLink exact={this.props.name==="Home"} to={this.props.link}>
         {this.props.name} <LinkTabAnim className="child" />
       </StyledLink>
     );
   }
 }
 
-class NavBar extends React.Component {
-  render() {
-    return (
-      <div className="flex flex-row h-10 lg:h-20 border-b-2 mt-3 pl-1 border-primary pr-10">
-        {this.props.pages.map((data) => {
-            return (
-              <NavButton key={data.name} name={data.name} link={data.path} />
-            )
-        })}
+function NavBar(props) {
+  const size = useWindowSize();
 
-        <div className="flex flex-row-reverse w-full">
-          {this.props.loggedIn ? (
-            <React.Fragment>
-              <StyledText>{this.props.user}</StyledText>
-              <StyledTab
-                onClick={() => {
-                  API.logout();
-                  console.log(document.cookie);
-                  this.props.userLogout();
-                }}
-              >
-                <LinkTabAnim className="child" />
-                Log Out
-              </StyledTab>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
-              <StyledTab className="log-in">
-                <LinkTabAnim className="child" />
-                Log In
-                <StyledDropDownForm>
-                  <LogInForm />
-                </StyledDropDownForm>
-              </StyledTab>
-            </React.Fragment>
-          )}
-        </div>
+  return (
+    <div className="flex flex-row h-10 xl:h-20 border-b-2 mt-3 pl-1 border-primary pr-1 xl:pr-10">
+      {(size.width > 570) ? (
+        <React.Fragment>
+          {props.pages.map((data) => {
+              return (
+                <NavButton key={data.name} name={data.name} link={data.path} />
+              )
+          })}
+        </React.Fragment>
+      ) : (
+        <StyledTab>
+          <LinkTabAnim className="child" />
+          <FontAwesomeIcon icon={faBars} className="text-2xl"/>
+        </StyledTab>
+      )
+
+      }
+
+      <div className="flex flex-row-reverse w-full">
+        {props.loggedIn ? (
+          <React.Fragment>
+            <StyledText>{props.user}</StyledText>
+            <StyledTab
+              onClick={() => {
+                API.logout();
+                console.log(document.cookie);
+                props.userLogout();
+              }}
+            >
+              <LinkTabAnim className="child" />
+              Log Out
+            </StyledTab>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
+            <StyledTab className="log-in">
+              <LinkTabAnim className="child" />
+              Log In
+              <StyledDropDownForm>
+                <LogInForm />
+              </StyledDropDownForm>
+            </StyledTab>
+          </React.Fragment>
+        )}
       </div>
-    );
-  }
+    </div>
+  );
+}
+
+// Hook
+function useWindowSize() {
+  // Initialize state with undefined width/height so server and client renders match
+  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    // Handler to call on window resize
+    function handleResize() {
+      // Set window width/height to state
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty array ensures that effect is only run on mount
+
+  return windowSize;
 }
 
 const mapStateToProps = (state) => {

@@ -10,18 +10,18 @@ const StyledHero = styled.div`
   padding-bottom: 120px;
 
   .signup{
-    width: 90%;
-    margin-left: 5%;
+    width: 94%;
+    margin-left: 3%;
   }
 
-  @media only screen and (min-width: 600px){
+  @media only screen and (min-width: 620px){
     .signup {
     width: 70%;
     margin-left: 15%;
   }
   }
 
-  @media only screen and (min-width: 1100px){
+  @media only screen and (min-width: 1280px){
     .signup {
     width: 30%;
     margin-left: 60%;
