@@ -45,6 +45,23 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
+const StyledLinkDropdown = styled(NavLink)`
+  width: 100%;
+  padding: 15px;
+  display: block;
+
+  color: ${theme.colors.primary.default};
+  background: ${theme.colors.whiteSpace};
+  &:hover{
+    color: ${theme.colors.whiteSpace};
+    background: ${theme.colors.primary.faded};
+  }
+  &.active{
+    color: ${theme.colors.whiteSpace};
+    background: ${theme.colors.primary.default};
+  }
+`;
+
 const LinkTabAnim = styled.div`
   position: absolute;
   background: ${theme.colors.primary.faded};
@@ -141,6 +158,29 @@ const StyledDropDownForm = styled.div`
     display: block;
   }
 `;
+
+const StyledDropDown = styled.div`
+  position: absolute;
+  left: 0px;
+  width: 300%;
+  top: 100%;
+  margin: 0px;
+  padding: 0px;
+  z-index: 1;
+  display: none;
+  overflow: hidden;
+  box-shadow: 3px 5px 10px 5px #0003, 1px 2px 10px 3px #0001 inset;
+  
+  text-align: left;
+  cursor: auto;
+  border-color: ${theme.colors.primary.default};
+  border-width: 2px;
+  border-radius: 0px 0px 6px 6px;
+  .menu:hover &,.menu:active & {
+    display: block;
+  }
+
+`;
 class NavButton extends React.Component {
   render() {
     return (
@@ -165,7 +205,18 @@ function NavBar(props) {
           })}
         </React.Fragment>
       ) : (
-        <StyledTab>
+        <StyledTab className="menu">
+          <StyledDropDown>
+            {props.pages.map((data) => {
+                return (
+                  <div className="w-full" key={data.name}>
+                    <StyledLinkDropdown exact={data.name==="Home"}  to={data.path}>
+                      {data.name}
+                    </StyledLinkDropdown>
+                  </div>
+                )
+            })}
+          </StyledDropDown>
           <LinkTabAnim className="child" />
           <FontAwesomeIcon icon={faBars} className="text-2xl"/>
         </StyledTab>
