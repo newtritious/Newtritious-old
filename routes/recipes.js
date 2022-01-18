@@ -3,6 +3,7 @@ const { User, Recipe } = require('../models');
 require('../services/passport');
 
 module.exports = function (app) {
+  /* ----------------------------- GET ALL RECIPES ---------------------------- */
   app.get(
     '/recipe',
     passport.authenticate('jwt', { session: false }),
@@ -40,7 +41,9 @@ module.exports = function (app) {
 
         const savedRecipes = user.savedRecipes;
 
-        let recipe = savedRecipes.find((element) => element === hasRecipe._id);
+        console.log(savedRecipes[0])
+
+        let recipe = savedRecipes.find((element) => element.toString() === hasRecipe._id.toString());
 
         if (!recipe) return res.status(404).send(`Recipe not found`);
 
@@ -86,29 +89,5 @@ module.exports = function (app) {
       }
     }
   );
-
-  // app.get(
-  //   '/recipe/:id',
-  //   passport.authenticate('jwt', { session: false }),
-  //   async (req, res) => {
-  //     const id = Number(req.params.id);
-  //     const _id = req.user._id;
-
-  //     try {
-  //       const user = await User.findOne({
-  //         _id
-  //       });
-
-  //       const savedRecipes = user.savedRecipes;
-
-  //       let recipe = savedRecipes.find((element) => element.id === id);
-
-  //       if (!recipe) return res.status(404).send(`Recipe not found`);
-
-  //       res.status(200).json(recipe);
-  //     } catch (e) {
-  //       res.status(500).send(`Error: ${e}`);
-  //     }
-  //   }
-  // );
+/* ------------------------------ DELETE RECIPE ----------------------------- */
 };
