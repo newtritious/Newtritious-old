@@ -12,7 +12,10 @@ module.exports = function (app) {
         _id: req.user._id
       });
 
-      const recipes = await Recipe.find().where('_id').in(user.savedRecipes);
+      const recipes = await Recipe.find()
+        .where('_id')
+        .in(user.savedRecipes)
+        .select('-__v');
 
       if (!recipes.length) {
         return res.status(404).json({
@@ -40,8 +43,6 @@ module.exports = function (app) {
         let hasRecipe = await Recipe.findOne({ id: spoonacularRecipeId });
 
         const savedRecipes = user.savedRecipes;
-
-        console.log(savedRecipes[0]);
 
         let recipe = savedRecipes.find(
           (element) => element.toString() === hasRecipe._id.toString()
