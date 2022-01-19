@@ -140,7 +140,7 @@ module.exports = function (app) {
 
         await user.save();
 
-        res.status(200).json({ savedRecipes: user.savedRecipes });
+        res.status(200).json({ message: "Recipe deleted from user's favorited recipes" });
       } catch (e) {
         res.status(500).json(e.message);
       }
