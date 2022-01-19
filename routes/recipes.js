@@ -5,7 +5,7 @@ require('../services/passport');
 module.exports = function (app) {
   /* ----------------------------- GET ALL RECIPES ---------------------------- */
   app.get(
-    '/recipe',
+    '/',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
       try {
@@ -33,7 +33,7 @@ module.exports = function (app) {
 
   /* ---------------------------- GET SINGLE RECIPE --------------------------- */
   app.get(
-    '/recipe/:id',
+    '/:id',
     passport.authenticate('jwt', { session: false }),
     async (req, res) => {
       const spoonacularRecipeId = Number(req.params.id);
@@ -67,7 +67,7 @@ module.exports = function (app) {
 
   /* ------------------------------ SAVE A RECIPE ----------------------------- */
   app.post(
-    '/recipe',
+    '/',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
       const spoonacularRecipeId = req.body.id;
