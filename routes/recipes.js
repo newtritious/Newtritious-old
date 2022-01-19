@@ -40,19 +40,21 @@ module.exports = function (app) {
           _id: userId
         });
 
-        let hasRecipe = await Recipe.findOne({ id: spoonacularRecipeId });
+        let recipe = await Recipe.findOne({ id: spoonacularRecipeId });
 
         const savedRecipes = user.savedRecipes;
 
-        let recipe = savedRecipes.find(
-          (element) => element.toString() === hasRecipe._id.toString()
+        let hasRecipe = savedRecipes.find(
+          (element) => element.toString() === recipe._id.toString()
         );
 
-        if (!recipe) return res.status(404).send(`Recipe not found`);
+        if (!hasRecipe) {
+          return res.status(404).send(`Recipe not found`);
+        }
 
         res.status(200).json(recipe);
       } catch (e) {
-        res.status(500).send(`Error: ${e}`);
+        res.status(500).send(`Error: ${e.message}`);
       }
     }
   );
@@ -88,7 +90,7 @@ module.exports = function (app) {
         await user.save();
         res.status(201).json(recipe);
       } catch (e) {
-        res.status(500).json(e);
+        res.status(500).json(e.message);
       }
     }
   );
