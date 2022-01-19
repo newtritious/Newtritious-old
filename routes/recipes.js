@@ -8,22 +8,28 @@ module.exports = function (app) {
     '/recipe',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
-      const user = await User.findOne({
-        _id: req.user._id
-      });
 
-      const recipes = await Recipe.find()
-        .where('_id')
-        .in(user.savedRecipes)
-        .select('-__v');
-
-      if (!recipes.length) {
-        return res.status(404).json({
-          message: 'No saved recipes. Try saving a recipe first!'
+      try {
+        const user = await User.findOne({
+          _id: req.user._id
         });
+  
+        const recipes = await Recipe.find()
+          .where('_id')
+          .in(user.savedRecipes)
+          .select('-__v');
+  
+        if (!recipes.length) {
+          return res.status(404).json({
+            message: 'No saved recipes. Try saving a recipe first!'
+          });
+        }
+  
+        res.status(200).json(recipes);
+      } catch (e) {
+        res.status(500).send(`Error: ${e.message}`);
       }
-
-      res.status(200).json(recipes);
+      
     }
   );
 
