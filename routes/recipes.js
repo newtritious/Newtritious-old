@@ -8,28 +8,26 @@ module.exports = function (app) {
     '/recipe',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
-
       try {
         const user = await User.findOne({
           _id: req.user._id
         });
-  
+
         const recipes = await Recipe.find()
           .where('_id')
           .in(user.savedRecipes)
           .select('-__v');
-  
+
         if (!recipes.length) {
           return res.status(404).json({
             message: 'No saved recipes. Try saving a recipe first!'
           });
         }
-  
+
         res.status(200).json(recipes);
       } catch (e) {
         res.status(500).send(`Error: ${e.message}`);
       }
-      
     }
   );
 
@@ -46,7 +44,9 @@ module.exports = function (app) {
           _id: userId
         });
 
-        let recipe = await Recipe.findOne({ id: spoonacularRecipeId });
+        let recipe = await Recipe.findOne({ id: spoonacularRecipeId }).select(
+          '-__v'
+        );
 
         const savedRecipes = user.savedRecipes;
 
@@ -70,7 +70,6 @@ module.exports = function (app) {
     '/recipe',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
-      let recipe;
       const spoonacularRecipeId = req.body.id;
 
       try {
@@ -78,11 +77,13 @@ module.exports = function (app) {
           _id: req.user._id
         });
 
-        let hasRecipe = await Recipe.findOne({ id: spoonacularRecipeId });
+        let recipe = await Recipe.findOne({ id: spoonacularRecipeId }).select(
+          '-__v'
+        );
 
         // Database _ids are saved as objects, not strings, so string conversion must occur to compare.
         let isRecipeSavedToUser = user.savedRecipes.find(
-          (element) => element.toString() === hasRecipe._id.toString()
+          (element) => element.toString() === recipe._id.toString()
         );
 
         if (isRecipeSavedToUser) {
@@ -91,7 +92,7 @@ module.exports = function (app) {
           });
         }
 
-        recipe = user.savedRecipes.addToSet(hasRecipe);
+        user.savedRecipes.addToSet(recipe);
 
         await user.save();
         res.status(201).json(recipe);
@@ -100,8 +101,8 @@ module.exports = function (app) {
       }
     }
   );
-  /* ------------------------------ DELETE RECIPE ----------------------------- */
 
+  /* ------------------------------ DELETE RECIPE ----------------------------- */
   app.delete(
     '/:id',
     passport.authenticate('jwt', { session: false }),
