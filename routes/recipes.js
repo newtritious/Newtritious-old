@@ -16,7 +16,7 @@ module.exports = function (app) {
 
       if (!recipes.length) {
         return res.status(404).json({
-          data: 'No saved recipes. Try saving a recipe first!'
+          message: 'No saved recipes. Try saving a recipe first!'
         });
       }
 
@@ -41,9 +41,11 @@ module.exports = function (app) {
 
         const savedRecipes = user.savedRecipes;
 
-        console.log(savedRecipes[0])
+        console.log(savedRecipes[0]);
 
-        let recipe = savedRecipes.find((element) => element.toString() === hasRecipe._id.toString());
+        let recipe = savedRecipes.find(
+          (element) => element.toString() === hasRecipe._id.toString()
+        );
 
         if (!recipe) return res.status(404).send(`Recipe not found`);
 
@@ -69,14 +71,14 @@ module.exports = function (app) {
 
         let hasRecipe = await Recipe.findOne({ id: spoonacularRecipeId });
 
-        // Database _ids are saved as objects, not strings, so string conversion must occur.
+        // Database _ids are saved as objects, not strings, so string conversion must occur to compare.
         let isRecipeSavedToUser = user.savedRecipes.find(
           (element) => element.toString() === hasRecipe._id.toString()
         );
 
         if (isRecipeSavedToUser) {
           return res.status(400).json({
-            data: 'Recipe is already saved to database.'
+            error: 'Recipe is already saved to database.'
           });
         }
 
@@ -89,5 +91,49 @@ module.exports = function (app) {
       }
     }
   );
-/* ------------------------------ DELETE RECIPE ----------------------------- */
+  /* ------------------------------ DELETE RECIPE ----------------------------- */
+
+  app.delete(
+    '/:id',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+      const spoonacularRecipeId = Number(req.params.id);
+      const userId = req.user._id;
+      try {
+        const user = await User.findOne({
+          _id: userId
+        });
+
+        const recipe = await Recipe.findOne({
+          id: spoonacularRecipeId
+        });
+
+        if (!recipe) {
+          return res.status(404).json({
+            error: 'Recipe has not been saved to database.'
+          });
+        }
+
+        let isRecipeSavedToUser = user.savedRecipes.find(
+          (savedRecipe) => savedRecipe.toString() === recipe._id.toString()
+        );
+
+        if (!isRecipeSavedToUser) {
+          return res.status(404).json({
+            error: 'Recipe has not been saved to favorites.'
+          });
+        }
+
+        user.savedRecipes = user.savedRecipes.filter(
+          (savedRecipe) => savedRecipe.toString() !== recipe._id.toString()
+        );
+
+        await user.save();
+
+        res.status(200).json({ savedRecipes: user.savedRecipes });
+      } catch (e) {
+        res.status(500).json(e.message);
+      }
+    }
+  );
 };
