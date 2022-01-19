@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { connect } from 'react-redux';
 import { userLogout } from '../store/reducers/userReducer';
 import { NavLink } from 'react-router-dom';
@@ -74,7 +74,7 @@ const LinkTabAnim = styled.div`
   transition: top 0.3s ease-in-out;
 `;
 
-const StyledTab = styled.div`
+const StyledTab = styled(DropTab)`
   min-width: 60px;
   @media only screen and (min-width: 570px){
     width: 11%;
@@ -97,7 +97,15 @@ const StyledTab = styled.div`
   user-select: none;
   cursor: pointer;
 
-  &:hover, &:active{
+  &.mobile-active{
+    color: #fff;
+    
+    .child {
+      top: 0;
+    }
+  }
+
+  &:hover{
     color: #fff;
 
     .child {
@@ -150,7 +158,11 @@ const StyledDropDownForm = styled.div`
   font-size: 1.125rem;
   cursor: auto;
 
-  .log-in:hover &,.log-in:active & {
+  .mobile-active &{
+    display: block;
+  }
+
+  .log-in:hover &{
     display: block;
   }
 
@@ -176,11 +188,40 @@ const StyledDropDown = styled.div`
   border-color: ${theme.colors.primary.default};
   border-width: 2px;
   border-radius: 0px 0px 6px 6px;
-  .menu:hover &,.menu:active & {
+  .mobile-active &{
+    display:block;
+  }
+
+  .menu:hover &{
     display: block;
   }
 
 `;
+
+function DropTab({className,children,classes}) {
+  const wrapperRef = useRef(null);
+  const [mobileActive, setMobileActive] = useState("");
+  useTouchOutside(wrapperRef, setMobileActive);
+
+  
+
+  function handleTouch(e){
+    e.preventDefault();
+    if(mobileActive === ""){
+      setMobileActive(" mobile-active")
+    }
+    else{
+      setMobileActive("")
+    }
+  }
+  
+  return(
+      <div ref={wrapperRef} className={className + classes + mobileActive}>
+        <div onTouchStart={handleTouch} className="absolute w-full h-full bottom-0 left-0"/>
+        {children}
+      </div>
+  )
+}
 class NavButton extends React.Component {
   render() {
     return (
@@ -205,7 +246,7 @@ function NavBar(props) {
           })}
         </React.Fragment>
       ) : (
-        <StyledTab className="menu">
+        <StyledTab classes=" menu">
           <StyledDropDown>
             {props.pages.map((data) => {
                 return (
@@ -242,7 +283,7 @@ function NavBar(props) {
         ) : (
           <React.Fragment>
             <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
-            <StyledTab className="log-in">
+            <StyledTab classes=" log-in">
               <LinkTabAnim className="child" />
               Log In
               <StyledDropDownForm>
@@ -287,6 +328,28 @@ function useWindowSize() {
 
   return windowSize;
 }
+
+
+function useTouchOutside(ref, eventResponse) {
+  useEffect(() => {
+      /**
+       * Alert if clicked on outside of element
+       */
+      function handleTouchOutside(event) {
+          if (ref.current && !ref.current.contains(event.target)) {
+              eventResponse("")
+          }
+      }
+
+      // Bind the event listener
+      document.addEventListener("touchstart", handleTouchOutside);
+      return () => {
+          // Unbind the event listener on clean up
+          document.removeEventListener("touchstart", handleTouchOutside);
+      };
+  }, [ref, eventResponse]);
+}
+
 
 const mapStateToProps = (state) => {
   return {

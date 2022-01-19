@@ -6,12 +6,13 @@ import styled from 'styled-components';
 const StyledHero = styled.div`
   background-image: linear-gradient(#0002, #0002), url('./images/pizza1.jpg');
   background-size: cover;
-  padding: 50px;
+  padding-top: 50px;
+  
   padding-bottom: 120px;
 
   .signup{
-    width: 94%;
-    margin-left: 3%;
+    width: 88%;
+    margin-left: 6%;
   }
 
   @media only screen and (min-width: 620px){
@@ -23,8 +24,8 @@ const StyledHero = styled.div`
 
   @media only screen and (min-width: 1280px){
     .signup {
-    width: 30%;
-    margin-left: 60%;
+    width: 26%;
+    margin-left: 62%;
   }
   }
 
