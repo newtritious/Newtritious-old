@@ -203,8 +203,6 @@ function DropTab({className,children,classes}) {
   const [mobileActive, setMobileActive] = useState("");
   useTouchOutside(wrapperRef, setMobileActive);
 
-  
-
   function handleTouch(e){
     e.preventDefault();
     if(mobileActive === ""){
