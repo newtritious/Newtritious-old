@@ -17,8 +17,8 @@ const StyledHero = styled.div`
 
   @media only screen and (min-width: 620px){
     .signup {
-    width: 70%;
-    margin-left: 15%;
+      width: 70%;
+      margin-left: 15%;
   }
   }
 
@@ -31,19 +31,17 @@ const StyledHero = styled.div`
 
 `;
 
-class Hero extends React.Component {
-  render() {
+function Hero(props){
     return (
       <StyledHero>
-        {!this.props.loggedIn ? (
+        {!props.loggedIn ? (
           <SignUpForm/>
         ) : (
           //this element is just here to take up space
           <div className="h-96"></div>
         )}
       </StyledHero>
-    );
-  }
+    )
 }
 
 const mapStateToProps = (state) => {

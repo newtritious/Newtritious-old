@@ -69,9 +69,9 @@ class App extends React.Component {
             <SignUpPage/>
             {this.props.loggedIn && <Redirect to="/" />}
           </Route>
-          {this.state.pages.map((data) => {
+          {this.state.pages.reverse().map((data) => {
             return (
-              <Route key={data.name} exact path={data.path}>
+              <Route key={data.name} path={data.path}>
                 {data.component}
               </Route>
 

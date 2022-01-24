@@ -74,7 +74,7 @@ const LinkTabAnim = styled.div`
   transition: top 0.3s ease-in-out;
 `;
 
-const StyledTab = styled(DropTab)`
+const StyledDropdownTab = styled(DropdownTab)`
   min-width: 60px;
   @media only screen and (min-width: 570px){
     width: 11%;
@@ -122,6 +122,38 @@ const StyledTab = styled(DropTab)`
   }
 
   position: relative;
+`;
+
+const StyledTab = styled.div`
+  min-width: 60px;
+  @media only screen and (min-width: 570px){
+    width: 11%;
+    min-width: 90px;
+  }
+  font-size: 1.2rem;
+  padding: 10px;
+  padding-top: 5px;
+  @media only screen and (min-width: 1280px){
+    min-width: 170px;
+    font-size: 2.5rem;
+    padding-top: 10px;
+  }
+  text-align: center;
+ 
+  position: relative;
+  color: ${theme.colors.primary.default};
+  transition: color 0.3s ease-in-out;
+  margin-left: 5px;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover{
+    color: #fff;
+
+    .child {
+      top: 0;
+    }
+  }
 `;
 
 const StyledText = styled.div`
@@ -198,7 +230,7 @@ const StyledDropDown = styled.div`
 
 `;
 
-function DropTab({className,children,classes}) {
+function DropdownTab({className,children,classes}) {
   const wrapperRef = useRef(null);
   const [mobileActive, setMobileActive] = useState("");
   useTouchOutside(wrapperRef, setMobileActive);
@@ -206,7 +238,7 @@ function DropTab({className,children,classes}) {
   function handleTouch(e){
     e.preventDefault();
     if(mobileActive === ""){
-      setMobileActive(" mobile-active")
+      setMobileActive("mobile-active")
     }
     else{
       setMobileActive("")
@@ -214,20 +246,26 @@ function DropTab({className,children,classes}) {
   }
   
   return(
-      <div ref={wrapperRef} className={className + classes + mobileActive}>
+      <div ref={wrapperRef} className={className + " " + classes + " " + mobileActive}>
         <div onTouchStart={handleTouch} className="absolute w-full h-full bottom-0 left-0"/>
-        {children}
+        <LinkTabAnim className="child" />
+        {(classes === "menu") ? (
+          <>
+            <FontAwesomeIcon icon={faBars} className="text-2xl"/>
+            <StyledDropDown onClick = {handleTouch}>
+              {children}
+            </StyledDropDown>
+          </>
+        ) : (children)}
       </div>
   )
 }
-class NavButton extends React.Component {
-  render() {
+function NavButton(props) {
     return (
-      <StyledLink exact={this.props.name==="Home"} to={this.props.link}>
-        {this.props.name} <LinkTabAnim className="child" />
+      <StyledLink exact={props.name==="Home"} to={props.link}>
+        {props.name} <LinkTabAnim className="child" />
       </StyledLink>
-    );
-  }
+    )
 }
 
 function NavBar(props) {
@@ -244,21 +282,17 @@ function NavBar(props) {
           })}
         </React.Fragment>
       ) : (
-        <StyledTab classes=" menu">
-          <StyledDropDown>
-            {props.pages.map((data) => {
-                return (
-                  <div className="w-full" key={data.name}>
-                    <StyledLinkDropdown exact={data.name==="Home"}  to={data.path}>
-                      {data.name}
-                    </StyledLinkDropdown>
-                  </div>
-                )
-            })}
-          </StyledDropDown>
-          <LinkTabAnim className="child" />
-          <FontAwesomeIcon icon={faBars} className="text-2xl"/>
-        </StyledTab>
+        <StyledDropdownTab classes="menu">
+          {props.pages.map((data) => {
+              return (
+                <div className="w-full" key={data.name}>
+                  <StyledLinkDropdown exact={data.name==="Home"}  to={data.path}>
+                    {data.name}
+                  </StyledLinkDropdown>
+                </div>
+              )
+          })}
+        </StyledDropdownTab>
       )
 
       }
@@ -281,13 +315,13 @@ function NavBar(props) {
         ) : (
           <React.Fragment>
             <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
-            <StyledTab classes=" log-in">
+            <StyledDropdownTab classes="log-in">
               <LinkTabAnim className="child" />
               Log In
               <StyledDropDownForm>
                 <LogInForm />
               </StyledDropDownForm>
-            </StyledTab>
+            </StyledDropdownTab>
           </React.Fragment>
         )}
       </div>
