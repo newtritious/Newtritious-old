@@ -39,7 +39,7 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
+#build/Release
 
 # Dependency directories
 node_modules/
@@ -84,7 +84,7 @@ typings/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+#dist
 
 # Gatsby files
 .cache/
@@ -107,10 +107,5 @@ dist
 # TernJS port file
 .tern-port
 
-<<<<<<< HEAD
-# we are using yarn, so need this to stop showing up
-package-lock.json
-=======
 #file with  personal API KEY
 .env
->>>>>>> 2109ecb3e4503161186d0e5d3f999db0b54ba97f
