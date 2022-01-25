@@ -16,20 +16,26 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('client/build'));
-if (process.env.NODE_ENV === "production") {
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build/index.html'));
-  });
-}
-app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(express.static('client/build'));
 
 // Routes defined here
 require('./routes/routes')(app);
 require('./routes/recipes')(app);
 require('./routes/spoonacular-api')(app);
+
+if (process.env.NODE_ENV === "production") {
+  app.get('*', (req, res) => {
+    app.use(express.static(path.join(__dirname, '/client/build')));
+    // res.sendFile(path.join(__dirname, 'client/build/index.html'));
+  });
+}
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'))
+})
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // Set Express server to listen on PORT
 app.listen(PORT, () => {
