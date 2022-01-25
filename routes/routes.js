@@ -2,6 +2,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 require('../services/passport');
+require('dotenv').config();
 
 const signToken = (userId) => {
   return jwt.sign({ sub: userId }, process.env.SECRET_STRING, {
