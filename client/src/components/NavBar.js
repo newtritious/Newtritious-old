@@ -7,8 +7,10 @@ import styled from 'styled-components';
 import LogInForm from './LoginForm';
 import API from '../utils/API';
 import theme from '../theme.js';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import useWindowSize from '../hooks/useWindowSize.js';
+import useTouchOutside from '../hooks/useTouchOutside.js';
 
 const StyledLink = styled(NavLink)`
   width: 11%;
@@ -233,7 +235,8 @@ const StyledDropDown = styled.div`
 function DropdownTab({className,children,classes}) {
   const wrapperRef = useRef(null);
   const [mobileActive, setMobileActive] = useState("");
-  useTouchOutside(wrapperRef, setMobileActive);
+  useTouchOutside(wrapperRef,function(){ setMobileActive("")});
+
 
   function handleTouch(e){
     e.preventDefault();
@@ -299,7 +302,7 @@ function NavBar(props) {
 
       <div className="flex flex-row-reverse w-full">
         {props.loggedIn ? (
-          <React.Fragment>
+          <>
             <StyledText>{props.user}</StyledText>
             <StyledTab
               onClick={() => {
@@ -311,9 +314,9 @@ function NavBar(props) {
               <LinkTabAnim className="child" />
               Log Out
             </StyledTab>
-          </React.Fragment>
+          </>
         ) : (
-          <React.Fragment>
+          <>
             <NavButton className="text-xl" name="Sign Up" link="/sign-up" />
             <StyledDropdownTab classes="log-in">
               <LinkTabAnim className="child" />
@@ -322,65 +325,16 @@ function NavBar(props) {
                 <LogInForm />
               </StyledDropDownForm>
             </StyledDropdownTab>
-          </React.Fragment>
+          </>
         )}
       </div>
     </div>
   );
 }
 
-// Hook
-function useWindowSize() {
-  // Initialize state with undefined width/height so server and client renders match
-  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
-
-  useEffect(() => {
-    // Handler to call on window resize
-    function handleResize() {
-      // Set window width/height to state
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-
-    // Add event listener
-    window.addEventListener("resize", handleResize);
-
-    // Call handler right away so state gets updated with initial window size
-    handleResize();
-
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount
-
-  return windowSize;
-}
 
 
-function useTouchOutside(ref, eventResponse) {
-  useEffect(() => {
-      /**
-       * Alert if clicked on outside of element
-       */
-      function handleTouchOutside(event) {
-          if (ref.current && !ref.current.contains(event.target)) {
-              eventResponse("")
-          }
-      }
 
-      // Bind the event listener
-      document.addEventListener("touchstart", handleTouchOutside);
-      return () => {
-          // Unbind the event listener on clean up
-          document.removeEventListener("touchstart", handleTouchOutside);
-      };
-  }, [ref, eventResponse]);
-}
 
 
 const mapStateToProps = (state) => {

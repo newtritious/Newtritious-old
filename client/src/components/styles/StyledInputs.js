@@ -4,8 +4,8 @@ import React from 'react';
 
 const StyledForm = styled.form`
   width: 80%;
-@media only screen and (min-width: 570px){
-  width: 50%;
+  @media only screen and (min-width: 570px){
+    width: 50%;
   }
   margin: auto;
   margin-top: 50px;

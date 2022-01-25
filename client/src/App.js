@@ -24,7 +24,7 @@ class App extends React.Component {
   state = {
     testResult: 'fail',
     pages: [
-      
+      //Home should always be the first index in this array.
       {
         name: 'Home',
         path: '/',
