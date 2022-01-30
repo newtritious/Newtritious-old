@@ -182,12 +182,16 @@ const StyledDropDownForm = styled.div`
     width: 190%;
   }
   top: 100%;
-  background: #dcd;
+  background: ${theme.colors.whiteSpace};
   color: #000;
   z-index: 1;
   display: none;
   padding: 15px;
+  border-color: ${theme.colors.primary.default};
+  border-width: 2px;
   border-radius: 0px 0px 5px 5px;
+  
+  box-shadow: 3px 5px 10px 5px #0003, 1px 2px 10px 3px #0001 inset;
   text-align: left;
   font-size: 1.125rem;
   cursor: auto;

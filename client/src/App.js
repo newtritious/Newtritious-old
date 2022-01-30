@@ -24,7 +24,6 @@ class App extends React.Component {
   state = {
     testResult: 'fail',
     pages: [
-      //Home should always be the first index in this array.
       {
         name: 'Home',
         path: '/',
@@ -69,14 +68,19 @@ class App extends React.Component {
             <SignUpPage/>
             {this.props.loggedIn && <Redirect to="/" />}
           </Route>
-          {this.state.pages.reverse().map((data) => {
-            return (
-              <Route key={data.name} path={data.path}>
-                {data.component}
-              </Route>
+          <Route path="/page-c">
+            <PageC/>
+          </Route>
+          <Route path="/page-b">
+            <PageB/>
+          </Route>
+          <Route path="/search">
+            <SearchPage/>
+          </Route>
+          <Route path="/">
+            <HomePage/>
+          </Route>
 
-            )
-          })}
         </Switch>
         <span>Test api: {this.state.testResult}!</span>
       </Router>
