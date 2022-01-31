@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const recipeSchema = require('./recipes');
+const Recipe = require('./recipes');
 
 const UserSchema = new Schema(
   {
@@ -19,7 +19,12 @@ const UserSchema = new Schema(
       type: String,
       required: [true, 'Required']
     },
-    savedRecipes: [recipeSchema],
+    savedRecipes: [
+      {
+        type: Schema.Types.ObjectId,
+        unique: true
+      }
+    ],
     tokens: [
       {
         token: {
