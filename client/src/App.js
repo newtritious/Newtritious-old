@@ -22,7 +22,30 @@ document.body.style.backgroundColor = theme.colors.whiteSpace;
 
 class App extends React.Component {
   state = {
-    testResult: 'fail'
+    testResult: 'fail',
+    pages: [
+      {
+        name: 'Home',
+        path: '/',
+        component: <HomePage />
+      },
+      {
+        name: 'Search',
+        path: '/search',
+        component: <SearchPage />
+      },
+      {
+        name: 'Page B',
+        path: '/page-b',
+        component: <PageB />
+      },
+      {
+        name: 'Page C',
+        path: '/page-c',
+        component: <PageC />
+      },
+
+    ]
   };
 
   componentDidMount() {
@@ -35,27 +58,29 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <NavBar/>
+        <NavBar pages={this.state.pages}/>
         <Switch>
-          <Route path="/search">
-            <SearchPage />
-          </Route>
           <Route path="/recipe/:id">
             <Recipe />
           </Route>
-          <Route path="/page-b">
-            <PageB />
-          </Route>
-          <Route path="/page-c">
-            <PageC />
-          </Route>
+
           <Route path="/sign-up">
             <SignUpPage/>
             {this.props.loggedIn && <Redirect to="/" />}
           </Route>
+          <Route path="/page-c">
+            <PageC/>
+          </Route>
+          <Route path="/page-b">
+            <PageB/>
+          </Route>
+          <Route path="/search">
+            <SearchPage/>
+          </Route>
           <Route path="/">
             <HomePage/>
           </Route>
+
         </Switch>
         <span>Test api: {this.state.testResult}!</span>
       </Router>
