@@ -101,6 +101,8 @@ Contributions are what make the open source community such an amazing place to b
 5. Push to the Branch (`git push origin feature/AmazingFeature`)
 6. Open a Pull Request
 
+Make sure to follow our [code of conduct](https://github.com/newtritious/Newtritious/blob/main/CODE_OF_CONDUCT.md)!
+
 ## Tests
 
 To run tests, cd into the client folder and run the following command:
