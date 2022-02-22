@@ -19,7 +19,9 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.3",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "@tailwindcss/postcss7-compat": "^2.2.7"
   },
   "scripts": {
     "start": "craco start",
@@ -46,9 +48,9 @@
     ]
   },
   "devDependencies": {
-    "@tailwindcss/postcss7-compat": "^2.1.0",
+  
     "autoprefixer": "^9",
-    "postcss": "^7",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "postcss": "^7"
+   
   }
 }
