@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { recipesLoaded } from '../../store/reducers/searchReducer';
-import theme from '../../theme';
 import API from '../../utils/API';
 import SearchForm from './../SearchForm.js';
 import {StyledButton} from './../styles/StyledInputs';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
 class SearchPage extends React.Component {
   state = {
@@ -69,7 +71,8 @@ class SearchPage extends React.Component {
                 className="mt-3 mb-1.5 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
                 key={data.id}
               >
-                <div className="md:flex items-center p-2">
+                <div className="md:flex items-center p-2 relative">
+                  
                   <div className="md:flex-shrink-0">
                     <img
                       className="h-60 w-full object-cover md:w-60 rouded-xl"
@@ -77,7 +80,10 @@ class SearchPage extends React.Component {
                       alt="recipe"
                     />
                   </div>
-                  <div className="p-4">
+                  <div className="p-4 relative w-full">
+                    <div className="absolute top-4 right-2">
+                      <StyledButton className="small" text={<FontAwesomeIcon icon={faHeart}/>}/>
+                    </div>
                     <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
                       {data.title}
                     </div>
