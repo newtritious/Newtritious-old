@@ -34,16 +34,16 @@ class App extends React.Component {
         path: '/search',
         component: <SearchPage />
       },
-      {
-        name: 'Page B',
-        path: '/page-b',
-        component: <PageB />
-      },
-      {
-        name: 'Page C',
-        path: '/page-c',
-        component: <PageC />
-      },
+      // {
+      //   name: 'Page B',
+      //   path: '/page-b',
+      //   component: <PageB />
+      // },
+      // {
+      //   name: 'Page C',
+      //   path: '/page-c',
+      //   component: <PageC />
+      // },
 
     ]
   };
@@ -58,31 +58,31 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <NavBar pages={this.state.pages}/>
+        <NavBar pages={this.state.pages} />
         <Switch>
           <Route path="/recipe/:id">
             <Recipe />
           </Route>
 
           <Route path="/sign-up">
-            <SignUpPage/>
+            <SignUpPage />
             {this.props.loggedIn && <Redirect to="/" />}
           </Route>
           <Route path="/page-c">
-            <PageC/>
+            <PageC />
           </Route>
           <Route path="/page-b">
-            <PageB/>
+            <PageB />
           </Route>
           <Route path="/search">
-            <SearchPage/>
+            <SearchPage />
           </Route>
           <Route path="/">
-            <HomePage/>
+            <HomePage />
           </Route>
 
         </Switch>
-        <span>Test api: {this.state.testResult}!</span>
+
       </Router>
     );
   }
