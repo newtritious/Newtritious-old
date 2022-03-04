@@ -30,6 +30,7 @@
     "@fortawesome/react-fontawesome": "^0.1.16",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
+    "clone-deep": "^4.0.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^9.0.1",

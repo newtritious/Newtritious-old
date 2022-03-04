@@ -19,7 +19,6 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.3",
-    "tailwindcss": "^3.0.23",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
