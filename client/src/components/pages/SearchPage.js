@@ -8,6 +8,7 @@ import {StyledButton} from './../styles/StyledInputs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import FavoriteButton from "./../FavoriteButton.js"
 
 class SearchPage extends React.Component {
   state = {
@@ -82,7 +83,7 @@ class SearchPage extends React.Component {
                   </div>
                   <div className="p-4 relative w-full">
                     <div className="absolute top-4 right-2">
-                      <StyledButton className="small" text={<FontAwesomeIcon icon={faHeart}/>}/>
+                      <FavoriteButton/>
                     </div>
                     <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
                       {data.title}

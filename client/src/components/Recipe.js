@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import API from '../utils/API';
+import FavoriteButton from './FavoriteButton'
 
 function Recipe() {
   const params = useParams();
@@ -19,7 +20,11 @@ function Recipe() {
       });
   }, [params.id]);
   return (
-    <div className="md:container mx-auto">
+    <div className="md:container mx-auto relative">
+      
+      <div className="absolute top-4 right-2">
+        <FavoriteButton/>
+      </div>
       <h1 className="text-center text-6xl mb-5 mt-5">{recipe.title}</h1>
       <img className="flex mx-auto" src={recipe.image} alt={recipe.title} />
       <ul className="flex gap-3	items-center mt-2">
