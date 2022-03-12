@@ -1,11 +1,12 @@
 // Require external packages
-require('dotenv').config();
-require('./db/mongoose');
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const path = require('path')
+require('dotenv').config();
+require('./db/mongoose');
+
 // Declare instance of Express
 const app = express();
 
@@ -16,15 +17,17 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('client/build'));
-if (process.env.PRODUCTION_URL) {
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build/index.html'));
-  });
-}
+app.use(express.static('../client/build'));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
+
+if (process.env.PRODUCTION_URL) {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+  });
+}
+
 
 // Routes defined here
 require('./routes/routes')(app);
