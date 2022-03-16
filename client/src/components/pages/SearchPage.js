@@ -83,7 +83,7 @@ class SearchPage extends React.Component {
                   </div>
                   <div className="p-4 relative w-full">
                     <div className="absolute top-4 right-2">
-                      <FavoriteButton/>
+                      <FavoriteButton recipe={data}/>
                     </div>
                     <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
                       {data.title}

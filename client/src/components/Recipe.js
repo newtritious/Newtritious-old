@@ -23,7 +23,7 @@ function Recipe() {
     <div className="md:container mx-auto relative">
       
       <div className="absolute top-4 right-2">
-        <FavoriteButton/>
+        <FavoriteButton recipe={recipe}/>
       </div>
       <h1 className="text-center text-6xl mb-5 mt-5">{recipe.title}</h1>
       <img className="flex mx-auto" src={recipe.image} alt={recipe.title} />

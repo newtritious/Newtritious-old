@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef} from "react";
 import { connect } from 'react-redux';
 import { userLogout } from '../store/reducers/userReducer';
 import { NavLink } from 'react-router-dom';

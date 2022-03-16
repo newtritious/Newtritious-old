@@ -13,6 +13,10 @@ const API = {
     return axios.get(`/spoonacular/${id}`);
   },
 
+  getSavedRecipes: function () {
+    return axios.get('/');
+  },
+
   login: async function (email, password) {
     try {
       const user = await axios
