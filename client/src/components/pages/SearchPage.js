@@ -5,9 +5,6 @@ import { recipesLoaded } from '../../store/reducers/searchReducer';
 import API from '../../utils/API';
 import SearchForm from './../SearchForm.js';
 import {StyledButton} from './../styles/StyledInputs';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import FavoriteButton from "./../FavoriteButton.js"
 
 class SearchPage extends React.Component {
