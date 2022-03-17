@@ -70,11 +70,21 @@ module.exports = function (app) {
     '/',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
+      const spoonacularRecipeId = req.body.id;
       try {
         const user = await User.findOne({
           _id: req.user._id
         });
 
+
+        
+        let recipe = await Recipe.findOne({ id: spoonacularRecipeId }).select(
+          '-__v'
+        );
+
+        if(recipe === null){
+          recipe = new Recipe(req.body)
+        }
 
         // Database _ids are saved as objects, not strings, so string conversion must occur to compare.
         let isRecipeSavedToUser = user.savedRecipes.find(
@@ -86,16 +96,12 @@ module.exports = function (app) {
             error: 'Recipe is already saved to database.'
           });
         }
-        
-        let recipe = new Recipe(req.body)
 
-        console.log(recipe)
+        await recipe.save();
 
         user.savedRecipes.addToSet(recipe);
         
         await user.save();
-
-        console.log(user.savedRecipes)
 
         const recipes = await Recipe.find()
           .where('_id')
@@ -147,7 +153,13 @@ module.exports = function (app) {
 
         await user.save();
 
-        res.status(200).json(user.savedRecipes);
+        const recipes = await Recipe.find()
+          .where('_id')
+          .in(user.savedRecipes)
+          .select('-__v');
+
+
+        res.status(200).json(recipes);
       } catch (e) {
         res.status(500).json(e.message);
       }

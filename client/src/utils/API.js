@@ -18,7 +18,7 @@ const API = {
   },
 
   saveRecipe: function (recipe) {
-    return axios.post('/');
+    return axios.post('/', recipe);
   },
 
   deleteRecipe: function (id) {
