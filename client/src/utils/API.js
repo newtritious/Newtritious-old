@@ -17,6 +17,14 @@ const API = {
     return axios.get('/');
   },
 
+  saveRecipe: function (recipe) {
+    return axios.post('/');
+  },
+
+  deleteRecipe: function (id) {
+    return axios.delete(`/${id}`)
+  },
+
   login: async function (email, password) {
     try {
       const user = await axios

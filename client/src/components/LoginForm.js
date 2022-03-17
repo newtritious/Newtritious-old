@@ -31,6 +31,8 @@ class LogInForm extends React.Component {
           });
           this.props.userLogin(this.state.username);
           this.props.history.push('/search');
+
+          
         }
       })
       .catch((error) => {

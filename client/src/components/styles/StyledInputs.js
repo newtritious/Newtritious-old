@@ -58,7 +58,7 @@ const StyledInputMessage = styled.p`
 class ResponsiveButton extends React.Component {
   render(){
       return(
-          <button className ={this.props.className}>
+          <button onClick={this.props.onClick} className ={this.props.className}>
               <div className="dynamicChild">{this.props.text}</div>
               <div className="staticChild">{this.props.text}</div>
           </button>
