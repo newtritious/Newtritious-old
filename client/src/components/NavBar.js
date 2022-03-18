@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useRef} from "react";
 import { connect } from 'react-redux';
-import { userLogout } from '../store/reducers/userReducer';
+import { userLogout, updateSavedRecipes } from '../store/reducers/userReducer';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import LogInForm from './LoginForm';
@@ -310,7 +310,9 @@ function NavBar(props) {
             <StyledText>{props.user}</StyledText>
             <StyledTab
               onClick={() => {
-                API.logout();
+                API.logout().then(
+                  props.updateSavedRecipes([])
+                )
                 console.log(document.cookie);
                 props.userLogout();
               }}
@@ -350,7 +352,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    userLogout: () => dispatch(userLogout())
+    userLogout: () => dispatch(userLogout()),
+    updateSavedRecipes: (savedRecipes) => dispatch(updateSavedRecipes(savedRecipes))
   }
 };
 

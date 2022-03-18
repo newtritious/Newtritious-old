@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { userLogin } from '../store/reducers/userReducer';
+import { userLogin, updateSavedRecipes } from '../store/reducers/userReducer';
 import { StyledTextInput, StyledButton } from './styles/StyledInputs';
 import API from '../utils/API';
 
@@ -32,7 +32,11 @@ class LogInForm extends React.Component {
           this.props.userLogin(this.state.username);
           this.props.history.push('/search');
 
-          
+          API.getSavedRecipes()
+            .then((response) => {
+              console.log(response.data)
+              this.props.updateSavedRecipes(response.data)
+            })
         }
       })
       .catch((error) => {
@@ -85,7 +89,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  userLogin: (username) => dispatch(userLogin(username))
+  userLogin: (username) => dispatch(userLogin(username)),
+  updateSavedRecipes: (savedRecipes) => dispatch(updateSavedRecipes(savedRecipes))
 });
 
 export default connect(

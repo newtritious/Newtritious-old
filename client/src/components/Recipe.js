@@ -6,6 +6,7 @@ import FavoriteButton from './FavoriteButton'
 function Recipe() {
   const params = useParams();
   const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     API.getRecipe(params.id)
@@ -13,6 +14,7 @@ function Recipe() {
         if (results) {
           console.log(results.data);
           setRecipe(results.data);
+          setLoading(false)
         }
       })
       .catch((error) => {
@@ -23,7 +25,7 @@ function Recipe() {
     <div className="md:container mx-auto relative">
       
       <div className="absolute top-4 right-2">
-        <FavoriteButton recipe={recipe}/>
+        {!loading && <FavoriteButton recipe={recipe}/>}
       </div>
       <h1 className="text-center text-6xl mb-5 mt-5">{recipe.title}</h1>
       <img className="flex mx-auto" src={recipe.image} alt={recipe.title} />

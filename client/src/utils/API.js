@@ -14,7 +14,7 @@ const API = {
   },
 
   getSavedRecipes: function () {
-    return axios.get('/');
+    return axios.get('/saved');
   },
 
   saveRecipe: function (recipe) {

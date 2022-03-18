@@ -5,7 +5,7 @@ require('../services/passport');
 module.exports = function (app) {
   /* ----------------------------- GET ALL RECIPES ---------------------------- */
   app.get(
-    '/',
+    '/saved',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
       try {
