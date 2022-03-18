@@ -129,6 +129,16 @@ const StyledButton = styled(ResponsiveButton)`
   &.blue:hover {
       background: #05b;
       cursor: pointer;
+  }
+  &.clear {
+    background: none;
+    border: none;
+    color: ${theme.colors.primary.default};
+    box-shadow: none;
+    padding: 5px;
+  }
+  &.clear:focus{
+    outline: none;
   }`
 
 export { StyledTextInput, StyledButton, StyledInputMessage, StyledForm };
