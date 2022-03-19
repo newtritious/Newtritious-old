@@ -103,12 +103,7 @@ module.exports = function (app) {
         
         await user.save();
 
-        const recipes = await Recipe.find()
-          .where('_id')
-          .in(user.savedRecipes)
-          .select('-__v');
-
-        res.status(201).json(recipes);
+        res.status(201).json("recipe saved!");
       } catch (e) {
         res.status(500).json(e.message);
       }
@@ -153,13 +148,7 @@ module.exports = function (app) {
 
         await user.save();
 
-        const recipes = await Recipe.find()
-          .where('_id')
-          .in(user.savedRecipes)
-          .select('-__v');
-
-
-        res.status(200).json(recipes);
+        res.status(200).json("recipe deleted!");
       } catch (e) {
         res.status(500).json(e.message);
       }

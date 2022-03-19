@@ -10,34 +10,19 @@ import API from './../utils/API.js'
 
 
 function FavoriteButton(props) {
-    const [saved, setSaved] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-
-    function checkIfSaved(){
-        let check = false
-
-        props.savedRecipes.forEach(function(index){
-            if(index.id === props.recipe.id){
-                check = true
-            }
-        })
-
-        setSaved(check)
-    }
-
-    useEffect(() => {
-        checkIfSaved()
-    },[props.savedRecipes,props.recipe])
 
     function handleOnClick(e) {
         e.preventDefault()
         
         if(!isLoading){
             setIsLoading(true)
-            if(saved){
+            if(props.saved){
                 API.deleteRecipe(props.recipe.id)
                     .then((response) => {
-                        props.updateSavedRecipes(response.data)
+                        let savedRecipes = props.savedRecipes
+                        savedRecipes.delete(props.recipe.id)
+                        props.updateSavedRecipes(new Set(savedRecipes))
                         setIsLoading(false)
                     })
                     .catch((error) =>{
@@ -48,7 +33,8 @@ function FavoriteButton(props) {
             else{
                 API.saveRecipe(props.recipe)
                     .then((response) => {
-                        props.updateSavedRecipes(response.data)
+                        let savedRecipes = props.savedRecipes
+                        props.updateSavedRecipes(new Set(savedRecipes.add(props.recipe.id)))
                         setIsLoading(false)
                     })
                     .catch((error) =>{
@@ -61,7 +47,7 @@ function FavoriteButton(props) {
 
     return(
         props.username !== '' && (
-            <StyledButton onClick={handleOnClick} className="clear" text={saved ? (<FontAwesomeIcon icon={faHeartSolid}/>) : (<FontAwesomeIcon icon={faHeart}/>)}/>
+            <StyledButton onClick={handleOnClick} className="clear" text={props.saved ? (<FontAwesomeIcon icon={faHeartSolid}/>) : (<FontAwesomeIcon icon={faHeart}/>)}/>
         )
         
     )

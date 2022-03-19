@@ -1,7 +1,7 @@
 const initialState = {
   username: '',
   email: '' ,
-  savedRecipes: []
+  savedRecipes: new Set()
 };
 
 // action types - help to avoid action name typos

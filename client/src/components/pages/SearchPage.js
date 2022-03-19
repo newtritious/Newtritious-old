@@ -80,7 +80,7 @@ class SearchPage extends React.Component {
                   </div>
                   <div className="p-4 relative w-full">
                     <div className="absolute top-4 right-2">
-                      <FavoriteButton recipe={data}/>
+                      <FavoriteButton recipe={data} saved={this.props.savedRecipes.has(data.id)}/>
                     </div>
                     <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
                       {data.title}
@@ -118,7 +118,8 @@ class SearchPage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  recipes: state.search.recipes
+  recipes: state.search.recipes,
+  savedRecipes: state.user.savedRecipes
 });
 
 const mapDispatchToProps = (dispatch) => ({

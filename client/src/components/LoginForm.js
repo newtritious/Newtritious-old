@@ -35,7 +35,7 @@ class LogInForm extends React.Component {
           API.getSavedRecipes()
             .then((response) => {
               console.log(response.data)
-              this.props.updateSavedRecipes(response.data)
+              this.props.updateSavedRecipes(new Set(response.data.map((index) => index.id)))
             })
         }
       })
