@@ -24,6 +24,21 @@ module.exports = function (app) {
     }
   });
 
+  app.get('/spoonacular/:diet', async function (req, res) {
+    console.log("hey there we are getting hit")
+    try {
+      const response = await axios.get(
+        `https://api.spoonacular.com/recipes/complexSearch?diet=${req.params.diet}&apiKey=${process.env.SPOONACULAR_API_KEY}`
+
+      );
+      // send results with a status of 200
+      res.status(200).json(response.data.results);
+    } catch (error) {
+      // log any errors
+      console.error(error);
+    }
+  });
+
   /**
    * search spoonacular
    * @param {object} req

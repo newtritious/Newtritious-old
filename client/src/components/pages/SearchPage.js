@@ -5,7 +5,7 @@ import { recipesLoaded } from '../../store/reducers/searchReducer';
 import theme from '../../theme';
 import API from '../../utils/API';
 import SearchForm from './../SearchForm.js';
-import {StyledButton} from './../styles/StyledInputs';
+import { StyledButton } from './../styles/StyledInputs';
 
 class SearchPage extends React.Component {
   state = {
@@ -24,6 +24,14 @@ class SearchPage extends React.Component {
     this.setState({
       [event.target.name]: value
     });
+  }
+
+  filterGlutenFree = async () => {
+    try {
+      const response = await fetch()
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   handleSearchForm(e) {
@@ -62,6 +70,7 @@ class SearchPage extends React.Component {
           onSubmitForm={this.handleSearchForm}
           onInputChange={this.handleInputChange}
         />
+        <button onClick={this.filterGlutenFree}>Filter</button>
         {this.props.recipes?.length &&
           this.props.recipes.map((data) => {
             return (
@@ -100,9 +109,9 @@ class SearchPage extends React.Component {
                     <div className="block mt-1 text-base leading-tight font-normal text-black">
                       HealthScore: {data.healthScore}
                     </div>
-                      <Link to={`/recipe/${data.id}`}>
-                        <StyledButton className="x-small mt-2" text="View Recipe"/>
-                      </Link>
+                    <Link to={`/recipe/${data.id}`}>
+                      <StyledButton className="x-small mt-2" text="View Recipe" />
+                    </Link>
                   </div>
                 </div>
               </div>
