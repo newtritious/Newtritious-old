@@ -26,13 +26,7 @@ class SearchPage extends React.Component {
     });
   }
 
-  filterGlutenFree = async () => {
-    try {
-      const response = await fetch()
-    } catch (error) {
-      console.log(error)
-    }
-  }
+
 
   handleSearchForm(e) {
     e.preventDefault();
@@ -70,7 +64,8 @@ class SearchPage extends React.Component {
           onSubmitForm={this.handleSearchForm}
           onInputChange={this.handleInputChange}
         />
-        <button onClick={this.filterGlutenFree}>Filter</button>
+        <button title="vegetarian" value="vegetarian" onClick={(e) => API.getFilteredRecipes(e.target.value)}>Vegetarian</button>
+        <button title="vegetarian" onClick={API.getFilteredRecipes}>Filter</button>
         {this.props.recipes?.length &&
           this.props.recipes.map((data) => {
             return (

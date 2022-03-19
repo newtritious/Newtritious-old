@@ -32,6 +32,7 @@ module.exports = function (app) {
 
       );
       // send results with a status of 200
+      console.log(response.data.results)
       res.status(200).json(response.data.results);
     } catch (error) {
       // log any errors

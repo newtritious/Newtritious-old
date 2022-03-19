@@ -12,6 +12,10 @@ const API = {
   getRecipe: function (id) {
     return axios.get(`/spoonacular/${id}`);
   },
+  getFilteredRecipes: function (diet) {
+
+    return axios.get(`/spoonacular/${diet}`)
+  },
 
   login: async function (email, password) {
     try {
