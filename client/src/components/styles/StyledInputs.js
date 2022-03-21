@@ -58,7 +58,7 @@ const StyledInputMessage = styled.p`
 class ResponsiveButton extends React.Component {
   render(){
       return(
-          <button className ={this.props.className}>
+          <button onClick={this.props.onClick} className ={this.props.className}>
               <div className="dynamicChild">{this.props.text}</div>
               <div className="staticChild">{this.props.text}</div>
           </button>
@@ -129,6 +129,16 @@ const StyledButton = styled(ResponsiveButton)`
   &.blue:hover {
       background: #05b;
       cursor: pointer;
+  }
+  &.clear {
+    background: none;
+    border: none;
+    color: ${theme.colors.primary.default};
+    box-shadow: none;
+    padding: 5px;
+  }
+  &.clear:focus{
+    outline: none;
   }`
 
 export { StyledTextInput, StyledButton, StyledInputMessage, StyledForm };

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import API from '../utils/API';
+import FavoriteButton from './FavoriteButton'
+import { connect } from 'react-redux';
 
-function Recipe() {
+function Recipe(props) {
   const params = useParams();
   const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     API.getRecipe(params.id)
@@ -12,6 +15,7 @@ function Recipe() {
         if (results) {
           console.log(results.data);
           setRecipe(results.data);
+          setLoading(false)
         }
       })
       .catch((error) => {
@@ -19,7 +23,11 @@ function Recipe() {
       });
   }, [params.id]);
   return (
-    <div className="md:container mx-auto">
+    <div className="md:container mx-auto relative">
+      
+      <div className="absolute top-4 right-2">
+        {!loading && <FavoriteButton recipe={recipe} saved={props.savedRecipes.has(recipe.id)}/>}
+      </div>
       <h1 className="text-center text-6xl mb-5 mt-5">{recipe.title}</h1>
       <img className="flex mx-auto" src={recipe.image} alt={recipe.title} />
       <ul className="flex gap-3	items-center mt-2">
@@ -49,4 +57,10 @@ function Recipe() {
   );
 }
 
-export default Recipe;
+const mapStateToProps = (state) => ({
+  savedRecipes: state.user.savedRecipes
+});
+
+export default connect(
+  mapStateToProps
+)(Recipe);

@@ -5,7 +5,7 @@ require('../services/passport');
 module.exports = function (app) {
   /* ----------------------------- GET ALL RECIPES ---------------------------- */
   app.get(
-    '/',
+    '/saved',
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
       try {
@@ -71,15 +71,20 @@ module.exports = function (app) {
     passport.authenticate('jwt', { session: false }),
     async function (req, res) {
       const spoonacularRecipeId = req.body.id;
-
       try {
         const user = await User.findOne({
           _id: req.user._id
         });
 
+
+        
         let recipe = await Recipe.findOne({ id: spoonacularRecipeId }).select(
           '-__v'
         );
+
+        if(recipe === null){
+          recipe = new Recipe(req.body)
+        }
 
         // Database _ids are saved as objects, not strings, so string conversion must occur to compare.
         let isRecipeSavedToUser = user.savedRecipes.find(
@@ -92,10 +97,13 @@ module.exports = function (app) {
           });
         }
 
-        user.savedRecipes.addToSet(recipe);
+        await recipe.save();
 
+        user.savedRecipes.addToSet(recipe);
+        
         await user.save();
-        res.status(201).json(recipe);
+
+        res.status(201).json("recipe saved!");
       } catch (e) {
         res.status(500).json(e.message);
       }
@@ -140,7 +148,7 @@ module.exports = function (app) {
 
         await user.save();
 
-        res.status(200).json({ message: "Recipe deleted from user's favorited recipes" });
+        res.status(200).json("recipe deleted!");
       } catch (e) {
         res.status(500).json(e.message);
       }
