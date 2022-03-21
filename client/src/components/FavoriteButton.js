@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect} from "react";
-import {StyledButton} from './styles/StyledInputs';
+import { StyledButton } from './styles/StyledInputs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as faHeartSolid} from '@fortawesome/free-solid-svg-icons';
+import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { connect } from 'react-redux';
 import { updateSavedRecipes } from '../store/reducers/userReducer';
