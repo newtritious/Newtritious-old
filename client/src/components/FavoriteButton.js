@@ -62,9 +62,9 @@ const mapStateToProps = (state) => {
   };
 
 const mapDispatchToProps = (dispatch) => {
-return{
-    updateSavedRecipes: (savedRecipes) => dispatch(updateSavedRecipes(savedRecipes))
-}
+    return{
+        updateSavedRecipes: (savedRecipes) => dispatch(updateSavedRecipes(savedRecipes))
+    }
 };
 
 
