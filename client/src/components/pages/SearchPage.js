@@ -10,7 +10,8 @@ import { StyledButton } from './../styles/StyledInputs';
 class SearchPage extends React.Component {
   state = {
     searchInput: '',
-    isLoading: false
+    isLoading: false,
+    glutenFree: []
   };
   constructor(props) {
     super(props);
@@ -25,8 +26,6 @@ class SearchPage extends React.Component {
       [event.target.name]: value
     });
   }
-
-
 
   handleSearchForm(e) {
     e.preventDefault();
@@ -56,6 +55,22 @@ class SearchPage extends React.Component {
       });
   }
 
+  handleFiltered() {
+
+    API.getGlutenFree()
+      .then((results) => {
+        if (results) {
+          this.setState({
+            glutenFree: results.data
+          })
+          console.log(this.state.glutenFree);
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  }
+
   render() {
     return (
       <div>
@@ -64,9 +79,15 @@ class SearchPage extends React.Component {
           onSubmitForm={this.handleSearchForm}
           onInputChange={this.handleInputChange}
         />
-        <button title="vegetarian" value="vegetarian" onClick={(e) => API.getFilteredRecipes(e.target.value)}>Vegetarian</button>
-        <button title="vegetarian" onClick={API.getFilteredRecipes}>Filter</button>
-        {this.props.recipes?.length &&
+        <div class="px-6 pt-4 pb-2">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" title="glutenfree" value={this.state.glutenFree} onClick={API.getGlutenFree}>Gluten Free</button>
+          <button class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" title="keto" value="keto" onClick={(e) => API.getFilteredRecipes(e.target.value)}>Keto</button>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" title="gluten free" value="glutenFree" onClick={(e) => API.getFilteredRecipes(e.target.value)}>Gluten Free</button>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" title="paleo" value="paleo" onClick={(e) => API.getFilteredRecipes(e.target.value)}>Paleo</button>
+        </div>
+
+        {
+          this.props.recipes?.length &&
           this.props.recipes.map((data) => {
             return (
               <div
@@ -111,8 +132,9 @@ class SearchPage extends React.Component {
                 </div>
               </div>
             );
-          })}
-      </div>
+          })
+        }
+      </div >
     );
   }
 }

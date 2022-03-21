@@ -13,9 +13,12 @@ const API = {
     return axios.get(`/spoonacular/${id}`);
   },
   getFilteredRecipes: function (diet) {
-
     return axios.get(`/spoonacular/${diet}`)
   },
+  getGlutenFree: function () {
+    return axios.get(`/spoonacular/gf`)
+  },
+
 
   login: async function (email, password) {
     try {
