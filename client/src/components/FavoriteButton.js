@@ -20,9 +20,9 @@ function FavoriteButton(props) {
             if(props.saved){
                 API.deleteRecipe(props.recipe.id)
                     .then((response) => {
-                        let savedRecipes = props.savedRecipes
+                        let savedRecipes = new Set(props.savedRecipes)
                         savedRecipes.delete(props.recipe.id)
-                        props.updateSavedRecipes(new Set(savedRecipes))
+                        props.updateSavedRecipes(savedRecipes)
                         setIsLoading(false)
                     })
                     .catch((error) =>{
@@ -33,8 +33,8 @@ function FavoriteButton(props) {
             else{
                 API.saveRecipe(props.recipe)
                     .then((response) => {
-                        let savedRecipes = props.savedRecipes
-                        props.updateSavedRecipes(new Set(savedRecipes.add(props.recipe.id)))
+                        let savedRecipes = new Set(props.savedRecipes)
+                        props.updateSavedRecipes(savedRecipes.add(props.recipe.id))
                         setIsLoading(false)
                     })
                     .catch((error) =>{
