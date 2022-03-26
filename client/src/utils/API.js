@@ -13,7 +13,12 @@ const API = {
     return axios.get(`/spoonacular/${id}`);
   },
   getFilteredRecipes: function (diet) {
-    return axios.get(`/spoonacular/${diet}`)
+    const filteredData = axios.get(`/spoonacular/${diet}`)
+    // console.log(filteredData)
+    filteredData.then(res => {
+      console.log(res.data)
+    })
+    return filteredData
   },
   getGlutenFree: function () {
     return axios.get(`/spoonacular/gf`)

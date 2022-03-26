@@ -11,7 +11,7 @@ class SearchPage extends React.Component {
   state = {
     searchInput: '',
     isLoading: false,
-    glutenFree: []
+    // glutenFree: []
   };
   constructor(props) {
     super(props);
@@ -55,21 +55,38 @@ class SearchPage extends React.Component {
       });
   }
 
-  handleFiltered() {
-
-    API.getGlutenFree()
+  handleFiltered(e) {
+    API.getFilteredRecipes(e.target.value)
       .then((results) => {
         if (results) {
           this.setState({
-            glutenFree: results.data
+            recipes: results.data
           })
-          console.log(this.state.glutenFree);
+          this.props.recipesLoaded(this.state.recipes);
+          console.log(this.state.recipes);
         }
       })
-      .catch((error) => {
-        console.log(error)
-      });
   }
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.recipes !== prevProps.recipes) {
+      this.fetchData(this.props.userID);
+    }
+  }
+  //   API.getGlutenFree()
+  //     .then((results) => {
+  //       if (results) {
+  //         this.setState({
+  //           glutenFree: results.data
+  //         })
+  //         console.log(this.state.glutenFree);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     });
+  // }
 
   render() {
     return (
@@ -80,8 +97,11 @@ class SearchPage extends React.Component {
           onInputChange={this.handleInputChange}
         />
         <div class="px-6 pt-4 pb-2">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" title="glutenfree" value={this.state.glutenFree} onClick={API.getGlutenFree}>Gluten Free</button>
-          <button class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" title="keto" value="keto" onClick={(e) => API.getFilteredRecipes(e.target.value)}>Keto</button>
+          {/* <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" title="glutenfree" value={this.state.glutenFree} onClick={API.getGlutenFree}>Gluten Free</button> */}
+
+          <button class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" title="keto" value="keto" onClick={(e) => this.handleFiltered(e)}>Keto</button>
+
+
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" title="gluten free" value="glutenFree" onClick={(e) => API.getFilteredRecipes(e.target.value)}>Gluten Free</button>
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" title="paleo" value="paleo" onClick={(e) => API.getFilteredRecipes(e.target.value)}>Paleo</button>
         </div>
@@ -89,6 +109,7 @@ class SearchPage extends React.Component {
         {
           this.props.recipes?.length &&
           this.props.recipes.map((data) => {
+            // console.log(data)
             return (
               <div
                 className="mt-3 mb-1.5 max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl"
@@ -106,7 +127,7 @@ class SearchPage extends React.Component {
                     <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
                       {data.title}
                     </div>
-                    <div className="block mt-1 text-base leading-tight font-normal text-black">
+                    {/* <div className="block mt-1 text-base leading-tight font-normal text-black">
                       Cuisines: {data.cuisines.join(', ')}
                     </div>
                     <div className="block mt-1 text-base leading-tight font-normal text-black">
@@ -114,7 +135,7 @@ class SearchPage extends React.Component {
                     </div>
                     <div className="block mt-1 text-base leading-tight font-normal text-black">
                       Dish Type: {data.dishTypes.join(', ')}
-                    </div>
+                    </div> */}
 
                     <div className="block mt-1 text-base leading-tight font-normal text-black">
                       Ready Time: {data.readyInMinutes}
