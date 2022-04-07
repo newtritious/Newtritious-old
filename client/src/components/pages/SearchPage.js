@@ -62,7 +62,6 @@ class SearchPage extends React.Component {
             recipes: results.data
           })
           this.props.recipesLoaded(this.state.recipes);
-          console.log(this.state.recipes);
         }
       })
   }

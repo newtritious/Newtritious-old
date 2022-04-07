@@ -14,10 +14,6 @@ const API = {
   },
   getFilteredRecipes: function (diet) {
     const filteredData = axios.get(`/spoonacular/${diet}`)
-    // console.log(filteredData)
-    filteredData.then(res => {
-      console.log(res.data)
-    })
     return filteredData
   },
   getGlutenFree: function () {

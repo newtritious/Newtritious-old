@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { connect } from 'react-redux';
 import { userLogout } from '../store/reducers/userReducer';
 import { NavLink } from 'react-router-dom';
@@ -236,43 +236,43 @@ const StyledDropDown = styled.div`
 
 `;
 
-function DropdownTab({className,children,classes}) {
+function DropdownTab({ className, children, classes }) {
   const wrapperRef = useRef(null);
   const [mobileActive, setMobileActive] = useState("");
-  useTouchOutside(wrapperRef,function(){ setMobileActive("")});
+  useTouchOutside(wrapperRef, function () { setMobileActive("") });
 
 
-  function handleTouch(e){
+  function handleTouch(e) {
     e.preventDefault();
-    if(mobileActive === ""){
+    if (mobileActive === "") {
       setMobileActive("mobile-active")
     }
-    else{
+    else {
       setMobileActive("")
     }
   }
-  
-  return(
-      <div ref={wrapperRef} className={className + " " + classes + " " + mobileActive}>
-        <div onTouchStart={handleTouch} className="absolute w-full h-full bottom-0 left-0"/>
-        <LinkTabAnim className="child" />
-        {(classes === "menu") ? (
-          <>
-            <FontAwesomeIcon icon={faBars} className="text-2xl"/>
-            <StyledDropDown onClick = {handleTouch}>
-              {children}
-            </StyledDropDown>
-          </>
-        ) : (children)}
-      </div>
+
+  return (
+    <div ref={wrapperRef} className={className + " " + classes + " " + mobileActive}>
+      <div onTouchStart={handleTouch} className="absolute w-full h-full bottom-0 left-0" />
+      <LinkTabAnim className="child" />
+      {(classes === "menu") ? (
+        <>
+          <FontAwesomeIcon icon={faBars} className="text-2xl" />
+          <StyledDropDown onClick={handleTouch}>
+            {children}
+          </StyledDropDown>
+        </>
+      ) : (children)}
+    </div>
   )
 }
 function NavButton(props) {
-    return (
-      <StyledLink exact={props.name==="Home"} to={props.link}>
-        {props.name} <LinkTabAnim className="child" />
-      </StyledLink>
-    )
+  return (
+    <StyledLink exact={props.name === "Home"} to={props.link}>
+      {props.name} <LinkTabAnim className="child" />
+    </StyledLink>
+  )
 }
 
 function NavBar(props) {
@@ -283,21 +283,21 @@ function NavBar(props) {
       {(size.width > 570) ? (
         <React.Fragment>
           {props.pages.map((data) => {
-              return (
-                <NavButton key={data.name} name={data.name} link={data.path} />
-              )
+            return (
+              <NavButton key={data.name} name={data.name} link={data.path} />
+            )
           })}
         </React.Fragment>
       ) : (
         <StyledDropdownTab classes="menu">
           {props.pages.map((data) => {
-              return (
-                <div className="w-full" key={data.name}>
-                  <StyledLinkDropdown exact={data.name==="Home"}  to={data.path}>
-                    {data.name}
-                  </StyledLinkDropdown>
-                </div>
-              )
+            return (
+              <div className="w-full" key={data.name}>
+                <StyledLinkDropdown exact={data.name === "Home"} to={data.path}>
+                  {data.name}
+                </StyledLinkDropdown>
+              </div>
+            )
           })}
         </StyledDropdownTab>
       )
@@ -349,7 +349,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return{
+  return {
     userLogout: () => dispatch(userLogout())
   }
 };
