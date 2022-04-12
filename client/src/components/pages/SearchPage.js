@@ -62,7 +62,7 @@ class SearchPage extends React.Component {
           onSubmitForm={this.handleSearchForm}
           onInputChange={this.handleInputChange}
         />
-        {this.props.recipes?.length &&
+        {!!this.props.recipes?.length &&
           this.props.recipes.map((data) => {
             return (
               <div
