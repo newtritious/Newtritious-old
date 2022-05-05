@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API = {
   testApi: function () {
-    return axios.get('/test');
+    return axios.get('api/test');
   },
   searchRecipes: function (searchQuery) {
     return axios.get('/spoonacular/search', {
@@ -28,7 +28,7 @@ const API = {
   login: async function (email, password) {
     try {
       const user = await axios
-        .post('/login', {
+        .post('api/login', {
           email,
           password
         })

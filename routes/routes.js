@@ -10,11 +10,11 @@ const signToken = (userId) => {
 };
 
 module.exports = function (app) {
-  app.get('/test', function (req, res) {
+  app.get('api/test', function (req, res) {
     return res.json({ test: 'success' });
   });
 
-  app.post('/signup', async function (req, res) {
+  app.post('api/signup', async function (req, res) {
     const user = new User(req.body);
 
     try {
@@ -37,7 +37,7 @@ module.exports = function (app) {
   });
 
   app.post(
-    '/login',
+    'api/login',
     passport.authenticate('local', { session: false }),
     function (req, res) {
       if (req.isAuthenticated()) {
@@ -59,7 +59,7 @@ module.exports = function (app) {
   );
 
   app.get(
-    '/logout',
+    'api/logout',
     passport.authenticate('jwt', { session: false }),
     function (req, res) {
       res.clearCookie('jwt');
