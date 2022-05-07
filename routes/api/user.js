@@ -11,7 +11,6 @@ const signToken = (userId) => {
 };
 
 router.get('/test', function (req, res) {
-  console.log('testtttt')
   return res.json({ test: 'success' });
 });
 

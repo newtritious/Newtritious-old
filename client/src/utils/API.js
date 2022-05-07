@@ -2,33 +2,39 @@ import axios from 'axios';
 
 const API = {
   testApi: function () {
-    return axios.get('api/test');
+    return axios.get('/user/test');
   },
   searchRecipes: function (searchQuery) {
+    console.log('searchRecipes Working');
     return axios.get('/spoonacular/search', {
       params: { searchInput: searchQuery }
     });
   },
   getRecipe: function (id) {
+    console.log('getRecipes Working');
     return axios.get(`/spoonacular/${id}`);
   },
 
   getSavedRecipes: function () {
-    return axios.get('/saved');
+    console.log('getSavedRecipes Working');
+    return axios.get('/recipes/saved');
   },
 
   saveRecipe: function (recipe) {
-    return axios.post('/', recipe);
+    console.log('saveRecipe Working');
+    return axios.post('/recipes/', recipe);
   },
 
   deleteRecipe: function (id) {
-    return axios.delete(`/${id}`)
+    console.log('deleteRecipe Working');
+    return axios.delete(`/recipes/${id}`);
   },
 
   login: async function (email, password) {
+    console.log('login Working');
     try {
       const user = await axios
-        .post('api/login', {
+        .post('/user/login', {
           email,
           password
         })
@@ -46,9 +52,10 @@ const API = {
     }
   },
   logout: async function () {
+    console.log('logout Working');
     try {
       const user = await axios
-        .get('/logout', {
+        .get('/user/logout', {
           cookies: document.cookie
         })
         .catch((error) => {
@@ -64,7 +71,8 @@ const API = {
     }
   },
   signup: function (submission) {
-    return axios.post('/signup', submission);
+    console.log('signup Working');
+    return axios.post('/user/signup', submission);
   }
 };
 

@@ -27,9 +27,6 @@ if (process.env.PRODUCTION_URL) {
 
 // Routes defined here
 app.use(routes);
-// require('./routes/routes')(app);
-// require('./routes/recipes')(app);
-// require('./routes/spoonacular-api')(app);
 
 app.listen(PORT, () => {
   console.log(`🌍 Server running on http://localhost:${PORT}`);

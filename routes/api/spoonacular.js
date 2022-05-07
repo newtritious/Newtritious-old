@@ -12,7 +12,7 @@ const axios = require('axios');
  * @param {object} res
  * @returns {array} list of pasta
  */
-router.get('/spoonacular', async function (_, res) {
+router.get('/', async function (_, res) {
   try {
     const response = await axios.get(
       `https://api.spoonacular.com/recipes/complexSearch?query=pasta&apiKey=${process.env.SPOONACULAR_API_KEY}`
@@ -31,7 +31,7 @@ router.get('/spoonacular', async function (_, res) {
  * @param {object} res
  * @returns {array} List of food results (default limit = 10)
  */
-router.get('/spoonacular/search', async function (req, res) {
+router.get('/search', async function (req, res) {
   // get searchInput value from the search form
   const searchInput = req.query.searchInput;
   console.log(`Input Value: ${searchInput}`);
@@ -55,7 +55,7 @@ router.get('/spoonacular/search', async function (req, res) {
  * @param {object} res
  * @returns {object} Object containing full information about a recipe
  */
-router.get('/spoonacular/:id', async function (req, res) {
+router.get('/:id', async function (req, res) {
   // get id from the req.params
   const id = req.params.id;
   try {
