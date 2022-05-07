@@ -18,12 +18,6 @@ router.get(
         .in(user.savedRecipes)
         .select('-__v');
 
-      if (!recipes.length) {
-        return res.status(404).json({
-          message: 'No saved recipes. Try saving a recipe first!'
-        });
-      }
-
       res.status(200).json(recipes);
     } catch (e) {
       res.status(500).send(`Error: ${e.message}`);
