@@ -9,11 +9,15 @@
 
 - [About The Project](#about-the-project)
 
+- [Deployed Link](#deployed-link)
+
 - [Built With](#built-with)
 
 - [Installation](#installation)
 
-- [Get Spoonacular API Key](#spoonacular)
+- [Get Spoonacular API Key](#get-spoonacular-api-key)
+
+- [Super Secret String](#super-secret-string)
 
 - [Running](#running-the-project)
 
@@ -33,6 +37,10 @@
 
 Nutrition app built by Trilogy bootcamp alumni to let a user find their caloric needs (using a calculator) and set a calorie goal. A user can search for specific food nutrition and recipes. Recipes will show ingredients and steps to make a meal, show the nutrition details of the recipe and save the recipe, and log the recipe as a meal. A user can add meals for the day to show the total amount of calories consumed and view any past meals they have logged.
 
+## Deployed Link
+
+<http://www.newtritio.us/>
+
 ### Built With
 
 - [Node](https://nodejs.org/en/)
@@ -47,13 +55,15 @@ Nutrition app built by Trilogy bootcamp alumni to let a user find their caloric 
 
 To get a local copy up and running follow these simple steps.
 
-1. Clone the repo
+1. Clone the repo in your terminal
 
    ```sh
-   git clone https://github.com/ichbindev/alumni-collab
+   git clone git@github.com:newtritious/Newtritious.git
    ```
 
-2. To install necessary dependencies, run the following command in the root project folder:
+2. After installation and in the same terminal, type ```cd Newtritious``` and hit enter before proceeding onto the next step
+
+3. Run the following command to install necessary dependencies:
 
    ```sh
    yarn install
@@ -69,8 +79,18 @@ Signup for your own Spoonacular API key @ `https://spoonacular.com/food-api`.
 2. From the `Dashboard` - Navigate to `Profile`
 3. You will see your API key hidden `API Key: *****************************`
 4. Click the `Show / Hide API Key` button
-5. Create a local `.env` file
+5. Create a local `.env` file in the root directory (i.e., the same directory where the ```CODE_OF_CONDUCT.md``` lives)
 6. In the `.env.EXAMPLE` file, you will see an example on how your Spoonacular API key should look in your `.env` file. `SPOONACULAR_API_KEY=your_api_key`
+
+## Super Secret String
+
+In the ```.env.EXAMPLE``` file, you will notice a key/value that looks like this:
+
+```sh
+SECRET_STRING=Super_Secret_String
+```
+
+Add this to your ```.env``` file in order for authentication and, consequently, the application to work as intended
 
 ## Running the project
 
@@ -103,7 +123,7 @@ Contributions are what make the open source community such an amazing place to b
 
 Make sure to follow our [code of conduct](https://github.com/newtritious/Newtritious/blob/main/CODE_OF_CONDUCT.md)!
 
-## Tests
+## Tests (Coming Soon)
 
 To run tests, cd into the client folder and run the following command:
 
