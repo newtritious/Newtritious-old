@@ -92,6 +92,16 @@ SECRET_STRING=Super_Secret_String
 
 Add this to your ```.env``` file in order for authentication and, consequently, the application to work as intended
 
+## MongoDB
+
+This project uses MongoDB as a database. If you have not yet installed Mongo, [you can find installation instructions here](https://www.mongodb.com/docs/manual/installation/). After installation, make sure you are running Mongo with:
+
+```
+mongod
+```
+
+You may also consult [the mongod documentation] for more flags and settings.
+
 ## Running the project
 
 To run the project locally, use the command `yarn start` in the root project folder
