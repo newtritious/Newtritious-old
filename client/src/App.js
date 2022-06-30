@@ -33,7 +33,7 @@ class App extends React.Component {
         name: 'Search',
         path: '/search',
         component: <SearchPage />
-      },
+      }
       // {
       //   name: 'Page B',
       //   path: '/page-b',
@@ -44,15 +44,15 @@ class App extends React.Component {
       //   path: '/page-c',
       //   component: <PageC />
       // },
-
     ]
   };
 
   componentDidMount() {
     // API.testApi().then(result => console.log(result));
-    API.testApi().then((result) =>
-      this.setState({ testResult: result.data.test })
-    );
+    API.testApi().then((result) => {
+      console.log(result);
+      this.setState({ testResult: result.data.test });
+    });
   }
 
   render() {
@@ -80,9 +80,7 @@ class App extends React.Component {
           <Route path="/">
             <HomePage />
           </Route>
-
         </Switch>
-
       </Router>
     );
   }
@@ -94,6 +92,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(
-  mapStateToProps
-)(App);
+export default connect(mapStateToProps)(App);

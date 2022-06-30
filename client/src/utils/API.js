@@ -2,33 +2,33 @@ import axios from 'axios';
 
 const API = {
   testApi: function () {
-    return axios.get('/test');
+    return axios.get('/api/user/test');
   },
   searchRecipes: function (searchQuery) {
-    return axios.get('/spoonacular/search', {
+    return axios.get('/api/spoonacular/search', {
       params: { searchInput: searchQuery }
     });
   },
   getRecipe: function (id) {
-    return axios.get(`/spoonacular/${id}`);
+    return axios.get(`/api/spoonacular/${id}`);
   },
 
   getSavedRecipes: function () {
-    return axios.get('/saved');
+    return axios.get('/api/recipes/saved');
   },
 
   saveRecipe: function (recipe) {
-    return axios.post('/', recipe);
+    return axios.post('/api/recipes/', recipe);
   },
 
   deleteRecipe: function (id) {
-    return axios.delete(`/${id}`)
+    return axios.delete(`/api/recipes/${id}`);
   },
 
   login: async function (email, password) {
     try {
       const user = await axios
-        .post('/login', {
+        .post('/api/user/login', {
           email,
           password
         })
@@ -48,7 +48,7 @@ const API = {
   logout: async function () {
     try {
       const user = await axios
-        .get('/logout', {
+        .get('/api/user/logout', {
           cookies: document.cookie
         })
         .catch((error) => {
@@ -64,7 +64,7 @@ const API = {
     }
   },
   signup: function (submission) {
-    return axios.post('/signup', submission);
+    return axios.post('/api/user/signup', submission);
   }
 };
 
