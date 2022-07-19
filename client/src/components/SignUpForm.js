@@ -70,7 +70,7 @@ class SignUpForm extends React.Component {
   render() {
     return (
       <StyledForm onSubmit={this.handleSubmit} className="signup">
-        <label>Username</label>
+        <label>Display Name</label>
         <div className="relative">
           <StyledTextInput
             type="text"
@@ -82,7 +82,7 @@ class SignUpForm extends React.Component {
           ></StyledTextInput>
           {!validateUsername(this.state.username) && (
             <StyledInputMessage>
-              Username should be 3 or more characters with only letters,
+              Display Name should be 3 or more characters with only letters,
               numbers, or underscores ( _ )
             </StyledInputMessage>
           )}
@@ -145,11 +145,7 @@ function validatePassword(password) {
 const mapDispatchToProps = (dispatch) => {
   return {
     userSignup: (username) => dispatch(userSignup(username))
-  }
+  };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignUpForm);
-
+export default connect(null, mapDispatchToProps)(SignUpForm);
