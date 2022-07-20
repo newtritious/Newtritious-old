@@ -3,7 +3,7 @@ import {
   StyledTextInput,
   StyledButton,
   StyledForm
-} from './styles/StyledInputs';
+} from '../styles/StyledInputs';
 
 function SearchForm(props) {
   return (

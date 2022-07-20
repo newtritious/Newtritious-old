@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { recipesLoaded } from '../../store/reducers/searchReducer';
-import API from '../../utils/API';
-import SearchForm from './../SearchForm.js';
-import {StyledButton} from './../styles/StyledInputs';
-import FavoriteButton from "./../FavoriteButton.js"
+import { recipesLoaded } from '../store/reducers/searchReducer';
+import API from '../utils/API';
+import SearchForm from '../components/SearchForm/index.js';
+import { StyledButton } from '../components/styles/StyledInputs';
+import FavoriteButton from '../components/FavoriteButton';
 
 class SearchPage extends React.Component {
   state = {
@@ -70,7 +70,6 @@ class SearchPage extends React.Component {
                 key={data.id}
               >
                 <div className="md:flex items-center p-2 relative">
-                  
                   <div className="md:flex-shrink-0">
                     <img
                       className="h-60 w-full object-cover md:w-60 rouded-xl"
@@ -80,7 +79,10 @@ class SearchPage extends React.Component {
                   </div>
                   <div className="p-4 relative w-full">
                     <div className="absolute top-4 right-2">
-                      <FavoriteButton recipe={data} saved={this.props.savedRecipes.has(data.id)}/>
+                      <FavoriteButton
+                        recipe={data}
+                        saved={this.props.savedRecipes.has(data.id)}
+                      />
                     </div>
                     <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
                       {data.title}
@@ -104,9 +106,12 @@ class SearchPage extends React.Component {
                     <div className="block mt-1 text-base leading-tight font-normal text-black">
                       HealthScore: {data.healthScore}
                     </div>
-                      <Link to={`/recipe/${data.id}`}>
-                        <StyledButton className="x-small mt-2" text="View Recipe"/>
-                      </Link>
+                    <Link to={`/recipe/${data.id}`}>
+                      <StyledButton
+                        className="x-small mt-2"
+                        text="View Recipe"
+                      />
+                    </Link>
                   </div>
                 </div>
               </div>
