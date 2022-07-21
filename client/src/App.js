@@ -37,12 +37,6 @@ class App extends React.Component {
     ]
   };
 
-  componentDidMount() {
-    API.testApi().then((result) =>
-      this.setState({ testResult: result.data.test })
-    );
-  }
-
   render() {
     return (
       <Router>
