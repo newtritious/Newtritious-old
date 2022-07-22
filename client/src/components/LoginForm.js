@@ -6,17 +6,17 @@ import { StyledTextInput, StyledButton } from './styles/StyledInputs';
 import API from '../utils/API';
 
 class LogInForm extends React.Component {
-  state = {
-    username: '',
-    userEmail: '',
-    email: '',
-    password: ''
-  };
   constructor(props) {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      username: '',
+      userEmail: '',
+      email: '',
+      password: ''
+    };
   }
 
   handleSubmit(event) {
@@ -32,11 +32,12 @@ class LogInForm extends React.Component {
           this.props.userLogin(this.state.username);
           this.props.history.push('/search');
 
-          API.getSavedRecipes()
-            .then((response) => {
-              console.log(response.data)
-              this.props.updateSavedRecipes(new Set(response.data.map((index) => index.id)))
-            })
+          API.getSavedRecipes().then((response) => {
+            console.log(response.data);
+            this.props.updateSavedRecipes(
+              new Set(response.data.map((index) => index.id))
+            );
+          });
         }
       })
       .catch((error) => {
@@ -90,7 +91,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   userLogin: (username) => dispatch(userLogin(username)),
-  updateSavedRecipes: (savedRecipes) => dispatch(updateSavedRecipes(savedRecipes))
+  updateSavedRecipes: (savedRecipes) =>
+    dispatch(updateSavedRecipes(savedRecipes))
 });
 
 export default connect(

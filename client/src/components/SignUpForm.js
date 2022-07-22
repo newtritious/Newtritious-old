@@ -10,19 +10,18 @@ import {
 import API from '../utils/API';
 
 class SignUpForm extends React.Component {
-  state = {
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  };
-
   constructor(props) {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLoginResponse = this.handleLoginResponse.bind(this);
+    this.state = {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    };
   }
   handleSubmit(event) {
     const userSubmission = {
