@@ -342,7 +342,7 @@ function NavBar(props) {
 const mapStateToProps = (state) => {
   return {
     user: state.user.displayname,
-    loggedIn: state.user.username !== ''
+    loggedIn: state.user.displayname !== ''
   };
 };
 

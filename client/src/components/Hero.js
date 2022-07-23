@@ -45,7 +45,7 @@ function Hero(props) {
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.user.username !== ''
+    loggedIn: state.user.displayname !== ''
   };
 };
 

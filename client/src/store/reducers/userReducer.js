@@ -1,5 +1,5 @@
 const initialState = {
-  username: '',
+  displayname: '',
   email: '',
   savedRecipes: new Set()
 };
@@ -11,19 +11,19 @@ export const UPDATE_SAVED_RECIPES = 'user/updateSavedRecipes';
 export const USER_LOGOUT = 'user/userLogout';
 
 // selectors - think of selectors as an API for accessing data from Redux state
-export const getUsername = (state) => state.user.username;
+export const getDisplayname = (state) => state.user.displayname;
 export const getUserEmail = (state) => state.user.email;
 export const getSavedRecipes = (state) => state.user.savedRecipes;
 
 // action creators - function that takes in data and returns a formatted action. Think of them as your API for modifying your data
-export const userSignup = (username) => ({
+export const userSignup = (displayname) => ({
   type: USER_SIGNUP,
-  payload: { username }
+  payload: { displayname }
 });
 
-export const userLogin = (username) => ({
+export const userLogin = (displayname) => ({
   type: USER_LOGIN,
-  payload: { username }
+  payload: { displayname }
 });
 
 export const updateSavedRecipes = (savedRecipes) => ({
