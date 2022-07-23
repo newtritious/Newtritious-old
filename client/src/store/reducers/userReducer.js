@@ -1,6 +1,6 @@
 const initialState = {
   username: '',
-  email: '' ,
+  email: '',
   savedRecipes: new Set()
 };
 
@@ -28,8 +28,8 @@ export const userLogin = (username) => ({
 
 export const updateSavedRecipes = (savedRecipes) => ({
   type: UPDATE_SAVED_RECIPES,
-  payload: {savedRecipes}
-})
+  payload: { savedRecipes }
+});
 
 export const userLogout = () => ({
   type: USER_LOGOUT,
