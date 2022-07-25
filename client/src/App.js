@@ -76,7 +76,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.user.username !== ''
+    loggedIn: state.user.displayname !== ''
   };
 };
 

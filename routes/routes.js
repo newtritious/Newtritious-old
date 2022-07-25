@@ -41,7 +41,7 @@ module.exports = function (app) {
     passport.authenticate('local', { session: false }),
     function (req, res) {
       if (req.isAuthenticated()) {
-        const { _id, username, email } = req.user;
+        const { _id, displayname, email } = req.user;
         const token = signToken(_id);
         res
           .cookie('jwt', token, {
@@ -50,7 +50,7 @@ module.exports = function (app) {
           })
           .status(200)
           .send({
-            username,
+            displayname,
             email,
             _id
           });
