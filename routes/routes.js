@@ -10,10 +10,6 @@ const signToken = (userId) => {
 };
 
 module.exports = function (app) {
-  app.get('/test', function (req, res) {
-    return res.json({ test: 'success' });
-  });
-
   app.post('/signup', async function (req, res) {
     const user = new User(req.body);
 
