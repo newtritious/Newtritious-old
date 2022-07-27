@@ -13,7 +13,6 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import API from './utils/API';
 import './index.css';
 import theme from './theme.js';
 import Recipe from './components/Recipe';
@@ -22,7 +21,6 @@ document.body.style.backgroundColor = theme.colors.whiteSpace;
 
 class App extends React.Component {
   state = {
-    testResult: 'fail',
     pages: [
       {
         name: 'Home',
@@ -36,12 +34,6 @@ class App extends React.Component {
       }
     ]
   };
-
-  componentDidMount() {
-    API.testApi().then((result) =>
-      this.setState({ testResult: result.data.test })
-    );
-  }
 
   render() {
     return (
