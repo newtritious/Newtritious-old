@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { recipesLoaded } from '../store/reducers/searchReducer';
 import API from '../utils/API';
-import SearchForm from '../components/SearchForm/index.js';
+import SearchForm from '../components/SearchForm';
 import { StyledButton } from '../components/styles/StyledInputs';
 import FavoriteButton from '../components/FavoriteButton';
 
