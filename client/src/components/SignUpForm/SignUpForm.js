@@ -10,29 +10,28 @@ import {
 import API from '../../utils/API';
 
 class SignUpForm extends React.Component {
-  state = {
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  };
-
   constructor(props) {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLoginResponse = this.handleLoginResponse.bind(this);
+    this.state = {
+      displayname: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    };
   }
   handleSubmit(event) {
     const userSubmission = {
-      username: this.state.username,
+      displayname: this.state.displayname,
       email: this.state.email,
       password: this.state.password
     };
 
     if (
-      validateUsername(this.state.username) &&
+      validateDisplayname(this.state.displayname) &&
       validatePassword(this.state.password) &&
       this.state.password === this.state.confirmPassword
     ) {
@@ -44,7 +43,7 @@ class SignUpForm extends React.Component {
         });
 
       this.setState({
-        userName: '',
+        displayname: '',
         email: '',
         password: '',
         confirmPassword: ''
@@ -57,7 +56,7 @@ class SignUpForm extends React.Component {
   handleLoginResponse(response) {
     console.log('a response!');
     console.log(response);
-    this.props.userSignup(response.data.user.username);
+    this.props.userSignup(response.data.user.displayname);
   }
 
   handleInputChange(event) {
@@ -70,19 +69,19 @@ class SignUpForm extends React.Component {
   render() {
     return (
       <StyledForm onSubmit={this.handleSubmit} className="signup">
-        <label>Username</label>
+        <label>Display Name</label>
         <div className="relative">
           <StyledTextInput
             type="text"
-            name="username"
-            value={this.state.username}
+            name="displayname"
+            value={this.state.displayname}
             onChange={this.handleInputChange}
             required
             maxLength="24"
           ></StyledTextInput>
-          {!validateUsername(this.state.username) && (
+          {!validateDisplayname(this.state.displayname) && (
             <StyledInputMessage>
-              Username should be 3 or more characters with only letters,
+              Display Name should be 3 or more characters with only letters,
               numbers, or underscores ( _ )
             </StyledInputMessage>
           )}
@@ -133,9 +132,9 @@ class SignUpForm extends React.Component {
   }
 }
 
-function validateUsername(username) {
-  if (/[^\w_]/.test(username)) return false;
-  else return !(username.length < 3 && username.length > 0);
+function validateDisplayname(displayname) {
+  if (/[^\w_]/.test(displayname)) return false;
+  else return !(displayname.length < 3 && displayname.length > 0);
 }
 
 function validatePassword(password) {
@@ -144,7 +143,7 @@ function validatePassword(password) {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    userSignup: (username) => dispatch(userSignup(username))
+    userSignup: (displayname) => dispatch(userSignup(displayname))
   };
 };
 

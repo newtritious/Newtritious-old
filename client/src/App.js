@@ -13,7 +13,6 @@ import {
   Route,
   Redirect
 } from 'react-router-dom';
-import API from './utils/API';
 import './index.css';
 import theme from './theme.js';
 import Recipe from './components/Recipe';
@@ -22,7 +21,6 @@ document.body.style.backgroundColor = theme.colors.whiteSpace;
 
 class App extends React.Component {
   state = {
-    testResult: 'fail',
     pages: [
       {
         name: 'Home',
@@ -34,25 +32,8 @@ class App extends React.Component {
         path: '/search',
         component: <SearchPage />
       }
-      // {
-      //   name: 'Page B',
-      //   path: '/page-b',
-      //   component: <PageB />
-      // },
-      // {
-      //   name: 'Page C',
-      //   path: '/page-c',
-      //   component: <PageC />
-      // },
     ]
   };
-
-  componentDidMount() {
-    // API.testApi().then(result => console.log(result));
-    API.testApi().then((result) =>
-      this.setState({ testResult: result.data.test })
-    );
-  }
 
   render() {
     return (
@@ -87,7 +68,7 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    loggedIn: state.user.username !== ''
+    loggedIn: state.user.displayname !== ''
   };
 };
 

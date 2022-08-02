@@ -1,9 +1,6 @@
 import axios from 'axios';
 
 const API = {
-  testApi: function () {
-    return axios.get('/test');
-  },
   searchRecipes: function (searchQuery) {
     return axios.get('/spoonacular/search', {
       params: { searchInput: searchQuery }
@@ -22,7 +19,7 @@ const API = {
   },
 
   deleteRecipe: function (id) {
-    return axios.delete(`/${id}`)
+    return axios.delete(`/${id}`);
   },
 
   login: async function (email, password) {

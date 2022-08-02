@@ -10,10 +10,6 @@ const signToken = (userId) => {
 };
 
 module.exports = function (app) {
-  app.get('/test', function (req, res) {
-    return res.json({ test: 'success' });
-  });
-
   app.post('/signup', async function (req, res) {
     const user = new User(req.body);
 
@@ -41,7 +37,7 @@ module.exports = function (app) {
     passport.authenticate('local', { session: false }),
     function (req, res) {
       if (req.isAuthenticated()) {
-        const { _id, username, email } = req.user;
+        const { _id, displayname, email } = req.user;
         const token = signToken(_id);
         res
           .cookie('jwt', token, {
@@ -50,7 +46,7 @@ module.exports = function (app) {
           })
           .status(200)
           .send({
-            username,
+            displayname,
             email,
             _id
           });

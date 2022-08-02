@@ -44,7 +44,7 @@ function FavoriteButton(props) {
   }
 
   return (
-    props.username !== '' && (
+    props.displayname !== '' && (
       <StyledButton
         onClick={handleOnClick}
         className="clear"
@@ -63,7 +63,7 @@ function FavoriteButton(props) {
 const mapStateToProps = (state) => {
   return {
     savedRecipes: state.user.savedRecipes,
-    username: state.user.username
+    displayname: state.user.displayname
   };
 };
 

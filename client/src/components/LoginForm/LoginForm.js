@@ -9,17 +9,17 @@ import { StyledTextInput, StyledButton } from '../styles/StyledInputs';
 import API from '../../utils/API';
 
 class LogInForm extends React.Component {
-  state = {
-    username: '',
-    userEmail: '',
-    email: '',
-    password: ''
-  };
   constructor(props) {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      displayname: '',
+      userEmail: '',
+      email: '',
+      password: ''
+    };
   }
 
   handleSubmit(event) {
@@ -29,10 +29,10 @@ class LogInForm extends React.Component {
       .then((results) => {
         if (results) {
           this.setState({
-            username: results.data.username,
+            displayname: results.data.displayname,
             userEmail: results.data.email
           });
-          this.props.userLogin(this.state.username);
+          this.props.userLogin(this.state.displayname);
           this.props.history.push('/search');
 
           API.getSavedRecipes().then((response) => {
@@ -88,12 +88,12 @@ class LogInForm extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    username: state.user.username
+    displayname: state.user.displayname
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  userLogin: (username) => dispatch(userLogin(username)),
+  userLogin: (displayname) => dispatch(userLogin(displayname)),
   updateSavedRecipes: (savedRecipes) =>
     dispatch(updateSavedRecipes(savedRecipes))
 });

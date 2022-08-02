@@ -6,7 +6,7 @@ const Recipe = require('./recipes');
 
 const UserSchema = new Schema(
   {
-    username: {
+    displayname: {
       type: String,
       required: [true, 'Required']
     },
