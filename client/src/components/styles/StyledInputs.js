@@ -4,13 +4,13 @@ import React from 'react';
 
 const StyledForm = styled.form`
   width: 80%;
-  @media only screen and (min-width: 570px){
+  @media only screen and (min-width: 570px) {
     width: 50%;
   }
   margin: auto;
   margin-top: 50px;
   padding: 30px;
-  @media only screen and (min-height: 700px){
+  @media only screen and (min-height: 700px) {
     padding: 40px;
   }
   background: ${theme.colors.whiteSpace};
@@ -28,8 +28,8 @@ const StyledTextInput = styled.input`
   padding: 3px;
   margin: auto;
   margin-bottom: 30px;
-  font-size: .7rem;
-  @media only screen and (min-width: 570px){
+  font-size: 0.7rem;
+  @media only screen and (min-width: 570px) {
     margin-bottom: 30px;
     font-size: 1.1rem;
   }
@@ -43,26 +43,25 @@ const StyledTextInput = styled.input`
 `;
 
 const StyledInputMessage = styled.p`
-  
   color: #d00;
   position: absolute;
   left: 0;
   font-size: 0.7rem;
   top: 26px;
-  @media only screen and (min-width: 570px){
+  @media only screen and (min-width: 570px) {
     font-size: 0.8rem;
     top: 34px;
   }
 `;
 
 class ResponsiveButton extends React.Component {
-  render(){
-      return(
-          <button onClick={this.props.onClick} className ={this.props.className}>
-              <div className="dynamicChild">{this.props.text}</div>
-              <div className="staticChild">{this.props.text}</div>
-          </button>
-      )
+  render() {
+    return (
+      <button onClick={this.props.onClick} className={this.props.className}>
+        <div className="dynamicChild">{this.props.text}</div>
+        <div className="staticChild">{this.props.text}</div>
+      </button>
+    );
   }
 }
 
@@ -81,54 +80,54 @@ const StyledButton = styled(ResponsiveButton)`
   box-shadow: 3px 5px 10px #0003;
   position: relative;
 
-  .dynamicChild{
-      transition: font-size 400ms;
-      position: absolute;
-      margin: auto;
-      left:0;
-      right:0;
-      top: 50%;
-      transform: translateY(-50%);
-      text-align: center;
+  .dynamicChild {
+    transition: font-size 400ms;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
   }
 
-  .staticChild{
-      opacity: 0;
+  .staticChild {
+    opacity: 0;
   }
 
-  &.centered{
-      margin-left: auto;
-      margin-right: auto;
+  &.centered {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   &.small {
-      padding: 8px 20px 8px 20px;
-      font-size: 1.25rem;
-      border-radius: 10px;
+    padding: 8px 20px 8px 20px;
+    font-size: 1.25rem;
+    border-radius: 10px;
   }
 
   &.x-small {
-      padding: 6px 15px 6px 15px;
-      font-size: 1rem;
-      border-radius: 5px;
-      font-weight: bold;
+    padding: 6px 15px 6px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    font-weight: bold;
   }
 
   &.blue {
-      background: #28c;
+    background: #28c;
   }
-  
+
   &:hover {
-      background: ${theme.colors.whiteSpace};
-      color: ${theme.colors.primary.default};
-      cursor: pointer;
-      .dynamicChild{
-          font-size: 1.05em;
-      }
+    background: ${theme.colors.whiteSpace};
+    color: ${theme.colors.primary.default};
+    cursor: pointer;
+    .dynamicChild {
+      font-size: 1.05em;
+    }
   }
   &.blue:hover {
-      background: #05b;
-      cursor: pointer;
+    background: #05b;
+    cursor: pointer;
   }
   &.clear {
     background: none;
@@ -137,8 +136,9 @@ const StyledButton = styled(ResponsiveButton)`
     box-shadow: none;
     padding: 5px;
   }
-  &.clear:focus{
+  &.clear:focus {
     outline: none;
-  }`
+  }
+`;
 
 export { StyledTextInput, StyledButton, StyledInputMessage, StyledForm };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SignUpForm from './SignUpForm';
+import SignUpForm from '../SignUpForm';
 import styled from 'styled-components';
 
 const StyledHero = styled.div`

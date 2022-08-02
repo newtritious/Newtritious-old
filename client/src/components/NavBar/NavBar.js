@@ -1,16 +1,19 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import { userLogout, updateSavedRecipes } from '../store/reducers/userReducer';
+import {
+  userLogout,
+  updateSavedRecipes
+} from '../../store/reducers/userReducer';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import LogInForm from './LoginForm';
-import API from '../utils/API';
-import theme from '../theme.js';
+import LogInForm from '../LoginForm';
+import API from '../../utils/API';
+import theme from '../../theme.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import useWindowSize from '../hooks/useWindowSize.js';
-import useTouchOutside from '../hooks/useTouchOutside.js';
+import useWindowSize from '../../hooks/useWindowSize.js';
+import useTouchOutside from '../../hooks/useTouchOutside.js';
 
 const StyledLink = styled(NavLink)`
   width: 11%;

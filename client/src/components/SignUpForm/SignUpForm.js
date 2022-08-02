@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { userSignup } from '../store/reducers/userReducer';
+import { userSignup } from '../../store/reducers/userReducer';
 import {
   StyledTextInput,
   StyledButton,
   StyledInputMessage,
   StyledForm
-} from './styles/StyledInputs';
-import API from '../utils/API';
+} from '../styles/StyledInputs';
+import API from '../../utils/API';
 
 class SignUpForm extends React.Component {
   constructor(props) {

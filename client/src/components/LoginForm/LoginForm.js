@@ -1,9 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { userLogin, updateSavedRecipes } from '../store/reducers/userReducer';
-import { StyledTextInput, StyledButton } from './styles/StyledInputs';
-import API from '../utils/API';
+import {
+  userLogin,
+  updateSavedRecipes
+} from '../../store/reducers/userReducer';
+import { StyledTextInput, StyledButton } from '../styles/StyledInputs';
+import API from '../../utils/API';
 
 class LogInForm extends React.Component {
   constructor(props) {

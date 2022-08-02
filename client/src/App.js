@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './App.css';
-import NavBar from './components/NavBar.js';
-import HomePage from './components/pages/HomePage.js';
-import SearchPage from './components/pages/SearchPage.js';
-import PageB from './components/pages/PageB.js';
-import PageC from './components/pages/PageC.js';
-import SignUpPage from './components/pages/SignUpPage.js';
+import NavBar from './components/NavBar';
+import HomePage from './pages/HomePage.js';
+import SearchPage from './pages/SearchPage.js';
+import PageB from './pages/PageB.js';
+import PageC from './pages/PageC.js';
+import SignUpPage from './pages/SignUpPage.js';
 import {
   BrowserRouter as Router,
   Switch,
