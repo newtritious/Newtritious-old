@@ -22,7 +22,7 @@ const UserSchema = new Schema(
     savedRecipes: [
       {
         type: Schema.Types.ObjectId,
-        unique: true
+        ref: 'Recipe'
       }
     ],
     tokens: [
